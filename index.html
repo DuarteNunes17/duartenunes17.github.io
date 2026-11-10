@@ -594,6 +594,8 @@ document.addEventListener("pointerover",function(e){if(e.pointerType!="mouse"||c
 document.addEventListener("pointermove",function(e){if(pvOn){PV.style.setProperty("--x",Math.min(e.clientX+24,innerWidth-300)+"px");PV.style.setProperty("--y",e.clientY-90+"px")}},{passive:true});
 window.addEventListener("hashchange",function(){pvOn=null;PV.classList.remove("on")});
 document.body.classList.add("boot");setTimeout(function(){document.body.classList.remove("boot")},1600);
+/* ao abrir ou atualizar, o site comeca sempre na pagina inicial, no topo */
+if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0);
 render();intro();
 
 </script>
