@@ -173,29 +173,7 @@ h1.t::after,h2.s::after{content:".";color:var(--acc)}
 
 
 
-#ov{position:fixed;inset:0;z-index:8;background:var(--bg);padding-top:calc(env(safe-area-inset-top,0px) + 6rem);overflow-y:auto;visibility:hidden;opacity:0;transform:translateY(-14px);transition:opacity .45s var(--ease),transform .45s var(--ease),visibility 0s .45s}
-#ov.open{visibility:visible;opacity:1;transform:none;transition-delay:0s}
-#ov nav{display:flex;flex-wrap:wrap;gap:.25rem .75rem;align-items:center;margin-top:1rem}
-#ov nav button:not(.tg){flex:0 0 100%;text-align:left;font-size:clamp(2.75rem,11vw,7rem);font-weight:700;letter-spacing:-.05em;line-height:1.02;color:var(--ink);padding:.1em 0;min-height:0;transition:transform .45s var(--ease),color .25s}
-#ov nav button:not(.tg)::after{display:none}
-#ov nav button:not(.tg):hover{transform:translateX(.75rem);color:var(--accink)}
-#ov nav button[aria-current="page"]:not(.tg){color:var(--accink)}
-#ov.open nav button:not(.tg){animation:up .8s var(--ease) both}
-#ov.open nav button:nth-child(2){animation-delay:.05s}#ov.open nav button:nth-child(3){animation-delay:.1s}#ov.open nav button:nth-child(4){animation-delay:.15s}
-#ov nav .tg{margin:2rem 0 0;font-size:.9375rem}
-#ov .cp{color:var(--mute);font-size:.875rem;margin:3rem 0 2rem}
 
-#ov{z-index:12;padding-top:calc(env(safe-area-inset-top,0px) + 4rem)}
-#en .eh{color:var(--mute);font-weight:500;margin:0 0 1rem}
-#en .eb{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;width:100%;background:none;border:0;border-bottom:1px solid var(--line);padding:.2em 0 .25em;cursor:pointer;color:var(--ink);text-align:left;font:inherit;transition:transform .45s var(--ease),color .25s}
-#en .eb span{font-size:clamp(2.75rem,11vw,6.5rem);font-weight:700;letter-spacing:-.05em;line-height:1.05}
-#en .eb small{font-size:.9375rem;color:var(--mute);font-weight:400;text-align:right}
-#en .eb:hover{color:var(--accink);transform:translateX(.75rem)}
-#en .er{display:flex;gap:.625rem;margin-top:2rem}
-#en .tg{border:1px solid var(--line);border-radius:99px;padding:.5rem 1rem;background:none;color:var(--ink);font:500 .9375rem var(--ff);cursor:pointer;min-height:2.75rem}
-#ov.open .eb{animation:up .8s var(--ease) both}
-#ov.open .eb:nth-child(3){animation-delay:.05s}#ov.open .eb:nth-child(4){animation-delay:.1s}#ov.open .eb:nth-child(5){animation-delay:.15s}
-@media(max-width:520px){#en .eb small{display:none}}
 @keyframes bob{50%{transform:translateY(-8px)}}
 .avw{display:grid;place-items:center}
 .avw svg{width:100%;max-width:27rem;height:auto;display:block;border-radius:2rem;box-shadow:0 30px 60px -30px var(--sh);animation:bob 5s ease-in-out infinite}
@@ -225,7 +203,6 @@ input,textarea{caret-color:var(--acc)}
 .chip .ic-l{margin-right:.375rem}.nx .go .ic{width:1.5rem;height:1.5rem}
 .feat .tags i{background:var(--surf)}
 .feat .k{margin:-.25rem 0 1rem}
-#ov:focus{outline:none}
 /*BONECO-LINHA*/
 :root{--avline:#3151D9;--avfill:#B9CCFF;--avpaper:#F8FBFF;--aveye:#F8FBFF;--avpupil:#3151D9;--avfeat:#3151D9}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--avline:oklch(86% .09 262);--avfill:oklch(48% .13 262);--avpaper:oklch(82% .05 258);--aveye:oklch(97% .012 255);--avpupil:oklch(22% .05 262);--avfeat:oklch(26% .06 262)}}
@@ -309,7 +286,7 @@ footer a:hover,footer a[aria-current="page"]{color:var(--ink)}
 <a class="skip" href="#pg" id="skip">Saltar para o conteúdo</a>
 <div id="pb" aria-hidden="true"></div>
 <header><div class="w"><button class="brand" data-go="home"><span class="mark">DN</span>Duarte Ferreira Nunes</button><div class="hr"><nav id="nav" aria-label="Principal"></nav><div class="st" id="st"></div></div></div></header>
-<div id="ov" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Menu"><div class="w"><div id="en"></div></div></div>
+
 <div class="w"><main id="pg" tabindex="-1"></main></div>
 <footer id="ft"></footer>
 <script>
@@ -367,16 +344,10 @@ var EN={"Sobre":"About","Definições":"Settings","Tema":"Theme","Claro":"Light"
 function tr(root){if(L!="en")return;var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode())a.push(n);
  a.forEach(function(n){var k=n.nodeValue.trim();if(EN[k])n.nodeValue=n.nodeValue.replace(k,EN[k])});
  root.querySelectorAll("[aria-label]").forEach(function(e){var k=e.getAttribute("aria-label");if(EN[k])e.setAttribute("aria-label",EN[k])});root.querySelectorAll("[alt]").forEach(function(e){var k=e.getAttribute("alt");if(EN[k])e.setAttribute("alt",EN[k])})}
-var ov=document.getElementById("ov");
-function showEntry(o){ov.classList.toggle("open",o);ov.setAttribute("aria-hidden",!o);document.body.style.overflow=o?"hidden":"";if(o){ov.setAttribute("tabindex","-1");ov.focus()}}
-document.addEventListener("keydown",function(e){if(!ov.classList.contains("open"))return;if(e.key=="Escape")return showEntry(false);
- if(e.key=="Tab"){var b=ov.querySelectorAll("button"),a=b[0],z=b[b.length-1];if(!b.length)return;if(e.shiftKey&&(document.activeElement==a||document.activeElement==ov)){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}else if(!ov.contains(document.activeElement)){e.preventDefault();a.focus()}}});
 var stOpen=false,GEAR='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.6"/><g stroke-width="3"><path d="M20.5 12h2M18 18l1.4 1.4M12 20.5v2M6 18l-1.4 1.4M3.5 12h-2M6 6L4.6 4.6M12 3.5v-2M18 6l1.4-1.4"/></g></svg>';
 function drawSt(){var d=dark();document.getElementById("st").innerHTML='<button class="gear" id="gb" aria-label="Definições" aria-controls="pp" aria-expanded="'+stOpen+'">'+GEAR+'</button><div class="pop" id="pp" role="group" aria-label="Definições"'+(stOpen?"":" hidden")+'><h4>Definições</h4><div><span class="lb">Tema</span><div class="seg"><button data-act="th" data-v="light" aria-pressed="'+!d+'">Claro</button><button data-act="th" data-v="dark" aria-pressed="'+d+'">Escuro</button></div></div><div><span class="lb">Idioma</span><div class="seg"><button data-act="lg" data-v="pt" aria-pressed="'+(L=="pt")+'">Português</button><button data-act="lg" data-v="en" aria-pressed="'+(L=="en")+'">English</button></div></div></div>';tr(document.getElementById("st"))}
 function closeSt(){stOpen=false;var p=document.getElementById("pp"),g=document.getElementById("gb");if(p)p.hidden=true;if(g)g.setAttribute("aria-expanded",false)}
 document.addEventListener("keydown",function(e){if(e.key=="Escape"&&stOpen)closeSt()});
-var ENT=[["home","Início","A página principal"],["sobre","Sobre","Quem sou e o que faço"],["projetos","Projetos","Os meus trabalhos"],["contacto","Contacto","Escreve-me uma mensagem"]];
-function drawEntry(){var en=document.getElementById("en");en.innerHTML='<p class="eh">Duarte Ferreira Nunes</p>'+ENT.map(function(n){return '<button class="eb" data-go="'+n[0]+'"><span>'+n[1]+"</span><small>"+n[2]+"</small></button>"}).join("")+'<div class="er"><button class="tg" data-act="th">'+(dark()?"Tema claro":"Tema escuro")+'</button><button class="tg" data-act="lg" aria-label="Mudar idioma">'+(L=="pt"?"EN":"PT")+'</button></div><p class="cp">© MMXXVI · Duarte Ferreira Nunes</p>';tr(en)}
 var pg=document.getElementById("pg"),nav=document.getElementById("nav"),cur={proj:"stock",cat:"Todas",q:""};
 var NAV=[["sobre","Sobre"],["projetos","Projetos"],["contacto","Contacto"]];
 var EM="nunes.duarte2007@gmail.com";
@@ -471,7 +442,7 @@ function render(quiet){var v=location.hash.slice(1);if(!V[v])v="home";
  pg.innerHTML=V[v]();
  var q=document.getElementById("q");if(q)q.oninput=function(){cur.q=q.value;var p=q.selectionStart,top=window.scrollY;render(1);window.scrollTo(0,top);var n=document.getElementById("q");n.focus();n.setSelectionRange(p,p)};
  var f=document.getElementById("f");if(f)f.onsubmit=send;
- drawEntry();drawSt();drawFt(v);tr(nav);tr(pg);tr(document.getElementById("skip"));document.documentElement.lang=L;
+ drawSt();drawFt(v);tr(nav);tr(pg);tr(document.getElementById("skip"));document.documentElement.lang=L;
  var tt=v=="projeto"?P.find(function(x){return x.id==cur.proj}).t:TIT[v];tt=L=="en"&&EN[tt]?EN[tt]:tt;document.title=(tt?tt+" · ":"")+"Duarte Ferreira Nunes"+(v=="home"?(L=="en"?" · Portfolio":" · Portefólio"):"");
  if(!q&&!quiet)window.scrollTo(0,0);if(!quiet)reveal()}
 function send(ev){ev.preventDefault();var r={n:"Diz-me o teu nome para eu saber a quem responder.",e:"O email parece incompleto. Exemplo: nome@dominio.pt",a:"Escreve um assunto curto, por exemplo “Proposta de projeto”.",m:"Escreve pelo menos 10 caracteres para eu perceber o que precisas."},ok=true;
@@ -487,13 +458,13 @@ document.addEventListener("click",function(e){if(stOpen&&!e.target.closest(".st"
  if(e.target.closest("#skip")){e.preventDefault();pg.focus();return}
  if(e.target.closest("a[data-proj]"))e.preventDefault();var t=e.target.closest("[data-go],[data-proj],[data-cat],[data-act],#gb");if(!t)return;
  if(t.id=="gb"){stOpen=!stOpen;document.getElementById("pp").hidden=!stOpen;t.setAttribute("aria-expanded",stOpen);return}
- if(t.dataset.go&&ov.classList.contains("open"))showEntry(false);
+
  if(t.dataset.act=="lg"){L=t.dataset.v||(L=="pt"?"en":"pt");try{localStorage.setItem("lang",L)}catch(x){}return render(1)}
  if(t.dataset.act=="th"){var d=document.documentElement;d.dataset.theme=t.dataset.v||(dark()?"light":"dark");return render(1)}
  if(t.dataset.cat){cur.cat=t.dataset.cat;if(t.dataset.clear)cur.q="";return render(1)}
  if(t.dataset.proj){cur.proj=t.dataset.proj;if(location.hash=="#projeto"){render();pg.focus({preventScroll:true})}else location.hash="projeto";return}
  location.hash=t.dataset.go});
-window.addEventListener("hashchange",function(){render();if(!ov.classList.contains("open"))pg.focus({preventScroll:true})});
+window.addEventListener("hashchange",function(){render();pg.focus({preventScroll:true})});
 function reveal(){if(matchMedia("(prefers-reduced-motion:reduce)").matches||!("IntersectionObserver" in window))return;
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
  document.querySelectorAll(".sec .head,.ar,.feat,.cta,.it,.pc,.cs section,.fx,.nx,.two>div,.two>form").forEach(function(el,i){el.classList.add("rv");el.style.setProperty("--i",i%4);io.observe(el)})}
@@ -505,7 +476,7 @@ function trackAv(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)retu
 trackAv();
 document.body.classList.add("boot");setTimeout(function(){document.body.classList.remove("boot")},1600);
 render();
-if(!location.hash||location.hash=="#home")showEntry(true)
+
 </script>
 </body>
 </html>
