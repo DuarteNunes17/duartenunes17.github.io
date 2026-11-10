@@ -258,6 +258,29 @@ main.enter h1{animation:rise 1s var(--ease) .15s both}
 #pv{position:fixed;left:0;top:0;width:17rem;z-index:30;pointer-events:none;opacity:0;transform:translate(var(--x,0),var(--y,0)) scale(.8) rotate(-4deg);transition:opacity .25s ease,transform .45s var(--ease)}
 #pv.on{opacity:1;transform:translate(var(--x,0),var(--y,0)) scale(1) rotate(-2deg)}
 #pv .cover{padding:1rem;box-shadow:0 24px 48px -20px var(--sh)}
+/*ENTRADA*/
+@property --mx{syntax:"<number>";inherits:true;initial-value:0}
+@property --my{syntax:"<number>";inherits:true;initial-value:0}
+@property --px{syntax:"<length>";inherits:true;initial-value:0px}
+@property --py{syntax:"<length>";inherits:true;initial-value:0px}
+body.intro{overflow:hidden}
+#intro{position:fixed;inset:0;z-index:60;cursor:pointer}
+#intro .ibg{position:absolute;inset:0;background:var(--acc);clip-path:circle(150% at var(--cx,50%) var(--cy,50%));transition:clip-path .95s var(--io)}
+#intro.out .ibg{clip-path:circle(0% at var(--cx,50%) var(--cy,50%))}
+#intro .ia{position:fixed;left:50%;top:44%;width:min(15rem,56vw);translate:-50% -50%;animation:ipop .85s var(--ease) .1s both}
+#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -25px oklch(10% .05 260/.55);animation:olhar 1.7s ease-in-out .75s both}
+#intro.fly .ia{transition:left .95s var(--io),top .95s var(--io),width .95s var(--io)}
+#intro .msg{position:fixed;left:0;right:0;top:calc(44% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--on);font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff);letter-spacing:-.03em;animation:up .7s var(--ease) .6s both;transition:opacity .3s}
+#intro .bar{display:block;width:7rem;height:3px;margin:1.1rem auto 0;border-radius:3px;background:color-mix(in oklch,var(--on) 28%,transparent);overflow:hidden}
+#intro .bar::after{content:"";display:block;height:100%;background:var(--on);transform-origin:left;animation:carrega 2.1s var(--io) .3s both}
+#intro.out .msg{opacity:0}
+@keyframes ipop{from{transform:scale(0) rotate(-14deg)}65%{transform:scale(1.07) rotate(3deg)}to{transform:none}}
+@keyframes olhar{0%{--mx:0;--px:0px;--py:0px}22%{--mx:-1;--px:-6px}50%{--mx:1;--px:6px}75%{--mx:.15;--px:1px;--py:-4px}100%{--mx:0;--px:0px;--py:0px}}
+@keyframes carrega{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+body.intro .hero .avw{opacity:0}
+body.intro .hero *{animation-play-state:paused}
+body.ido .hero .avw{animation:none}
+@media (prefers-reduced-motion:reduce){#intro{display:none}}
 /*BONECO-LINHA*/
 :root{--avline:#3151D9;--avfill:#B9CCFF;--avpaper:#F8FBFF;--aveye:#F8FBFF;--avpupil:#3151D9;--avfeat:#3151D9}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--avline:oklch(86% .09 262);--avfill:oklch(48% .13 262);--avpaper:oklch(82% .05 258);--aveye:oklch(97% .012 255);--avpupil:oklch(22% .05 262);--avfeat:oklch(26% .06 262)}}
@@ -552,13 +575,26 @@ function trackAv(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)retu
   sv.style.setProperty("--px",ux*6*k+"px");sv.style.setProperty("--mx",ux*k);sv.style.setProperty("--my",uy*k);sv.style.setProperty("--py",uy*6*k+"px");sv.style.setProperty("--r",ux*4*k+"deg");sv.style.setProperty("--hx",ux*3*k+"px");sv.style.setProperty("--hy",uy*2*k+"px")})},{passive:true});
  document.addEventListener("pointermove",function(e){var o=document.querySelector(".obj .tilt");if(!o)return;var b=o.getBoundingClientRect(),dx=(e.clientX-(b.left+b.width/2))/innerWidth,dy=(e.clientY-(b.top+b.height/2))/innerHeight;o.style.setProperty("--ry",Math.max(-1,Math.min(1,dx*2))*16+"deg");o.style.setProperty("--rx",Math.max(-1,Math.min(1,dy*2))*-12+"deg")},{passive:true})}
 trackAv();
+/* entrada: o boneco aparece num ecra azul, olha a volta e voa ate ao seu lugar na pagina inicial */
+function intro(){if(calmo())return;
+ var I=document.createElement("div");I.id="intro";I.setAttribute("aria-hidden","true");
+ I.innerHTML='<div class="ibg"></div><div class="ia">'+avImg("")+'</div><p class="msg">'+(L=="en"?"Hi!":"Olá!")+'<span class="bar"></span></p>';
+ document.body.appendChild(I);document.body.classList.add("intro");var ia=I.querySelector(".ia"),feito=false;
+ function sai(){if(feito)return;feito=true;removeEventListener("keydown",sai);
+  var t=document.querySelector(".hero .avw svg"),r=t&&t.getBoundingClientRect(),ok=r&&r.width&&r.top<innerHeight&&r.bottom>0;
+  if(ok){I.style.setProperty("--cx",r.left+r.width/2+"px");I.style.setProperty("--cy",r.top+r.height/2+"px");I.classList.add("fly");ia.style.left=r.left+r.width/2+"px";ia.style.top=r.top+r.height/2+"px";ia.style.width=r.width+"px"}
+  else{ia.style.transition="transform .6s var(--io),opacity .5s";ia.style.transform="scale(.5)";ia.style.opacity="0"}
+  I.classList.add("out");
+  setTimeout(function(){document.body.classList.add("ido");document.body.classList.remove("intro");I.remove()},ok?980:650)}
+ setTimeout(sai,2700);I.addEventListener("click",sai);addEventListener("keydown",sai)}
+window.addEventListener("hashchange",function(){document.body.classList.remove("ido")});
 /* pre-visualizacao do projeto que segue o rato nas listas */
 var PV=document.createElement("div");PV.id="pv";PV.setAttribute("aria-hidden","true");document.body.appendChild(PV);var pvOn=null;
 document.addEventListener("pointerover",function(e){if(e.pointerType!="mouse"||calmo())return;var r=e.target.closest(".idx [data-proj]");if(r==pvOn)return;pvOn=r;if(!r){PV.classList.remove("on");return}var p=P.find(function(x){return x.id==r.dataset.proj});if(!p)return;PV.innerHTML=vis(p);PV.style.setProperty("--x",e.clientX+24+"px");PV.style.setProperty("--y",e.clientY-90+"px");PV.offsetHeight;PV.classList.add("on")});
 document.addEventListener("pointermove",function(e){if(pvOn){PV.style.setProperty("--x",Math.min(e.clientX+24,innerWidth-300)+"px");PV.style.setProperty("--y",e.clientY-90+"px")}},{passive:true});
 window.addEventListener("hashchange",function(){pvOn=null;PV.classList.remove("on")});
 document.body.classList.add("boot");setTimeout(function(){document.body.classList.remove("boot")},1600);
-render();
+render();intro();
 
 </script>
 </body>
