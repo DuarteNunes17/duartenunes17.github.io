@@ -203,28 +203,24 @@ input,textarea{caret-color:var(--acc)}
 .chip .ic-l{margin-right:.375rem}.nx .go .ic{width:1.5rem;height:1.5rem}
 .feat .tags i{background:var(--surf)}
 .feat .k{margin:-.25rem 0 1rem}
-/*TRANSICOES*/
+/*TRANSICOES: pixeis*/
 :root{--io:cubic-bezier(.76,0,.24,1)}
-#pt{position:fixed;inset:0;z-index:40;pointer-events:none;overflow:hidden}
-#pt.cover,#pt.leave{pointer-events:auto}
-#pt .a,#pt .b{position:absolute;left:0;right:0;top:-14vh;bottom:-14vh;transform:translateY(115%);border-radius:50% 50% 0 0/14vh 14vh 0 0;transition:transform .7s var(--io),border-radius .7s var(--io);will-change:transform}
-#pt .a{background:var(--hl)}
-#pt .b{background:var(--acc);display:grid;place-items:center;transition-delay:.09s}
-#pt.cover .a,#pt.cover .b{transform:none;border-radius:0}
-#pt.leave .a,#pt.leave .b{transform:translateY(-115%);border-radius:0 0 50% 50%/0 0 14vh 14vh}
-#pt.leave .b{transition-delay:0s}#pt.leave .a{transition-delay:.09s}
-#pt.reset .a,#pt.reset .b,#pt.reset .lbl span{transition:none!important}
-#pt .lbl{overflow:hidden;padding:.06em .1em .12em;max-width:92vw;text-align:center}
-#pt .lbl span{display:inline-block;font:700 clamp(2.75rem,10vw,7.5rem)/1 var(--ff);letter-spacing:-.045em;color:var(--on);transform:translateY(115%);transition:transform .65s var(--ease) .3s;text-wrap:balance}
-#pt .lbl span::after{content:".";color:var(--hl)}
-#pt.cover .lbl span{transform:none}
-#pt.leave .lbl span{transform:translateY(-115%);transition:transform .5s var(--io) 0s}
-main.out{opacity:0;transform:translateY(-32px);transition:opacity .4s ease,transform .6s var(--io)}
-main.enter{animation:in .9s var(--ease) .12s both}
-main.enter h1{animation:rise 1s var(--ease) .18s both}
+#pt{position:fixed;inset:0;z-index:40;pointer-events:none;display:grid;place-items:center;overflow:hidden}
+#pt.busy{pointer-events:auto}
+#pt .px{position:absolute;inset:0;display:grid;grid-template-columns:repeat(var(--c,1),var(--s,56px));grid-auto-rows:var(--s,56px)}
+#pt .px i{display:block;background:var(--pc);opacity:0;transition:opacity .07s linear var(--d)}
+#pt.on .px i{opacity:1}
+#pt.off .px i{opacity:0;transition-delay:var(--e)}
+#pt .lbl{position:relative;overflow:hidden;padding:.06em .1em .12em;max-width:92vw;text-align:center}
+#pt .lbl span{display:inline-block;font:700 clamp(2.75rem,10vw,7.5rem)/1 var(--ff);letter-spacing:-.045em;color:var(--on);transform:translateY(115%);transition:transform .55s var(--ease);text-wrap:balance}
+#pt .lbl span::after{content:".";opacity:.55}
+#pt.show .lbl span{transform:none}
+#pt.hide .lbl span{transform:translateY(-115%);transition:transform .4s var(--io)}
+main.out{opacity:0;transform:translateY(-24px);transition:opacity .35s ease,transform .5s var(--io)}
+main.enter{animation:in .9s var(--ease) .1s both}
+main.enter h1{animation:rise 1s var(--ease) .15s both}
 @keyframes rise{from{clip-path:inset(0 0 100% 0);transform:translateY(.45em)}to{clip-path:inset(0 0 -20% 0);transform:none}}
-@media (prefers-reduced-motion:reduce){#pt{display:none}}
-/*OBJETO-PROJETOS*/
+@media (prefers-reduced-motion:reduce){#pt{display:none}}/*OBJETO-PROJETOS*/
 .ph{display:grid;grid-template-columns:1fr minmax(0,17rem);grid-template-rows:1fr auto;grid-template-areas:"t o" "c o";column-gap:3rem;align-items:end}
 .ph>h1{grid-area:t;align-self:end}.ph>.ctl{grid-area:c;margin-top:2rem}.ph>.obj{grid-area:o}
 .obj{position:relative;width:100%;max-width:17rem;justify-self:end;padding-bottom:1.5rem}
@@ -324,7 +320,7 @@ footer a:hover,footer a[aria-current="page"]{color:var(--ink)}
 <header><div class="w"><button class="brand" data-go="home"><span class="mark">DN</span>Duarte Ferreira Nunes</button><div class="hr"><nav id="nav" aria-label="Principal"></nav><div class="st" id="st"></div></div></div></header>
 
 <div class="w"><main id="pg" tabindex="-1"></main></div>
-<div id="pt" aria-hidden="true"><div class="a"></div><div class="b"><div class="lbl"><span></span></div></div></div>
+<div id="pt" aria-hidden="true"><div class="px"></div><div class="lbl"><span></span></div></div>
 <footer id="ft"></footer>
 <script>
 var P=[{id:"stock",h:250,v:"dash",pb:"A empresa controlava o stock em folhas de cálculo, com erros frequentes e sem avisos de rutura.",sl:"Desenvolvi uma aplicação em C# com base de dados SQL Server, registo de movimentos e alertas automáticos.",rs:"Menos erros de inventário e consulta do stock em tempo real.",t:"Sistema de gestão de stocks",c:"Gestão",k:["C#","SQL Server"],y:2026,d:"Aplicação para controlar entradas, saídas e alertas de rutura numa pequena empresa."},
@@ -500,22 +496,27 @@ document.addEventListener("click",function(e){if(stOpen&&!e.target.closest(".st"
  if(t.id=="gb"){stOpen=!stOpen;document.getElementById("pp").hidden=!stOpen;t.setAttribute("aria-expanded",stOpen);return}
 
  if(t.dataset.act=="lg"){L=t.dataset.v||(L=="pt"?"en":"pt");try{localStorage.setItem("lang",L)}catch(x){}return render(1)}
- if(t.dataset.act=="th"){var d=document.documentElement;d.dataset.theme=t.dataset.v||(dark()?"light":"dark");return render(1)}
+ if(t.dataset.act=="th"){var d=document.documentElement,nv=t.dataset.v||(dark()?"light":"dark");if((nv=="dark")==dark())return;pix(cv("--ink"),"",function(){d.dataset.theme=nv;render(1)});return}
  if(t.dataset.cat){cur.cat=t.dataset.cat;if(t.dataset.clear)cur.q="";return render(1)}
  if(t.dataset.proj){cur.proj=t.dataset.proj;if(location.hash=="#projeto"){swap(function(){render();par();pg.focus({preventScroll:true})})}else location.hash="projeto";return}
  location.hash=t.dataset.go});
-/* transicao entre paginas: o conteudo sai, duas camadas tapam o ecra com o nome do destino, a pagina nova entra */
-var PT=document.getElementById("pt"),ptId=0,ptT=[];
+/* transicao em pixeis: quadrados espalham-se a partir do clique, tapam o ecra e depois desfazem-se a mostrar a pagina nova */
+var PT=document.getElementById("pt"),ptId=0,ptT=[],ptX=null,ptY=null;
+document.addEventListener("pointerdown",function(e){ptX=e.clientX;ptY=e.clientY},{passive:true});
 function calmo(){return matchMedia("(prefers-reduced-motion:reduce)").matches}
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
 function ptLabel(v){var t=v=="projeto"?(P.find(function(x){return x.id==cur.proj})||{}).t:(v=="home"?"Início":TIT[v]);t=t||"Início";return L=="en"&&EN[t]?EN[t]:t}
-function swap(done){if(calmo()||!PT){done();return}
- var id=++ptId;ptT.forEach(clearTimeout);ptT=[];var v=location.hash.slice(1);if(!V[v])v="home";
- PT.querySelector(".lbl span").textContent=ptLabel(v);PT.className="";PT.offsetHeight;
- pg.classList.remove("enter");pg.classList.add("out");PT.className="cover";
- ptT.push(setTimeout(function(){if(id!=ptId)return;pg.classList.remove("out");pg.classList.add("enter");done();
-  ptT.push(setTimeout(function(){if(id!=ptId)return;PT.className="leave";
-   ptT.push(setTimeout(function(){if(id!=ptId)return;PT.className="reset";PT.offsetHeight;PT.className="";pg.classList.remove("enter")},1100))},180))},880))}
-function par(){if(calmo())return;var hh=innerHeight;document.querySelectorAll(".avw,.feat .cover,.pc .cover").forEach(function(e){var b=e.getBoundingClientRect();if(b.bottom<-200||b.top>hh+200)return;var c=b.top+b.height/2-hh/2;e.style.translate="0 "+Math.max(-40,Math.min(40,c*-.06)).toFixed(1)+"px"})}
+function pix(cor,txt,done,page){if(calmo()||!PT){done();return}
+ var id=++ptId;ptT.forEach(clearTimeout);ptT=[];
+ var W=innerWidth,H=innerHeight,s=W<700?40:56,c=Math.ceil(W/s),r=Math.ceil(H/s),ox=ptX==null?W/2:ptX,oy=ptY==null?H/2:ptY,far=Math.hypot(Math.max(ox,W-ox),Math.max(oy,H-oy))||1,cells="";ptX=ptY=null;
+ for(var y=0;y<r;y++)for(var x=0;x<c;x++){var d=Math.hypot(x*s+s/2-ox,y*s+s/2-oy)/far;cells+='<i style="--d:'+(d*.5+Math.random()*.16).toFixed(3)+'s;--e:'+(Math.random()*.42).toFixed(3)+'s"></i>'}
+ var px=PT.querySelector(".px");px.style.setProperty("--c",c);px.style.setProperty("--s",s+"px");px.innerHTML=cells;
+ PT.style.setProperty("--pc",cor);PT.querySelector(".lbl").style.display=txt?"":"none";PT.querySelector(".lbl span").textContent=txt;
+ PT.className="busy";PT.offsetHeight;PT.className="busy on";if(page){pg.classList.remove("enter");pg.classList.add("out")}
+ ptT.push(setTimeout(function(){if(id!=ptId)return;if(txt)PT.classList.add("show");
+  ptT.push(setTimeout(function(){if(id!=ptId)return;if(page){pg.classList.remove("out");pg.classList.add("enter")}done();PT.className="busy off"+(txt?" show hide":"");
+   ptT.push(setTimeout(function(){if(id!=ptId)return;PT.className="";px.innerHTML="";pg.classList.remove("enter")},1000))},txt?520:60))},760))}
+function swap(done){var v=location.hash.slice(1);if(!V[v])v="home";pix(cv("--acc"),ptLabel(v),done,1)}function par(){if(calmo())return;var hh=innerHeight;document.querySelectorAll(".avw,.feat .cover,.pc .cover").forEach(function(e){var b=e.getBoundingClientRect();if(b.bottom<-200||b.top>hh+200)return;var c=b.top+b.height/2-hh/2;e.style.translate="0 "+Math.max(-40,Math.min(40,c*-.06)).toFixed(1)+"px"})}
 window.addEventListener("hashchange",function(){swap(function(){render();par();pg.focus({preventScroll:true})})});
 function reveal(){if(matchMedia("(prefers-reduced-motion:reduce)").matches||!("IntersectionObserver" in window))return;
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
