@@ -116,7 +116,6 @@ label{font-weight:500;font-size:.9375rem;display:block;margin-bottom:.375rem}
 @keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
 @keyframes travel{0%{offset-distance:0%;opacity:0}15%{opacity:1}85%{opacity:1}100%{offset-distance:100%;opacity:0}}
 body{transition:background-color .4s,color .4s}
-#pb{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;height:3px;background:var(--acc);transform-origin:0 50%;transform:scaleX(0);z-index:11}
 .hero>div:first-child>*{animation:up .9s var(--ease) both}
 .hero>div:first-child>:nth-child(2){animation-delay:.08s}.hero>div:first-child>:nth-child(3){animation-delay:.16s}.hero>div:first-child>:nth-child(4){animation-delay:.24s}.hero>div:first-child>:nth-child(5){animation-delay:.32s}
 .hero .diag{animation:up 1s .35s var(--ease) both}
@@ -316,7 +315,6 @@ footer a:hover,footer a[aria-current="page"]{color:var(--ink)}
 </head>
 <body>
 <a class="skip" href="#pg" id="skip">Saltar para o conteúdo</a>
-<div id="pb" aria-hidden="true"></div>
 <header><div class="w"><button class="brand" data-go="home"><span class="mark">DN</span>Duarte Ferreira Nunes</button><div class="hr"><nav id="nav" aria-label="Principal"></nav><div class="st" id="st"></div></div></div></header>
 
 <div class="w"><main id="pg" tabindex="-1"></main></div>
@@ -521,8 +519,8 @@ window.addEventListener("hashchange",function(){swap(function(){render();par();p
 function reveal(){if(matchMedia("(prefers-reduced-motion:reduce)").matches||!("IntersectionObserver" in window))return;
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.12});
  document.querySelectorAll(".sec .head,.ar,.feat,.cta,.it,.pc,.cs section,.fx,.nx,.two>div,.two>form").forEach(function(el,i){el.classList.add("rv");el.style.setProperty("--i",i%4);io.observe(el)})}
-var pb=document.getElementById("pb"),tick=0;
-window.addEventListener("scroll",function(){if(tick)return;tick=requestAnimationFrame(function(){tick=0;document.querySelector("header").classList.toggle("sc",scrollY>8);var m=document.documentElement.scrollHeight-innerHeight;pb.style.transform="scaleX("+(m>0?Math.min(1,scrollY/m):0)+")";par()})},{passive:true});
+var tick=0;
+window.addEventListener("scroll",function(){if(tick)return;tick=requestAnimationFrame(function(){tick=0;document.querySelector("header").classList.toggle("sc",scrollY>8);par()})},{passive:true});
 function trackAv(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)return;
  document.addEventListener("pointermove",function(e){document.querySelectorAll(".avsvg").forEach(function(sv){var b=sv.getBoundingClientRect(),dx=e.clientX-(b.left+b.width/2),dy=e.clientY-(b.top+b.height*.48),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/320),ux=dx/d,uy=dy/d;
   sv.style.setProperty("--px",ux*6*k+"px");sv.style.setProperty("--mx",ux*k);sv.style.setProperty("--my",uy*k);sv.style.setProperty("--py",uy*6*k+"px");sv.style.setProperty("--r",ux*4*k+"deg");sv.style.setProperty("--hx",ux*3*k+"px");sv.style.setProperty("--hy",uy*2*k+"px")})},{passive:true});
