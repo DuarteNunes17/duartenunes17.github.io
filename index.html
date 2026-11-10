@@ -265,21 +265,33 @@ main.enter h1{animation:rise 1s var(--ease) .15s both}
 @property --py{syntax:"<length>";inherits:true;initial-value:0px}
 body.intro{overflow:hidden}
 #intro{position:fixed;inset:0;z-index:60;cursor:pointer}
-#intro .ibg{position:absolute;inset:0;background:var(--cool);clip-path:circle(150% at var(--cx,50%) var(--cy,50%));transition:clip-path .95s var(--io)}
-#intro.out .ibg{clip-path:circle(0% at var(--cx,50%) var(--cy,50%))}
-#intro .ia{position:fixed;left:50%;top:44%;width:min(15rem,56vw);translate:-50% -50%;animation:ipop .85s var(--ease) .1s both}
-#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -28px transparent;animation:olhar 1.7s ease-in-out .75s both;transition:box-shadow .9s var(--io)}
+#intro .ibg{position:absolute;inset:0;background:var(--cool);display:grid;grid-template-columns:repeat(var(--c,1),var(--s,56px));grid-auto-rows:var(--s,56px);overflow:hidden}
+#intro .ibg i{display:block;background:var(--cool);transition:opacity .09s linear var(--d,0s)}
+#intro.out .ibg{background:transparent}#intro.out .ibg i{opacity:0}
+#intro .ia{position:fixed;left:50%;top:42%;width:min(15rem,56vw);translate:-50% -50%;animation:ientra .9s var(--ease) both}
+#intro.fly .ia{transition:left .95s var(--io),top .95s var(--io),width .95s var(--io)}
+#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -28px transparent;animation:olhar 1.6s ease-in-out 1.95s both;transition:box-shadow .9s var(--io)}
 #intro .ia .avsvg .bg{opacity:0;transition:opacity .9s var(--io),fill .45s}
 #intro.fly .ia .avsvg{box-shadow:0 30px 60px -30px var(--sh)}
 #intro.fly .ia .avsvg .bg{opacity:1}
-#intro.fly .ia{transition:left .95s var(--io),top .95s var(--io),width .95s var(--io)}
-#intro .msg{position:fixed;left:0;right:0;top:calc(44% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--ink);font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff);letter-spacing:-.03em;animation:up .7s var(--ease) .6s both;transition:opacity .3s}
-#intro .bar{display:block;width:7rem;height:3px;margin:1.1rem auto 0;border-radius:3px;background:color-mix(in oklch,var(--ink) 15%,transparent);overflow:hidden}
-#intro .bar::after{content:"";display:block;height:100%;background:var(--acc);transform-origin:left;animation:carrega 2.1s var(--io) .3s both}
-#intro.out .msg{opacity:0}
-@keyframes ipop{from{transform:scale(0) rotate(-14deg)}65%{transform:scale(1.07) rotate(3deg)}to{transform:none}}
+#intro .avsvg *{transition:fill-opacity .6s ease}
+#intro.drawing .avsvg *{fill-opacity:0}
+#intro .avsvg .dr{stroke-dasharray:1;stroke-dashoffset:1;animation:traco .75s var(--ease) var(--dd,0s) forwards}
+#intro .avsvg .ofs{transition:transform 1.1s var(--ease)}
+#intro.drawing .avsvg .ofs{transform:translate(-34px,34px)}
+#intro .avsvg .star>*{transform-box:fill-box;transform-origin:center;animation:estrela .7s var(--ease) both}
+#intro .avsvg .star>:nth-child(1){animation-delay:1.45s}#intro .avsvg .star>:nth-child(2){animation-delay:1.58s}#intro .avsvg .star>:nth-child(3){animation-delay:1.71s}#intro .avsvg .star>:nth-child(4){animation-delay:1.84s}
+#intro .msg{position:fixed;left:1rem;right:1rem;top:calc(42% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--ink);font:700 clamp(1.6rem,4.6vw,2.4rem)/1.15 var(--ff);letter-spacing:-.03em;min-height:1.2em;transition:opacity .3s}
+#intro .car{display:inline-block;width:.09em;height:.95em;margin-left:.07em;vertical-align:-.1em;border-radius:1px;background:var(--acc);animation:pisca 1s steps(1) infinite}
+#intro .load{position:fixed;left:50%;bottom:clamp(1.75rem,7vh,3.25rem);translate:-50% 0;display:flex;align-items:center;gap:.875rem;color:var(--mute);font:500 .875rem var(--ff);font-variant-numeric:tabular-nums;white-space:nowrap;transition:opacity .3s}
+#intro .bar{width:9rem;height:3px;border-radius:3px;background:color-mix(in oklch,var(--ink) 14%,transparent);overflow:hidden}
+#intro .bar b{display:block;height:100%;background:var(--acc);transform-origin:left;transform:scaleX(0)}
+#intro .pct{min-width:3ch;text-align:right;color:var(--ink)}
+#intro.out .msg,#intro.out .load{opacity:0}
+@keyframes traco{to{stroke-dashoffset:0}}
+@keyframes estrela{from{transform:scale(0) rotate(-120deg)}70%{transform:scale(1.25) rotate(10deg)}to{transform:none}}
+@keyframes ientra{from{opacity:0;transform:translateY(18px) scale(.94)}to{opacity:1;transform:none}}
 @keyframes olhar{0%{--mx:0;--px:0px;--py:0px}22%{--mx:-1;--px:-6px}50%{--mx:1;--px:6px}75%{--mx:.15;--px:1px;--py:-4px}100%{--mx:0;--px:0px;--py:0px}}
-@keyframes carrega{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 body.intro .hero .avw{opacity:0}
 body.intro .hero *{animation-play-state:paused}
 body.ido .hero .avw{animation:none}
@@ -578,18 +590,30 @@ function trackAv(){if(matchMedia("(prefers-reduced-motion:reduce)").matches)retu
   sv.style.setProperty("--px",ux*6*k+"px");sv.style.setProperty("--mx",ux*k);sv.style.setProperty("--my",uy*k);sv.style.setProperty("--py",uy*6*k+"px");sv.style.setProperty("--r",ux*4*k+"deg");sv.style.setProperty("--hx",ux*3*k+"px");sv.style.setProperty("--hy",uy*2*k+"px")})},{passive:true});
  document.addEventListener("pointermove",function(e){var o=document.querySelector(".obj .tilt");if(!o)return;var b=o.getBoundingClientRect(),dx=(e.clientX-(b.left+b.width/2))/innerWidth,dy=(e.clientY-(b.top+b.height/2))/innerHeight;o.style.setProperty("--ry",Math.max(-1,Math.min(1,dx*2))*16+"deg");o.style.setProperty("--rx",Math.max(-1,Math.min(1,dy*2))*-12+"deg")},{passive:true})}
 trackAv();
-/* entrada: o boneco aparece num ecra azul, olha a volta e voa ate ao seu lugar na pagina inicial */
+/* entrada: o boneco desenha-se traco a traco, ganha cor, olha a volta, diz ola e voa para o seu lugar enquanto o fundo se desfaz em pixeis */
 function intro(){if(calmo())return;
- var I=document.createElement("div");I.id="intro";I.setAttribute("aria-hidden","true");
- I.innerHTML='<div class="ibg"></div><div class="ia">'+avImg("")+'</div><p class="msg">'+(L=="en"?"Hi!":"Olá!")+'<span class="bar"></span></p>';
- document.body.appendChild(I);document.body.classList.add("intro");var ia=I.querySelector(".ia"),feito=false;
- function sai(){if(feito)return;feito=true;removeEventListener("keydown",sai);
-  var t=document.querySelector(".hero .avw svg"),r=t&&t.getBoundingClientRect(),ok=r&&r.width&&r.top<innerHeight&&r.bottom>0;
-  if(ok){I.style.setProperty("--cx",r.left+r.width/2+"px");I.style.setProperty("--cy",r.top+r.height/2+"px");I.classList.add("fly");ia.style.left=r.left+r.width/2+"px";ia.style.top=r.top+r.height/2+"px";ia.style.width=r.width+"px"}
+ var en=L=="en",txt=en?"Hi! I'm Duarte.":"Olá! Sou o Duarte.",W=innerWidth,H=innerHeight,s=W<700?40:56,c=Math.ceil(W/s),r=Math.ceil(H/s),cells="";
+ for(var n=0;n<c*r;n++)cells+="<i></i>";
+ var I=document.createElement("div");I.id="intro";I.className="drawing";I.setAttribute("aria-hidden","true");
+ I.innerHTML='<div class="ibg" style="--c:'+c+';--s:'+s+'px">'+cells+'</div><div class="ia">'+avImg("")+'</div><p class="msg"><span class="ty"></span><span class="car"></span></p><div class="load"><span class="bar"><b></b></span><span class="pct">0%</span></div>';
+ document.body.appendChild(I);document.body.classList.add("intro");
+ var ia=I.querySelector(".ia"),ty=I.querySelector(".ty"),bar=I.querySelector(".bar b"),pct=I.querySelector(".pct"),feito=false,T=[],t0=performance.now(),DUR=3300,raf;
+ /* tracos: cada linha desenha-se por ordem */
+ [].slice.call(I.querySelectorAll(".ln path,.ln circle,.ln ellipse,.ln rect")).filter(function(e){var k=getComputedStyle(e).stroke;return k&&k!="none"}).forEach(function(e,i){e.setAttribute("pathLength","1");e.classList.add("dr");e.style.setProperty("--dd",(.15+i*.032).toFixed(3)+"s")});
+ T.push(setTimeout(function(){I.classList.remove("drawing")},1250));
+ /* texto escrito letra a letra */
+ var k=0;T.push(setTimeout(function(){var iv=setInterval(function(){k++;ty.textContent=txt.slice(0,k);if(k>=txt.length)clearInterval(iv)},55);T.push(iv)},1500));
+ /* contagem 0 a 100 */
+ (function conta(now){var p=Math.min(1,(now-t0)/DUR),e=p*p*(3-2*p);bar.style.transform="scaleX("+e+")";pct.textContent=Math.round(e*100)+"%";if(p<1&&!feito)raf=requestAnimationFrame(conta)})(t0);
+ function sai(){if(feito)return;feito=true;removeEventListener("keydown",sai);T.forEach(function(x){clearTimeout(x);clearInterval(x)});cancelAnimationFrame(raf);
+  I.classList.remove("drawing");I.querySelectorAll(".dr").forEach(function(e){e.style.animation="none";e.style.strokeDashoffset="0"});ty.textContent=txt;bar.style.transform="scaleX(1)";pct.textContent="100%";
+  var t=document.querySelector(".hero .avw svg"),b=t&&t.getBoundingClientRect(),ok=b&&b.width&&b.top<innerHeight&&b.bottom>0,ox=ok?b.left+b.width/2:W/2,oy=ok?b.top+b.height/2:H*.42,far=Math.hypot(Math.max(ox,W-ox),Math.max(oy,H-oy))||1;
+  I.querySelectorAll(".ibg i").forEach(function(el,n){var x=(n%c)*s+s/2,y=Math.floor(n/c)*s+s/2;el.style.setProperty("--d",(Math.hypot(x-ox,y-oy)/far*.55+Math.random()*.12).toFixed(3)+"s")});
+  if(ok){I.classList.add("fly");ia.style.left=ox+"px";ia.style.top=oy+"px";ia.style.width=b.width+"px"}
   else{ia.style.transition="transform .6s var(--io),opacity .5s";ia.style.transform="scale(.5)";ia.style.opacity="0"}
-  I.classList.add("out");
-  setTimeout(function(){document.body.classList.add("ido");document.body.classList.remove("intro");I.remove()},ok?980:650)}
- setTimeout(sai,2700);I.addEventListener("click",sai);addEventListener("keydown",sai)}
+  I.offsetHeight;I.classList.add("out");
+  setTimeout(function(){document.body.classList.add("ido");document.body.classList.remove("intro");I.remove()},1050)}
+ T.push(setTimeout(sai,DUR+250));I.addEventListener("click",sai);addEventListener("keydown",sai)}
 window.addEventListener("hashchange",function(){document.body.classList.remove("ido")});
 /* pre-visualizacao do projeto que segue o rato nas listas */
 var PV=document.createElement("div");PV.id="pv";PV.setAttribute("aria-hidden","true");document.body.appendChild(PV);var pvOn=null;
