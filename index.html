@@ -265,14 +265,14 @@ main.enter h1{animation:rise 1s var(--ease) .15s both}
 @property --py{syntax:"<length>";inherits:true;initial-value:0px}
 body.intro{overflow:hidden}
 #intro{position:fixed;inset:0;z-index:60;cursor:pointer}
-#intro .ibg{position:absolute;inset:0;background:var(--acc);clip-path:circle(150% at var(--cx,50%) var(--cy,50%));transition:clip-path .95s var(--io)}
+#intro .ibg{position:absolute;inset:0;background:var(--cool);clip-path:circle(150% at var(--cx,50%) var(--cy,50%));transition:clip-path .95s var(--io)}
 #intro.out .ibg{clip-path:circle(0% at var(--cx,50%) var(--cy,50%))}
 #intro .ia{position:fixed;left:50%;top:44%;width:min(15rem,56vw);translate:-50% -50%;animation:ipop .85s var(--ease) .1s both}
-#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -25px oklch(10% .05 260/.55);animation:olhar 1.7s ease-in-out .75s both}
+#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -28px var(--sh);animation:olhar 1.7s ease-in-out .75s both}
 #intro.fly .ia{transition:left .95s var(--io),top .95s var(--io),width .95s var(--io)}
-#intro .msg{position:fixed;left:0;right:0;top:calc(44% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--on);font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff);letter-spacing:-.03em;animation:up .7s var(--ease) .6s both;transition:opacity .3s}
-#intro .bar{display:block;width:7rem;height:3px;margin:1.1rem auto 0;border-radius:3px;background:color-mix(in oklch,var(--on) 28%,transparent);overflow:hidden}
-#intro .bar::after{content:"";display:block;height:100%;background:var(--on);transform-origin:left;animation:carrega 2.1s var(--io) .3s both}
+#intro .msg{position:fixed;left:0;right:0;top:calc(44% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--ink);font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff);letter-spacing:-.03em;animation:up .7s var(--ease) .6s both;transition:opacity .3s}
+#intro .bar{display:block;width:7rem;height:3px;margin:1.1rem auto 0;border-radius:3px;background:color-mix(in oklch,var(--ink) 15%,transparent);overflow:hidden}
+#intro .bar::after{content:"";display:block;height:100%;background:var(--acc);transform-origin:left;animation:carrega 2.1s var(--io) .3s both}
 #intro.out .msg{opacity:0}
 @keyframes ipop{from{transform:scale(0) rotate(-14deg)}65%{transform:scale(1.07) rotate(3deg)}to{transform:none}}
 @keyframes olhar{0%{--mx:0;--px:0px;--py:0px}22%{--mx:-1;--px:-6px}50%{--mx:1;--px:6px}75%{--mx:.15;--px:1px;--py:-4px}100%{--mx:0;--px:0px;--py:0px}}
