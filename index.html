@@ -268,7 +268,10 @@ body.intro{overflow:hidden}
 #intro .ibg{position:absolute;inset:0;background:var(--cool);clip-path:circle(150% at var(--cx,50%) var(--cy,50%));transition:clip-path .95s var(--io)}
 #intro.out .ibg{clip-path:circle(0% at var(--cx,50%) var(--cy,50%))}
 #intro .ia{position:fixed;left:50%;top:44%;width:min(15rem,56vw);translate:-50% -50%;animation:ipop .85s var(--ease) .1s both}
-#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -28px var(--sh);animation:olhar 1.7s ease-in-out .75s both}
+#intro .ia .avsvg{display:block;width:100%;height:auto;border-radius:1.75rem;box-shadow:0 30px 60px -28px transparent;animation:olhar 1.7s ease-in-out .75s both;transition:box-shadow .9s var(--io)}
+#intro .ia .avsvg .bg{opacity:0;transition:opacity .9s var(--io),fill .45s}
+#intro.fly .ia .avsvg{box-shadow:0 30px 60px -30px var(--sh)}
+#intro.fly .ia .avsvg .bg{opacity:1}
 #intro.fly .ia{transition:left .95s var(--io),top .95s var(--io),width .95s var(--io)}
 #intro .msg{position:fixed;left:0;right:0;top:calc(44% + min(7.5rem,28vw) + 1.75rem);margin:0;text-align:center;color:var(--ink);font:700 clamp(1.75rem,5vw,2.5rem)/1 var(--ff);letter-spacing:-.03em;animation:up .7s var(--ease) .6s both;transition:opacity .3s}
 #intro .bar{display:block;width:7rem;height:3px;margin:1.1rem auto 0;border-radius:3px;background:color-mix(in oklch,var(--ink) 15%,transparent);overflow:hidden}
