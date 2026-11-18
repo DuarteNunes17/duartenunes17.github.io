@@ -214,7 +214,8 @@ h2.s{font-size:clamp(1.6rem,3.4vw,2.4rem);letter-spacing:-.035em;font-weight:750
 #gl{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab}
 #gl.hov{cursor:pointer}
 .stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(120% 90% at 70% 40%,transparent 45%,color-mix(in oklch,var(--scene) 85%,transparent) 100%),linear-gradient(90deg,color-mix(in oklch,var(--scene) 80%,transparent) 0%,transparent 48%);z-index:1}
-.hud{position:absolute;inset:0;z-index:2;pointer-events:none}
+.hud{position:absolute;inset:0;z-index:2;pointer-events:none;transition:opacity .5s var(--ease)}
+.stage.zoom .hud,.stage.zoom .hsl{opacity:0;visibility:hidden}.stage::after{transition:opacity .5s}.stage.zoom::after{opacity:0}
 .hud .w{position:relative;height:100%;max-width:none;display:flex;flex-direction:column;justify-content:center;padding-top:2rem;padding-bottom:5rem}
 .hud .who{pointer-events:auto;max-width:36rem}
 .prompt{font:500 .9375rem var(--mono);color:var(--mute);margin:0 0 1rem;min-height:1.6em}
@@ -466,7 +467,7 @@ label{font-weight:500;font-size:.9375rem;display:block;margin-bottom:.375rem}
    10. SOBRE
    ========================================================= */
 .ab{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(2rem,5vw,4rem);margin-top:2.5rem;align-items:start}
-.ab .avw .win{position:sticky;top:5rem}
+
 .ab .avsvg{display:block;width:100%;height:auto}
 .ab .prose p{color:var(--mute);margin:0 0 1rem;max-width:62ch}
 .ab .prose p.big{font-size:clamp(1.2rem,2vw,1.45rem);color:var(--ink);line-height:1.45}
@@ -629,20 +630,19 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
   <canvas id="bliq" aria-hidden="true"></canvas>
   <div class="btb" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span>duarte@portefolio ~ zsh</span></div>
   <div class="bin">
-   <p class="bcm"># experimenta com som</p>
+   <p class="bcm"># portefólio do Duarte Nunes</p>
    <p class="cmd" id="bootT"><span class="ps">~ $</span> <b id="bootCmd"></b><span class="car" aria-hidden="true"></span></p>
    <ol id="bootL" aria-live="polite"></ol>
    <div class="pr"><span id="bootS">a preparar…</span><span id="bootP">0%</span></div>
    <div class="bar" id="bootB" aria-hidden="true"></div>
    <div class="go" id="bootG">
-    <button class="pri" data-enter="1"><span class="ic" data-i="snd"></span><span>Entrar com som</span></button>
-    <button data-enter="0"><span class="ic" data-i="mute"></span><span>Entrar sem som</span><kbd aria-hidden="true">⏎</kbd></button>
+    <button class="pri" data-enter="0"><span>Entrar</span><kbd aria-hidden="true">⏎</kbd></button>
    </div>
   </div>
   <div class="bav" id="bav" aria-hidden="true"></div>
  </div>
  <p class="bfoot" aria-hidden="true"><b id="bootN">DUARTE NUNES</b><span id="bootC"></span></p>
- <p class="hint" id="bootH">Enter entra sem som · podes ligar o som mais tarde</p>
+ <p class="hint" id="bootH">Prime Enter para entrar</p>
 </div>
 <header class="bar"><div class="w">
  <button class="brand" data-go="home" aria-label="Início"><span class="dot" aria-hidden="true"></span><span>duarte<span class="pth">@portefolio:~</span></span></button>
@@ -651,7 +651,7 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
   <span class="clock" id="clock" aria-hidden="true"></span>
   <button class="tbtn" id="tK" aria-label="Procurar (Ctrl+K)" title="Procurar (Ctrl+K)" aria-controls="cmdk" aria-expanded="false"><span class="ic" data-i="search"></span></button>
   <button class="tbtn" id="tTerm" aria-label="Abrir terminal" aria-pressed="false" title="Terminal ( ` )"><span class="ic" data-i="term"></span></button>
-  <button class="tbtn" id="tSnd" aria-label="Som" aria-pressed="false" title="Som"><span class="ic" data-i="mute"></span></button>
+  
   <div style="position:relative"><button class="tbtn" id="gb" aria-label="Definições" aria-expanded="false" aria-controls="pp"><span class="ic" data-i="gear"></span></button>
    <div class="pop" id="pp" role="group" aria-label="Definições" hidden></div></div>
  </div>
@@ -742,7 +742,7 @@ var EN={"Sobre":"About","Definições":"Settings","Tema":"Theme","Claro":"Light"
 "Para continuar, confirma que leste a Política de Privacidade.":"To continue, please confirm you have read the Privacy Policy.",
 "Ver projeto":"View project","Arquivo":"Archive","Projetos mais antigos.":"Older projects.","Gestão e programação":"Management and programming","À procura de estágio":"Looking for an internship","API e regras":"API and rules","Base de dados":"Database","Diagrama: interface, API e base de dados ligadas entre si":"Diagram: interface, API and database connected together","Todos os projetos":"All projects","Termos de Utilização":"Terms of Use","Política de Cookies":"Cookie Policy"};
 Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","Início":"Home","Experiência":"Experience","Sobre":"About","Contacto":"Contact","Projetos":"Projects",
-"Entrar com som":"Enter with sound","Entrar sem som":"Enter without sound","Enter entra sem som · podes ligar o som mais tarde":"Enter goes in without sound · you can turn sound on later",
+"Entrar com som":"Enter with sound","Entrar sem som":"Enter without sound","Enter entra sem som · podes ligar o som mais tarde":"Enter goes in without sound · you can turn sound on later","Entrar":"Enter","Prime Enter para entrar":"Press Enter to go in","# portefólio do Duarte Nunes":"# Duarte Nunes' portfolio",
 "Abrir terminal":"Open terminal","Som":"Sound","Ver projetos":"View projects","Explora o escritório com o rato":"Explore the office with your mouse","Disponível para estágio a partir de setembro":"Available for an internship from September",
 "O que faço":"What I do","Do desenho da base de dados ao ecrã que o utilizador vê.":"From database design to the screen the user sees.",
 "Arquivo":"Archive","Projetos mais antigos.":"Older projects.","Abrir":"Open","Objetivo":"Goal","O que faz":"What it does","Resultado":"Result","Anterior":"Previous","Seguinte":"Next","Fechar":"Close","Maximizar":"Maximise","Minimizar":"Minimise",
@@ -802,7 +802,7 @@ var snd={click:function(){tom(660,.08,"triangle",.035,990)},hover:function(){tom
 function ambiente(on){if(!on&&!AU.amb)return;var c=actx();if(!c)return;if(on&&!AU.amb){var n=c.sampleRate*4,b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0),last=0;for(var i=0;i<n;i++){var w=Math.random()*2-1;last=(last+.02*w)/1.02;a[i]=last*3.2}
  var s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();s.buffer=b;s.loop=true;f.type="lowpass";f.frequency.value=420;g.gain.value=0;g.gain.linearRampToValueAtTime(.05,c.currentTime+2);s.connect(f);f.connect(g);g.connect(c.destination);s.start();AU.amb={s:s,g:g}}
  else if(!on&&AU.amb){var am=AU.amb;am.g.gain.linearRampToValueAtTime(0,c.currentTime+.6);setTimeout(function(){try{am.s.stop()}catch(x){}},700);AU.amb=null}}
-function setSom(on){AU.on=on;if(on){var c=actx();if(c&&c.state=="suspended")c.resume()}ambiente(on);var b=document.getElementById("tSnd");b.setAttribute("aria-pressed",on);b.innerHTML=ic(on?"snd":"mute");b.setAttribute("aria-label",T(on?"Desligar som":"Ligar som",on?"Turn sound off":"Turn sound on"))}
+function setSom(on){AU.on=false;return;if(on){var c=actx();if(c&&c.state=="suspended")c.resume()}ambiente(on);var b=document.getElementById("tSnd");b.setAttribute("aria-pressed",on);b.innerHTML=ic(on?"snd":"mute");b.setAttribute("aria-label",T(on?"Desligar som":"Ligar som",on?"Turn sound off":"Turn sound on"))}
 
 /* =========================================================
    UTILITARIOS
@@ -830,11 +830,11 @@ home:function(){return '<section class="stage" id="stage"><canvas id="gl" aria-l
  +'<p class="hrole hin" style="--dl:1.8s">Estudante de <b>gestão e programação de sistemas informáticos</b>, à procura de <b>estágio</b> a partir de setembro.</p>'
  +'<div class="acts hin" style="--dl:2.05s"><button class="btn p" data-go="projetos"><span>Ver projetos</span>'+ic("arr","ic-arr")+'</button><button class="btn o" data-term="open">'+ic("term")+'<span>Abrir terminal</span></button></div></div></div>'
  +''
- +'<div class="status hin" style="--dl:2.4s"><span class="chipst"><i aria-hidden="true"></i>Disponível para estágio a partir de setembro</span></div><p class="explore hin" style="--dl:2.7s">'+ic("mouse")+'<span>Explora o escritório com o rato</span></p></div></section>'
+ +'<p class="explore hin" style="--dl:2.7s">'+ic("mouse")+'<span>Explora o escritório com o rato</span></p></div></section>'
  +'<div class="w"><section class="sec"><div class="head rv"><h2 class="s">O que faço</h2><p>Do desenho da base de dados ao ecrã que o utilizador vê.</p></div><div class="areas">'
  +[["gestao.app","Aplicações de gestão","Sistemas para controlar stocks, tarefas e processos internos de pequenas empresas.",["C#","SQL Server"]],["dados.sql","Bases de dados","Modelação, consultas otimizadas e relatórios que respondem às perguntas do negócio.",["SQL","MySQL","PostgreSQL"]],["web.js","Web e automação","APIs, páginas web e scripts que poupam trabalho repetitivo.",["Node.js","PHP","Python"]]].map(function(a,i){return '<article class="win rv" style="--i:'+i+'">'+tbar(a[0])+'<div class="wbody"><h3>'+a[1]+"</h3><p>"+a[2]+"</p>"+tg(a[3])+"</div></article>"}).join("")
- +'</div></section><section class="sec rv"><div class="head"><h2 class="s">Tecnologias</h2></div><div class="skills">'+["C#","SQL","SQL Server","MySQL","PostgreSQL","Python","JavaScript","Node.js","PHP","Git","Figma","Postman"].map(function(s){return "<span>"+s+"</span>"}).join("")+'</div></section>'
- +'<section class="sec rv" style="margin-bottom:clamp(3rem,7vw,6rem)"><div class="cta"><h2>Vamos trabalhar juntos.</h2><button class="btn" data-go="contacto"><span>Enviar mensagem</span>'+ic("arr","ic-arr")+'</button></div></section></div>'},
+ +'</div></section><section class="sec rv"><div class="head"><h2 class="s">Tecnologias</h2></div><div class="skills">'+["PHP","HTML","CSS","Java","C#","Python","Kotlin","Android"].map(function(s){return "<span>"+s+"</span>"}).join("")+'</div></section>'
+ +'<div style="height:clamp(3rem,7vw,6rem)"></div></div>'},
 
 projetos:function(){var cats=["Todas","Gestão","Web","Automação"],l=P.filter(function(p){return(cur.cat=="Todas"||p.c==cur.cat)&&(p.t+" "+(EN[p.t]||"")+" "+p.k.join(" ")).toLowerCase().indexOf(cur.q.toLowerCase())>-1});
  if(!l.some(function(p){return p.id==cur.sel}))cur.sel=l.length?l[0].id:null;var sp=P.find(function(p){return p.id==cur.sel});
@@ -864,7 +864,7 @@ sobre:function(){return '<div class="w page"><p class="crumb"><b>~/sobre</b> $ c
  +'<h2 id="competencias">Competências</h2><p class="sm">Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.</p><div class="kgrid">'
  +SK.map(function(g){return '<div class="win"><div class="wbody"><h3>'+g[0]+'</h3><ul class="skl">'+g[1].map(function(s){return '<li><span class="sn">'+s+"</span>"+usadoEm(s).map(function(p){return '<button class="pchip" data-proj="'+p.id+'" aria-label="'+esc(T("Abrir ","Open ")+pt2(p.t))+'">'+p.id+"</button>"}).join("")+"</li>"}).join("")+"</ul></div></div>"}).join("")+"</div>"
  +'<h2>Objetivos</h2><p>Encontrar um estágio a partir de setembro e continuar a construir sistemas fiáveis e fáceis de manter.</p>'
- +'<div class="acts"><button class="btn p" data-go="contacto"><span>Falar comigo</span>'+ic("arr","ic-arr")+'</button><button class="btn o" data-go="projetos">'+ic("grid")+"<span>Ver projetos</span></button></div></div></div></div>"},
+ +'<div class="acts"><button class="btn o" data-act="cv">'+ic("file")+'<span>Currículo (PDF)</span></button><button class="btn p" data-go="contacto"><span>Falar comigo</span>'+ic("arr","ic-arr")+'</button><button class="btn o" data-go="projetos">'+ic("grid")+"<span>Ver projetos</span></button></div></div></div></div>"},
 
 contacto:function(){return '<div class="w page"><p class="crumb"><b>~/contacto</b> $ mail duarte</p><h1 class="t">Contacto</h1><p class="lead">Tens um projeto ou um estágio em mente? Escreve-me.</p><div class="ct2"><div class="cards"><div class="win ccard av"><span class="ico">'+ic("time")+'</span><div><small>Disponibilidade</small><strong>Estágio a partir de setembro</strong><span class="sub">A forma mais rápida de falar comigo é por email.</span></div></div>'
  +'<div class="win ccard"><span class="ico">'+ic("mail")+'</span><div><small>Email</small><a href="mailto:'+EM+'"><strong>'+EM+'</strong></a></div><button class="tbtn cp" data-copy="'+EM+'" aria-label="Copiar email" title="Copiar email">'+ic("copy")+"</button></div>"
@@ -976,7 +976,7 @@ function pix(cor,txt,done,page){if(calmo()){done();return}
  ptT.push(setTimeout(function(){if(id!=ptId)return;if(txt)PT.classList.add("show");
   ptT.push(setTimeout(function(){if(id!=ptId)return;if(page){pg.classList.remove("out");pg.classList.add("enter")}done();PT.className="busy off"+(txt?" show hide":"");
    ptT.push(setTimeout(function(){if(id!=ptId)return;PT.className="";px.innerHTML="";pg.classList.remove("enter")},1050))},txt?520:60))},1000))}
-window.addEventListener("hashchange",function(){fechaJanela(true);var v=route();pix(v=="home"?cv("--scene"):cv("--acc"),pt2(TIT[v]||"Início"),function(){render();pg.focus({preventScroll:true})},1)});
+window.addEventListener("hashchange",function(){fechaJanela(true);var v=route();pix(cv("--acc"),pt2(TIT[v]||"Início"),function(){render();pg.focus({preventScroll:true})},1)});
 window.addEventListener("resize",indNav);
 
 /* cliques globais */
@@ -997,6 +997,7 @@ document.addEventListener("click",function(e){
  if(t.id=="tSnd"){setSom(!AU.on);snd.click();toast(AU.on?T("Som ligado.","Sound on."):T("Som desligado.","Sound off."));return}
  if(t.dataset.copy){copiar(t.dataset.copy);return}
  if(t.dataset.term){terminal(t.dataset.term=="open"?true:t.dataset.term=="close"?false:undefined);return}
+ if(t.dataset.act=="cv"){cvPdf();return}
  if(t.dataset.act=="lg"){L=t.dataset.v;try{localStorage.setItem("lang",L)}catch(x){}snd.click();return render(1)}
  if(t.dataset.act=="th"){var nv=t.dataset.v;if((nv=="dark")==dark())return;snd.click();pix(nv=="dark"?"#0b0f17":"#dfe6f0","",function(){document.documentElement.dataset.theme=nv;drawSt();glTheme()});return}
  if(t.dataset.cat){cur.cat=t.dataset.cat;if(t.dataset.clear)cur.q="";snd.click();return render(1)}
@@ -1078,15 +1079,14 @@ function send(ev){ev.preventDefault();var r={n:"Diz-me o teu nome para eu saber 
 var tOut=document.getElementById("tOut"),tIn=document.getElementById("tIn"),hist=[],hi=0,tIniciado=false;
 var tq=0;function tw(html,cls){var p=document.createElement("p");if(cls)p.className=cls;p.style.animationDelay=Math.min(tq++,30)*28+"ms";p.innerHTML=html;tOut.appendChild(p);tOut.scrollTop=tOut.scrollHeight}
 function terminal(open){var t=document.getElementById("term"),b=document.getElementById("tTerm");if(open===undefined)open=t.hidden;t.hidden=!open;b.setAttribute("aria-pressed",open);
- if(open){if(!document.getElementById("chat").hidden)chat(false);tq=0;snd.open();if(!tIniciado){CMD.neofetch();tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}setTimeout(function(){tIn.focus()},60)}else{snd.close();if(document.activeElement==tIn)b.focus()}}
+ if(open){if(!document.getElementById("chat").hidden)chat(false);tq=0;snd.open();if(!tIniciado){CMD.neofetch();tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}setTimeout(function(){tIn.focus()},60)}else{snd.close();G.zt=0;if(document.activeElement==tIn)b.focus()}}
 var KB=[
- {k:["linguag","language","c#","csharp","python","javascript","programa"],pt:"Linguagens: C#, SQL, Python e JavaScript. Também usei Node.js e PHP nos projetos.",en:"Languages: C#, SQL, Python and JavaScript. I have also used Node.js and PHP in projects."},
- {k:["sql","base de dados","bases de dados","database","postgres","mysql","server"],pt:"Bases de dados: SQL Server, MySQL e PostgreSQL. Modelação, consultas otimizadas e relatórios.",en:"Databases: SQL Server, MySQL and PostgreSQL. Data modelling, optimised queries and reports."},
+ {k:["linguag","language","c#","csharp","python","java","kotlin","android","php","html","css","programa"],pt:"Tecnologias: PHP, HTML, CSS, Java, C#, Python, Kotlin e Android.",en:"Technologies: PHP, HTML, CSS, Java, C#, Python, Kotlin and Android."},
+ {k:["sql","base de dados","bases de dados","database","postgres","mysql","server"],pt:"Os meus projetos usam bases de dados SQL Server, MySQL e PostgreSQL.",en:"My projects use SQL Server, MySQL and PostgreSQL databases."},
  {k:["estagio","estágio","internship","disponivel","disponível","setembro","september"],pt:"Estou à procura de estágio a partir de setembro. Escreve 'contacto' para falar comigo.",en:"I am looking for an internship from September. Type 'contact' to reach me."},
  {k:["contact","email","mail","falar","reach"],pt:"Email: "+EM+" · GitHub: github.com/DuarteNunes17",en:"Email: "+EM+" · GitHub: github.com/DuarteNunes17"},
  {k:["curso","escola","forma","estud","school","course","study"],pt:"Estudo Gestão e Programação de Sistemas Informáticos.",en:"I study Computer Systems Management and Programming."},
  {k:["projet","project","portfolio","portefolio","trabalh","work"],pt:"Tenho 4 projetos: "+P.map(function(p){return p.t}).join(", ")+". Escreve 'projetos' para os ver.",en:"I have 4 projects. Type 'projects' to see them."},
- {k:["ferrament","tool","git","figma","postman"],pt:"Ferramentas: Git, Figma e Postman.",en:"Tools: Git, Figma and Postman."},
  {k:["lingua","língua","idiom","ingl","english","portugu"],pt:"Falo português e inglês.",en:"I speak Portuguese and English."},
  {k:["quem","who","sobre","about"],pt:"Sou o Duarte Ferreira Nunes, estudante de Gestão e Programação de Sistemas Informáticos. Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.",en:"I'm Duarte Ferreira Nunes, a student of Computer Systems Management and Programming."}];
 var CMD={
@@ -1099,7 +1099,7 @@ var CMD={
  github:function(){tw('<a href="'+GH+'" target="_blank" rel="noopener">'+GH+"</a>");window.open(GH,"_blank","noopener")},
  tema:function(a){var v=/claro|light/.test(a)?"light":/escuro|dark/.test(a)?"dark":(dark()?"light":"dark");document.documentElement.dataset.theme=v;drawSt();glTheme();tw(T("Tema: ","Theme: ")+(v=="dark"?T("escuro","dark"):T("claro","light")),"c2")},
  idioma:function(a){L=/en/.test(a)?"en":"pt";try{localStorage.setItem("lang",L)}catch(x){}render(1);tw(L=="en"?"Language: English":"Idioma: português","c2")},
- som:function(a){setSom(!/off|des/.test(a||""));tw(AU.on?T("Som ligado.","Sound on."):T("Som desligado.","Sound off."),"c2")},
+ cv:function(){cvPdf();tw(T("A transferir o currículo (PDF)…","Downloading the CV (PDF)…"),"c2")},
  clear:function(){tOut.innerHTML=""},
  date:function(){tw(new Date().toLocaleString(L=="en"?"en-GB":"pt-PT"))},
  sudo:function(){tw(T("Permissão negada. Boa tentativa.","Permission denied. Nice try."),"c4")},
@@ -1122,7 +1122,7 @@ tIn.addEventListener("keydown",function(e){if(e.key=="ArrowUp"){if(hi>0){hi--;tI
 /* =========================================================
    COMPETENCIAS (ligadas aos projetos onde foram usadas)
    ========================================================= */
-var SK=[["Linguagens",["C#","SQL","Python","JavaScript"]],["Bases de dados",["SQL Server","MySQL","PostgreSQL"]],["Web e back-end",["Node.js","PHP"]],["Ferramentas",["Git","Figma","Postman"]]];
+var SK=[["Linguagens",["C#","Java","Python","Kotlin","PHP"]],["Web",["HTML","CSS"]],["Mobile",["Android"]]];
 function usadoEm(s){return P.filter(function(p){return p.k.some(function(k){return k==s||(s=="SQL"&&/SQL/.test(k))})})}
 function nrm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
 
@@ -1130,10 +1130,10 @@ function nrm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]
 CMD.about=function(){tw("Duarte Ferreira Nunes","c1");tw(T("Estudante de Gestão e Programação de Sistemas Informáticos.","Computer Systems Management and Programming student."));tw(T("Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.","I'm interested in where information management meets software development."),"c3");tw(T("À procura de estágio a partir de setembro.","Looking for an internship from September."),"c2")};
 CMD.skills=function(){SK.forEach(function(g){tw('<span class="c1">'+pt2(g[0]).padEnd(16," ")+"</span>"+g[1].join(" · "))});tw(T("Na página Sobre vês em que projetos usei cada uma.","On the About page you can see which projects use each one."),"c3")};
 CMD.contacto=function(){tw("email   "+'<a href="mailto:'+EM+'">'+EM+"</a>");tw("github  "+'<a href="'+GH+'" target="_blank" rel="noopener">github.com/DuarteNunes17</a>');tw(T("A abrir Contacto…","Opening Contact…"),"c3");location.hash="contacto"};
-CMD.neofetch=function(){var a=["   ▄▄▄▄▄   ","  █ ▀ ▀ █  ","  █  ▄  █  ","   ▀▄▄▄▀   ","  ▄█████▄  "],i=[["duarte","@portefolio"],["OS",T("duarte-os (portefólio)","duarte-os (portfolio)")],[T("Curso","Course"),"GPSI"],[T("Projetos","Projects"),String(P.length)],["Stack","C# · SQL · Python · JS"],[T("Línguas","Languages"),T("português, inglês","Portuguese, English")],[T("Tema","Theme"),dark()?T("escuro","dark"):T("claro","light")],[T("Estado","Status"),T("disponível para estágio (setembro)","available for an internship (September)")]];
+CMD.neofetch=function(){var a=["   ▄▄▄▄▄   ","  █ ▀ ▀ █  ","  █  ▄  █  ","   ▀▄▄▄▀   ","  ▄█████▄  "],i=[["duarte","@portefolio"],["OS",T("duarte-os (portefólio)","duarte-os (portfolio)")],[T("Curso","Course"),"GPSI"],[T("Projetos","Projects"),String(P.length)],["Stack","C# · Java · Python · Kotlin · PHP"],[T("Línguas","Languages"),T("português, inglês","Portuguese, English")],[T("Tema","Theme"),dark()?T("escuro","dark"):T("claro","light")],[T("Estado","Status"),T("disponível para estágio (setembro)","available for an internship (September)")]];
  i.forEach(function(r,k){tw('<span class="c1">'+(a[k]||"           ")+"</span>  "+(k?'<span class="c4">'+r[0]+"</span>: "+r[1]:'<span class="c2">'+r[0]+"</span>"+r[1]))})};
 ALI.about="about";ALI.skills="skills";ALI.competencias="skills";ALI["competências"]="skills";ALI.contact="contacto";ALI.fetch="neofetch";
-CMD.help=function(){tw(T("Comandos","Commands"),"c1");[["about","quem sou, em poucas linhas"],["skills","competências por área"],["projetos | projects","lista de projetos"],["abrir <nome>","abre um projeto (ex.: abrir stock)"],["contacto | contact","email e GitHub"],["experiencia | sobre","vai para a secção"],["email · github","copia o email · abre o GitHub"],["neofetch","resumo do sistema"],["tema · idioma · som","claro|escuro · pt|en · on|off"],["ls · date · clear","ficheiros · data · limpar"]].forEach(function(c){tw('  <span class="c4">'+esc(c[0].padEnd(22," "))+"</span>"+pt2(c[1]))});tw(T("Podes também fazer perguntas (ex.: que linguagens sabes?). E há comandos escondidos.","You can also ask questions (e.g. which languages do you know?). And there are hidden commands."),"c3")};
+CMD.help=function(){tw(T("Comandos","Commands"),"c1");[["about","quem sou, em poucas linhas"],["skills","competências por área"],["projetos | projects","lista de projetos"],["abrir <nome>","abre um projeto (ex.: abrir stock)"],["contacto | contact","email e GitHub"],["experiencia | sobre","vai para a secção"],["email · github","copia o email · abre o GitHub"],["neofetch","resumo do sistema"],["cv","transfere o meu currículo em PDF"],["tema · idioma","claro|escuro · pt|en"],["ls · date · clear","ficheiros · data · limpar"]].forEach(function(c){tw('  <span class="c4">'+esc(c[0].padEnd(22," "))+"</span>"+pt2(c[1]))});tw(T("Podes também fazer perguntas (ex.: que linguagens sabes?). E há comandos escondidos.","You can also ask questions (e.g. which languages do you know?). And there are hidden commands."),"c3")};
 
 /* =========================================================
    ASSISTENTE (janela de conversa, respostas por palavras-chave)
@@ -1166,7 +1166,7 @@ function kItens(){var a=[];ROUTES.forEach(function(r,i){a.push({g:T("Secções",
  P.forEach(function(p){a.push({g:T("Projetos","Projects"),t:pt2(p.t),i:DI[p.v]||"grid",k:p.id+" "+p.k.join(" ")+" "+p.c,x:p.y,f:function(){location.hash="projeto/"+p.id}})});
  [[T("Abrir terminal","Open terminal"),"term","`",function(){terminal(true)}],[T("Abrir assistente","Open assistant"),"chat","",function(){chat(true)}],[T("Copiar email","Copy email"),"copy","",function(){copiar(EM)}],[T("Abrir GitHub","Open GitHub"),"gh","",function(){window.open(GH,"_blank","noopener")}],
   [dark()?T("Mudar para tema claro","Switch to light theme"):T("Mudar para tema escuro","Switch to dark theme"),"gear","",function(){var nv=dark()?"light":"dark";pix(nv=="dark"?"#0b0f17":"#dfe6f0","",function(){document.documentElement.dataset.theme=nv;drawSt();glTheme()})}],
-  [L=="en"?"Mudar para português":"Switch to English","gear","",function(){L=L=="en"?"pt":"en";try{localStorage.setItem("lang",L)}catch(x){}render(1)}],[AU.on?T("Desligar som","Turn sound off"):T("Ligar som","Turn sound on"),AU.on?"mute":"snd","",function(){setSom(!AU.on)}]].forEach(function(c){a.push({g:T("Ações","Actions"),t:c[0],i:c[1],k:"",x:c[2],f:c[3]})});return a}
+  [L=="en"?"Mudar para português":"Switch to English","gear","",function(){L=L=="en"?"pt":"en";try{localStorage.setItem("lang",L)}catch(x){}render(1)}],[T("Transferir currículo (PDF)","Download CV (PDF)"),"file","Ctrl+S",function(){cvPdf()}]].forEach(function(c){a.push({g:T("Ações","Actions"),t:c[0],i:c[1],k:"",x:c[2],f:c[3]})});return a}
 function kAbre(){var d=document.getElementById("cmdk");if(!d.hidden)return;kFoco=document.activeElement;d.hidden=false;KI=kItens();kSel=0;var i=document.getElementById("kIn");i.value="";kDraw();i.focus();snd.open();document.getElementById("tK").setAttribute("aria-expanded","true")}
 function kFecha(){var d=document.getElementById("cmdk");if(d.hidden)return;d.hidden=true;snd.close();document.getElementById("tK").setAttribute("aria-expanded","false");if(kFoco&&kFoco.focus)kFoco.focus({preventScroll:true})}
 function kLista(){var q=nrm(document.getElementById("kIn").value.trim());return KI.filter(function(it){return!q||nrm(it.t+" "+it.k+" "+it.g).indexOf(q)>-1})}
@@ -1179,7 +1179,8 @@ document.getElementById("kIn").addEventListener("keydown",function(e){var n=kLis
 document.getElementById("kList").addEventListener("click",function(e){var li=e.target.closest("[data-k]");if(li)kRun(Number(li.dataset.k))});
 document.getElementById("kList").addEventListener("mousemove",function(e){var li=e.target.closest("[data-k]");if(li&&Number(li.dataset.k)!=kSel){kSel=Number(li.dataset.k);kDraw()}});
 document.getElementById("cmdk").addEventListener("click",function(e){if(e.target.id=="cmdk")kFecha()});
-document.addEventListener("keydown",function(e){var bootOut=document.getElementById("boot").classList.contains("out");if(!bootOut)return;
+function cvPdf(){var a=document.createElement("a");a.href="Duarte-Nunes-CV.pdf";a.download="Duarte-Nunes-CV.pdf";document.body.appendChild(a);a.click();a.remove();toast(T("A transferir o currículo (PDF)…","Downloading the CV (PDF)…"))}
+document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="s"){e.preventDefault();cvPdf();return}var bootOut=document.getElementById("boot").classList.contains("out");if(!bootOut)return;
  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="k"){e.preventDefault();var d=document.getElementById("cmdk");d.hidden?kAbre():kFecha();return}
  if(e.key=="Escape"&&!document.getElementById("cmdk").hidden){e.stopImmediatePropagation();kFecha();return}
  if(e.key=="Escape"&&!document.getElementById("chat").hidden&&!document.getElementById("appwin")){chat(false);return}
@@ -1241,7 +1242,7 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  G.bias=new THREE.Sprite(glowM(0x6f86ff,.55));G.bias.scale.set(2.1,1.35,1);G.bias.position.set(-.05,1.3,-1.56);S.add(G.bias);
  /* secretaria */
  box(2.3,.06,.95,mt.wood,0,.75,-.95);[[-1.08,-1.36],[1.08,-1.36],[-1.08,-.54],[1.08,-.54]].forEach(function(p){box(.05,.72,.05,mt.metal,p[0],.36,p[1])});
- box(.42,.6,.78,mt.woodd,.82,.36,-.98);box(.36,.02,.01,mt.metal,.82,.5,-.585);box(.36,.02,.01,mt.metal,.82,.3,-.585);
+ box(.42,.7,.78,mt.woodd,.82,.37,-.98);box(.4,.005,.01,mt.dark,.82,.49,-.588);box(.4,.005,.01,mt.dark,.82,.25,-.588);box(.3,.018,.012,mt.metal,.82,.64,-.584);box(.3,.018,.012,mt.metal,.82,.41,-.584);box(.3,.018,.012,mt.metal,.82,.17,-.584);
  /* monitor (alvo: Projetos) */
  var mon=new THREE.Group();S.add(mon);mon.position.set(-.05,0,-1.18);
  box(.3,.02,.2,mt.metal,0,.79,0,mon);box(.05,.32,.04,mt.metal,0,.95,-.02,mon);var frame=box(1.06,.64,.045,mt.dark,0,1.26,.02,mon);
@@ -1274,7 +1275,7 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  var arc=new THREE.Mesh(new THREE.TorusGeometry(.075,.011,10,28,Math.PI),mt.plastic);arc.position.y=.25;arc.castShadow=true;hp.add(arc);
  [-1,1].forEach(function(sd){var cup=cyl(.037,.037,.03,M(0x2a2f38,.45,.3),sd*.075,.235,0,hp);cup.rotation.z=Math.PI/2;var cs=cyl(.031,.031,.012,M(0x111318,.95),sd*.057,.235,0,hp);cs.rotation.z=Math.PI/2});
  /* cabo do monitor */
- var cab=new THREE.CatmullRomCurve3([new THREE.Vector3(-.05,.92,-1.24),new THREE.Vector3(-.02,.82,-1.37),new THREE.Vector3(.05,.72,-1.46),new THREE.Vector3(.12,.35,-1.5),new THREE.Vector3(.25,.02,-1.42)]);var cbm=new THREE.Mesh(new THREE.TubeGeometry(cab,48,.006,6),mt.dark);cbm.castShadow=true;S.add(cbm);
+ var cab=new THREE.CatmullRomCurve3([new THREE.Vector3(-.05,.92,-1.24),new THREE.Vector3(-.03,.86,-1.42),new THREE.Vector3(.02,.8,-1.5),new THREE.Vector3(.08,.6,-1.53),new THREE.Vector3(.14,.3,-1.54),new THREE.Vector3(.25,.02,-1.48)]);var cbm=new THREE.Mesh(new THREE.TubeGeometry(cab,48,.006,6),mt.dark);cbm.castShadow=true;S.add(cbm);
  /* caneca (easter egg) */
  var mug=new THREE.Group();S.add(mug);mug.position.set(-.5,.784,-.58);
  cyl(.045,.04,.1,mt.mug,0,.05,0,mug);var hd=new THREE.Mesh(new THREE.TorusGeometry(.028,.007,10,20),mt.mug);hd.position.set(.05,.055,0);hd.castShadow=true;mug.add(hd);
@@ -1282,34 +1283,41 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  var stc=document.createElement("canvas");stc.width=stc.height=64;var sx=stc.getContext("2d"),gr=sx.createRadialGradient(32,32,2,32,32,30);gr.addColorStop(0,"rgba(255,255,255,.5)");gr.addColorStop(1,"rgba(255,255,255,0)");sx.fillStyle=gr;sx.fillRect(0,0,64,64);
  var stm=new THREE.SpriteMaterial({map:new THREE.CanvasTexture(stc),transparent:true,depthWrite:false,opacity:.35});G.steam=[];for(var s=0;s<4;s++){var sp=new THREE.Sprite(stm.clone());sp.scale.set(.08,.08,.08);sp.position.set(0,.12,0);mug.add(sp);G.steam.push({s:sp,o:s/4})}
  G.mug=mug;
- /* candeeiro (clica para ligar/desligar) */
- var lamp=new THREE.Group();S.add(lamp);lamp.position.set(.88,.78,-1.22);
- cyl(.08,.09,.025,mt.metal,0,.012,0,lamp);var a1=cyl(.012,.012,.5,mt.metal,0,.26,0,lamp);a1.rotation.z=-.35;a1.position.x=.085;
- var a2=cyl(.012,.012,.4,mt.metal,0,0,0,lamp);a2.position.set(.08,.55,.06);a2.rotation.set(.9,0,.6);
- var head=new THREE.Mesh(new THREE.ConeGeometry(.09,.14,24,1,true),M(0x2a2f38,.4,.4));head.material.side=THREE.DoubleSide;head.position.set(-.07,.66,.2);head.rotation.x=-2.2;head.castShadow=true;lamp.add(head);
- var bulb=new THREE.Mesh(new THREE.SphereGeometry(.03,16,12),new THREE.MeshBasicMaterial({color:0xffe2b0,toneMapped:false}));bulb.position.set(-.07,.62,.24);lamp.add(bulb);G.bulb=bulb;
- var spot=new THREE.SpotLight(0xffc98a,6,4,.75,.6,2);spot.position.set(.81,1.4,-.98);spot.target.position.set(.2,.75,-.8);spot.castShadow=!mob;spot.shadow.mapSize.set(mob?512:2048,mob?512:2048);spot.shadow.bias=-.0004;spot.shadow.radius=3;S.add(spot);S.add(spot.target);G.spot=spot;G.lamp=lamp;G.lampOn=true;
- G.bglow=new THREE.Sprite(glowM(0xffd9a0,.8));G.bglow.scale.set(.32,.32,1);G.bglow.position.set(.81,1.39,-.99);S.add(G.bglow);
- var hd0=new THREE.Vector3(.81,1.41,-1.0),dir=new THREE.Vector3(.25,.78,-.78).sub(hd0),cl=dir.length();dir.normalize();
+ /* candeeiro articulado (clica para ligar/desligar): base, dois bracos, articulacoes e cupula ligados */
+ var lamp=new THREE.Group();S.add(lamp);lamp.position.set(.88,.78,-1.22);var lmt=M(0x2a2f38,.38,.6);
+ var lrod=function(a,b,r){var d=b.clone().sub(a),m=new THREE.Mesh(new THREE.CylinderGeometry(r,r,d.length(),12),lmt);m.position.copy(a).add(b).multiplyScalar(.5);m.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),d.normalize());m.castShadow=true;lamp.add(m)};
+ var ljnt=function(p,r){var m=new THREE.Mesh(new THREE.SphereGeometry(r,14,10),lmt);m.position.copy(p);m.castShadow=true;lamp.add(m)};
+ cyl(.085,.095,.028,lmt,0,.014,0,lamp,32);
+ var pA=new THREE.Vector3(0,.04,0),pE=new THREE.Vector3(.05,.44,-.05),pH=new THREE.Vector3(-.08,.6,.17);ljnt(pA,.022);lrod(pA,pE,.011);ljnt(pE,.02);lrod(pE,pH,.01);ljnt(pH,.019);
+ var ltg=new THREE.Vector3(.25,.78,-.8).sub(lamp.position),ldir=ltg.clone().sub(pH).normalize();
+ var shade=new THREE.Mesh(new THREE.ConeGeometry(.09,.15,28,1,true),M(0x2a2f38,.4,.5));shade.material.side=THREE.DoubleSide;shade.position.copy(pH).addScaledVector(ldir,.06);shade.quaternion.setFromUnitVectors(new THREE.Vector3(0,-1,0),ldir);shade.castShadow=true;lamp.add(shade);
+ var bulb=new THREE.Mesh(new THREE.SphereGeometry(.028,16,12),new THREE.MeshBasicMaterial({color:0xffe2b0,toneMapped:false}));bulb.position.copy(pH).addScaledVector(ldir,.1);lamp.add(bulb);G.bulb=bulb;
+ var bwp=bulb.position.clone().add(lamp.position),twp=ltg.clone().add(lamp.position);
+ var spot=new THREE.SpotLight(0xffc98a,6,4,.75,.6,2);spot.position.copy(bwp);spot.target.position.copy(twp);spot.castShadow=!mob;spot.shadow.mapSize.set(mob?512:2048,mob?512:2048);spot.shadow.bias=-.0004;spot.shadow.radius=3;S.add(spot);S.add(spot.target);G.spot=spot;G.lamp=lamp;G.lampOn=true;
+ G.bglow=new THREE.Sprite(glowM(0xffd9a0,.8));G.bglow.scale.set(.3,.3,1);G.bglow.position.copy(bwp);S.add(G.bglow);
+ var dir=twp.clone().sub(bwp),cl=dir.length();dir.normalize();
  var bt0=ctex(8,128,function(c){var g=c.createLinearGradient(0,0,0,128);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(.25,"rgba(255,255,255,.55)");g.addColorStop(1,"rgba(255,255,255,0)");c.fillStyle=g;c.fillRect(0,0,8,128)});
  var cg=new THREE.ConeGeometry(.34,cl,40,1,true);cg.translate(0,-cl/2,0);G.cone=new THREE.Mesh(cg,new THREE.MeshBasicMaterial({color:0xffcf90,map:bt0,transparent:true,opacity:.07,blending:THREE.AdditiveBlending,depthWrite:false,side:THREE.DoubleSide,toneMapped:false}));
- G.cone.position.copy(hd0);G.cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,-1,0),dir);S.add(G.cone);
- /* planta grande no chao */
- var plant=new THREE.Group();S.add(plant);plant.position.set(1.42,0,-1.18);cyl(.17,.13,.4,mt.pot,0,.2,0,plant,32);cyl(.155,.155,.01,M(0x2a1c12,1),0,.39,0,plant);
- var lfg=new THREE.SphereGeometry(1,14,8);for(var f=0;f<18;f++){var stm2=new THREE.Group();stm2.rotation.order="YXZ";stm2.rotation.set(-(.35+(f%5)*.2),f*2.399,0);stm2.position.y=.4+(f%3)*.05;plant.add(stm2);
-  var lf=new THREE.Mesh(lfg,mt.leaf);var ln=.2+(f%4)*.05;lf.scale.set(.075,.012,ln);lf.position.set(0,0,ln);lf.rotation.x=.15;lf.castShadow=true;stm2.add(lf)}
+ G.cone.position.copy(bwp);G.cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,-1,0),dir);S.add(G.cone);
+ /* planta grande no chao (afastada da secretaria e da parede) */
+ var plant=new THREE.Group();S.add(plant);plant.position.set(1.52,0,-1.1);cyl(.16,.12,.38,mt.pot,0,.19,0,plant,32);cyl(.145,.145,.01,M(0x2a1c12,1),0,.37,0,plant);
+ var lfg=new THREE.SphereGeometry(1,14,8);for(var f=0;f<16;f++){var stm2=new THREE.Group();stm2.rotation.order="YXZ";stm2.rotation.set(-(.6+(f%4)*.18),f*2.399,0);stm2.position.y=.38;plant.add(stm2);
+  var ln=.15+(f%3)*.045,lf=new THREE.Mesh(lfg,mt.leaf);lf.scale.set(.06,.012,ln);lf.position.set(0,0,ln);lf.castShadow=true;stm2.add(lf)}
  /* estante com livros (alvo: Sobre) */
  var books=new THREE.Group();S.add(books);books.position.set(-1.25,1.72,-1.47);box(1.05,.035,.24,mt.wood,0,0,0,books);
- var bx=-.46;for(var b=0;b<11;b++){var bh=.2+Math.random()*.1,bwid=.04+Math.random()*.03;var bk=box(bwid,bh,.17,mt.book[b%6],bx+bwid/2,bh/2+.018,0,books);if(b==8)bk.rotation.z=.25;bx+=bwid+.006;if(bx>.4)break}
+ var bx=-.46,bhs=[.24,.21,.27,.22,.26,.2,.25,.23],bws=[.05,.06,.045,.055,.05,.065,.045,.055];for(var b=0;b<8;b++){box(bws[b],bhs[b],.17,mt.book[b%6],bx+bws[b]/2,bhs[b]/2+.018,0,books);bx+=bws[b]+.006}
+ /* um livro encostado aos outros, sem os atravessar */
+ var lw=.05,lh=.24,th=.28,lbk=box(lw,lh,.17,mt.book[4],0,0,0,books);lbk.rotation.z=th;lbk.position.set(bx+lw/2*Math.cos(th)+lh/2*Math.sin(th),.018+lw/2*Math.sin(th)+lh/2*Math.cos(th),0);
+ var suc=new THREE.Group();suc.position.set(.36,.018,0);books.add(suc);cyl(.045,.035,.07,mt.pot,0,.035,0,suc,20);for(var sc2=0;sc2<7;sc2++){var sl2=new THREE.Mesh(new THREE.SphereGeometry(.022,10,8),mt.leaf);sl2.scale.set(1,1.6,.6);sl2.position.set(Math.cos(sc2*.9)*.02,.09+(sc2%2)*.015,Math.sin(sc2*.9)*.02);sl2.rotation.z=Math.cos(sc2*.9)*.5;sl2.castShadow=true;suc.add(sl2)}
  /* quadro de cortica com linha temporal (alvo: Experiencia) */
  var board=new THREE.Group();S.add(board);board.position.set(.95,1.72,-1.585);box(.78,.5,.025,mt.wood,0,0,0,board);
  var bc=document.createElement("canvas");bc.width=512;bc.height=320;var bxx=bc.getContext("2d");bxx.fillStyle="#b48a5d";bxx.fillRect(0,0,512,320);for(var q=0;q<1400;q++){bxx.fillStyle="rgba(60,35,15,"+(Math.random()*.25)+")";bxx.fillRect(Math.random()*512,Math.random()*320,2,2)}
- [["2024",70,90,"#f6e27a"],["2025",200,60,"#9fd6f5"],["2025",300,150,"#f5b3a3"],["2026",420,85,"#b8f0c2"]].forEach(function(n){bxx.save();bxx.translate(n[1],n[2]);bxx.rotate((Math.random()-.5)*.15);bxx.fillStyle=n[3];bxx.fillRect(-48,-38,96,86);bxx.fillStyle="#2a2a2a";bxx.font="bold 30px sans-serif";bxx.textAlign="center";bxx.fillText(n[0],0,10);bxx.fillStyle="#d33";bxx.beginPath();bxx.arc(0,-28,7,0,7);bxx.fill();bxx.restore()});
+ [["2024",70,90,"#f6e27a"],["2025",200,60,"#9fd6f5"],["2026",300,150,"#f5b3a3"],["2027",420,85,"#b8f0c2"]].forEach(function(n){bxx.save();bxx.translate(n[1],n[2]);bxx.rotate((Math.random()-.5)*.15);bxx.fillStyle=n[3];bxx.fillRect(-48,-38,96,86);bxx.fillStyle="#2a2a2a";bxx.font="bold 30px sans-serif";bxx.textAlign="center";bxx.fillText(n[0],0,10);bxx.fillStyle="#d33";bxx.beginPath();bxx.arc(0,-28,7,0,7);bxx.fill();bxx.restore()});
  bxx.strokeStyle="#c33";bxx.lineWidth=3;bxx.beginPath();bxx.moveTo(70,62);bxx.lineTo(200,32);bxx.lineTo(300,122);bxx.lineTo(420,57);bxx.stroke();
- bxx.fillStyle="#2a2a2a";bxx.font="bold 26px sans-serif";bxx.fillText("percurso",30,295);
+ bxx.fillStyle="#2a2a2a";bxx.font="bold 26px sans-serif";bxx.fillText("Percurso",30,295);
  var bt=new THREE.CanvasTexture(bc);bt.encoding=THREE.sRGBEncoding;var bp=new THREE.Mesh(new THREE.PlaneGeometry(.72,.45),M(0xffffff,.95));bp.material.map=bt;bp.position.z=.014;board.add(bp);
  /* caderno + caneta (alvo: Contacto) */
- var note=new THREE.Group();S.add(note);note.position.set(.68,.78,-.6);note.rotation.y=-.42;box(.22,.018,.3,M(0x2b2f37,.8),0,.009,0,note);
+ var note=new THREE.Group();S.add(note);note.position.set(.66,.78,-.72);note.rotation.y=-.42;box(.22,.018,.3,M(0x2b2f37,.8),0,.009,0,note);
  var nc=document.createElement("canvas");nc.width=256;nc.height=350;var nx=nc.getContext("2d");nx.fillStyle="#f4f1ea";nx.fillRect(0,0,256,350);nx.strokeStyle="#c9d3e8";for(var y=40;y<350;y+=26){nx.beginPath();nx.moveTo(14,y);nx.lineTo(242,y);nx.stroke()}nx.fillStyle="#3151d9";nx.font="italic 26px cursive";nx.fillText("olá!",24,70);nx.font="20px cursive";nx.fillStyle="#333";nx.fillText("escreve-me ✉",24,122);
  var nt=new THREE.CanvasTexture(nc);nt.encoding=THREE.sRGBEncoding;var np=new THREE.Mesh(new THREE.PlaneGeometry(.2,.28),M(0xffffff,.9));np.material.map=nt;np.rotation.x=-Math.PI/2;np.position.y=.0185;note.add(np);
  var pen=cyl(.006,.006,.17,M(0x3151d9,.4),.12,.015,0,note,10);pen.rotation.set(Math.PI/2,0,.3);
@@ -1319,7 +1327,7 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  box(.04,.95,.05,mt.white,-2.57,1.75,-1.02);box(.04,.95,.05,mt.white,-2.57,1.75,-.08);box(.04,.05,1,mt.white,-2.57,2.2,-.55);box(.04,.05,1,mt.white,-2.57,1.3,-.55);box(.04,.9,.02,mt.white,-2.57,1.75,-.55);
  /* letreiro de neon */
  var gc=document.createElement("canvas");gc.width=512;gc.height=160;var gx=gc.getContext("2d");gx.font="bold 96px monospace";gx.textAlign="center";gx.shadowColor="#7f9bff";gx.shadowBlur=26;gx.fillStyle="#cdd8ff";gx.fillText("</>",256,112);
- var ng=new THREE.Mesh(new THREE.PlaneGeometry(.75,.235),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gc),transparent:true,toneMapped:false,depthWrite:false}));ng.position.set(-.05,2.02,-1.565);S.add(ng);G.neon=ng;
+ var ng=new THREE.Mesh(new THREE.PlaneGeometry(.75,.235),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(gc),transparent:true,toneMapped:false,depthWrite:false}));ng.position.set(-.05,2.02,-1.565);S.add(ng);G.neon=ng;ng.visible=false;
  var nl=new THREE.PointLight(0x7f9bff,.6,2.2,2);nl.position.set(-.05,1.98,-1.3);S.add(nl);G.neonL=nl;
  /* poeira no ar */
  var pg2=new THREE.BufferGeometry(),pc=mob?120:320,pa=new Float32Array(pc*3);for(var u=0;u<pc;u++){pa[u*3]=(Math.random()-.5)*3.6;pa[u*3+1]=Math.random()*2.6;pa[u*3+2]=-1.5+Math.random()*2.6}pg2.setAttribute("position",new THREE.BufferAttribute(pa,3));
@@ -1329,17 +1337,18 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  G.sun=new THREE.DirectionalLight(0xfff1dc,0);G.sun.position.set(-3,3.2,.8);G.sun.target.position.set(0,.8,-.8);G.sun.castShadow=!mob;G.sun.shadow.mapSize.set(1024,1024);G.sun.shadow.camera.left=-2;G.sun.shadow.camera.right=2;G.sun.shadow.camera.top=2;G.sun.shadow.camera.bottom=-1;S.add(G.sun);S.add(G.sun.target);
  G.win=new THREE.PointLight(0x7da2ff,.5,4,2);G.win.position.set(-2.2,1.8,-.5);S.add(G.win);
  /* alvos clicaveis */
- G.targets={monitor:mon,books:books,board:board,note:note,mug:mug,lamp:lamp};
+ G.targets={monitor:mon,books:books,board:board,note:note,mug:mug,lamp:lamp,laptop:lap};
  G.pick=[];Object.keys(G.targets).forEach(function(k){G.targets[k].traverse(function(o){if(o.isMesh){o.material=o.material.clone();o.userData.t=k;G.pick.push(o)}})});
- G.anchor={monitor:new THREE.Vector3(-.05,1.62,-1.15),books:new THREE.Vector3(-1.25,2.05,-1.4),board:new THREE.Vector3(.95,2.03,-1.55),note:new THREE.Vector3(.68,.86,-.6)};
+ G.anchor={monitor:new THREE.Vector3(-.05,1.62,-1.15),books:new THREE.Vector3(-1.25,2.05,-1.4),board:new THREE.Vector3(.95,2.03,-1.55),note:new THREE.Vector3(.66,.86,-.72)};
  G.ray=new THREE.Raycaster();G.ptr=new THREE.Vector2(-9,-9);
  var dom=R.domElement;
  dom.addEventListener("pointermove",function(e){var b=dom.getBoundingClientRect();G.ptr.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1)},{passive:true});
  dom.addEventListener("pointerleave",function(){G.ptr.set(-9,-9);G.hover=-1});
- dom.addEventListener("click",function(){var k=G.hit;if(!k)return;if(k=="mug"){G.cups=(G.cups||0)+1;G.puff=performance.now();snd.click();if(G.cups==5)toast(T("5 cafés? Chega por hoje. ☕","5 coffees? That's enough for today. ☕"));return}
+ dom.addEventListener("click",function(){var k=G.hit;if(!k)return;if(k=="laptop"){zoomLap();return}if(k=="mug"){var nw=performance.now();if(G.sip&&nw-G.sip<2600)return;G.sip=nw;G.cups=(G.cups||0)+1;G.puff=nw;setTimeout(slurp,calmo()?0:320);if(G.cups==5)toast(T("5 cafés? Chega por hoje. ☕","5 coffees? That's enough for today. ☕"));return}
   if(k=="lamp"){G.lampOn=!G.lampOn;snd.click();glTheme();return}var h=HOT.find(function(x){return x.obj==k});if(h){snd.click();location.hash=h.go}});
  window.addEventListener("pointermove",function(e){G.mx=e.clientX/innerWidth*2-1;G.my=e.clientY/innerHeight*2-1},{passive:true});
  window.addEventListener("resize",glResize);document.addEventListener("visibilitychange",function(){G.hidden=document.hidden});
+ S.updateMatrixWorld(true);G.zl=new THREE.Vector3();lsc.getWorldPosition(G.zl);var nq=new THREE.Quaternion();lsc.getWorldQuaternion(nq);G.zp=G.zl.clone().add(new THREE.Vector3(0,0,1).applyQuaternion(nq).multiplyScalar(.46));var zr=new THREE.Vector3(1,0,0).applyQuaternion(nq).multiplyScalar(.13);G.zl.add(zr);G.zp.add(zr);G.zt=0;G.zf=0;
  glTheme();ecraInit();return true}
 function glTheme(){if(!G.S)return;var d=dark(),bg=new THREE.Color(d?0x0b0f17:0xdfe6f0);G.S.background=bg;G.S.fog=new THREE.Fog(bg,5,11);
  var m=G.mat;m.floor.color.set(d?0x1a1f29:0xb9a58c);m.wall.color.set(d?0x161b24:0xe6e1d8);m.wall2.color.set(d?0x131821:0xdcd6cc);
@@ -1374,6 +1383,12 @@ function ecra(now){var c=G.scx,W=1024,H=600;if(now-G.tick<(G.matrix&&now<G.matri
  for(var j=0;j<CODE.length;j++){c.fillStyle=j<=G.cl?"rgba(143,180,255,.35)":"rgba(255,255,255,.06)";c.fillRect(W-70,90+j*7,Math.min(56,CODE[j].length*1.4),3)}
  var d=new Date(),hh=String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
  c.fillStyle="#171c2c";c.fillRect(0,H-34,W,34);c.fillStyle="#4ad06b";c.font="16px monospace";c.fillText("● main   Ln "+(Math.min(G.cl,CODE.length-1)+1)+"   UTF-8   SQL",18,H-11);c.textAlign="right";c.fillStyle="#9aa4bd";c.fillText(hh,W-18,H-11);c.textAlign="left";G.stex.needsUpdate=true}
+/* clicar no portatil: a camara aproxima-se e abre o terminal */
+function zoomLap(){G.zt=1;setTimeout(function(){terminal(true)},calmo()?0:800)}
+/* golo de cafe (o unico som do site), sintetizado no browser */
+function slurp(){var c=actx();if(!c)return;if(c.state=="suspended")c.resume();var d=.7,n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);
+ for(var i=0;i<n;i++){var t=i/c.sampleRate,env=Math.pow(Math.sin(Math.PI*t/d),.6),gur=.5+.5*Math.sin(2*Math.PI*(12+10*t)*t);a[i]=(Math.random()*2-1)*env*gur}
+ var s=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain(),t0=c.currentTime;s.buffer=b;f.type="bandpass";f.Q.value=3;f.frequency.setValueAtTime(450,t0);f.frequency.exponentialRampToValueAtTime(2400,t0+d*.85);g.gain.value=.35;s.connect(f);f.connect(g);g.connect(c.destination);s.start(t0)}
 function glResize(){if(!G.R)return;var st=document.getElementById("stage");if(!st)return;var cv2=G.R.domElement,w=cv2.clientWidth||st.clientWidth,h=cv2.clientHeight||st.clientHeight;if(!w||!h)return;G.R.setSize(w,h,false);G.C.aspect=w/h;G.C.updateProjectionMatrix()}
 var V3=null;
 function glLoop(){G.loop=true;var last=performance.now();V3=new THREE.Vector3();
@@ -1385,7 +1400,10 @@ function glLoop(){G.loop=true;var last=performance.now();V3=new THREE.Vector3();
   var u=1-e,ix=base.x+2.2*u+Math.sin(e*Math.PI)*.35,iy=base.y+1.1*u,iz=base.z+3.2*u;
   var k=calmo()?0:1;G.cx+=(G.mx*k-G.cx)*.04;G.cy+=(G.my*k-G.cy)*.04;
   var fov=34+12*u;if(Math.abs(G.C.fov-fov)>.01){G.C.fov=fov;G.C.updateProjectionMatrix()}
-  G.C.position.set(ix+G.cx*(mob?.15:.45),iy-G.cy*(mob?.06:.18),iz+Math.abs(G.cx)*.12);G.C.lookAt(look.x+.7*u+G.cx*.08,look.y+.25*u-G.cy*.05,look.z);
+  G.zf+=(G.zt-G.zf)*Math.min(1,dt*(calmo()?99:3.2));var ze=G.zf*G.zf*(3-2*G.zf);
+  G.C.position.set(ix+G.cx*(mob?.15:.45)*(1-ze),iy-G.cy*(mob?.06:.18)*(1-ze),iz+Math.abs(G.cx)*.12);G.LK=(G.LK||new THREE.Vector3()).set(look.x+.7*u+G.cx*.08,look.y+.25*u-G.cy*.05,look.z);if(ze>.001){G.C.position.lerp(G.zp,ze);G.LK.lerp(G.zl,ze)}G.C.lookAt(G.LK);var stg=G.R.domElement.parentNode;if(stg&&stg.classList.contains("zoom")!=(ze>.05))stg.classList.toggle("zoom",ze>.05);
+  /* caneca: levanta e inclina ao beber */
+  if(G.sip){var sp=(now-G.sip)/1500;if(sp<1){var sv=Math.sin(Math.PI*sp);G.mug.position.y=.784+.14*sv;G.mug.rotation.x=.5*Math.max(0,Math.sin(Math.PI*Math.min(1,Math.max(0,(sp-.18)/.64))))}else{G.mug.position.y=.784;G.mug.rotation.x=0}}
   /* luzes a ligar uma a uma (neon, PC, candeeiro, monitor) */
   var sm=function(a,b){var x=Math.min(1,Math.max(0,(q-a)/(b-a)));return x*x*(3-2*x)},fl=function(a,b){return q<a?0:q<b?(Math.random()<.55?1:.08):1};
   var lv=G.lv,fN=fl(.3,.8),fL=fl(.9,1.2),fM=sm(1.3,1.7),fP=sm(.5,1.1),fA=.2+.8*sm(0,1.6),fx=q>1.3&&q<1.45?1.7:1,tt=now/1000;
@@ -1397,7 +1415,7 @@ function glLoop(){G.loop=true;var last=performance.now();V3=new THREE.Vector3();
   G.ray.setFromCamera(G.ptr,G.C);var hit=G.ray.intersectObjects(G.pick,false)[0],hk=hit?hit.object.userData.t:null;
   if(G.hover>-1)hk=HOT[G.hover].obj;G.hit=hit?hit.object.userData.t:null;G.R.domElement.classList.toggle("hov",!!G.hit);
   Object.keys(G.targets).forEach(function(n){var on=n==hk,s=G.targets[n];s.userData.g=(s.userData.g||0)+((on?1:0)-(s.userData.g||0))*.15;s.traverse(function(o){if(o.isMesh&&o.material.emissive){o.material.emissive.setRGB(.12*s.userData.g,.16*s.userData.g,.38*s.userData.g)}})});
-  if(G.hsEls){HOT.forEach(function(hh,i){var b=G.hsEls[i],a=G.anchor[hh.obj];V3.copy(a).project(G.C);var x=Math.max(64,Math.min(w-64,(V3.x*.5+.5)*w)),y=Math.max(24,Math.min(h-24,(-V3.y*.5+.5)*h));b.style.left=x+"px";b.style.top=y+"px";b.classList.toggle("vis",t>.75&&V3.z<1);b.classList.toggle("on",hk==hh.obj)})}
+  if(G.hsEls){HOT.forEach(function(hh,i){var b=G.hsEls[i],a=G.anchor[hh.obj];V3.copy(a).project(G.C);var x=Math.max(64,Math.min(w-64,(V3.x*.5+.5)*w)),y=Math.max(24,Math.min(h-24,(-V3.y*.5+.5)*h));b.style.left=x+"px";b.style.top=y+"px";b.classList.toggle("vis",t>.75&&V3.z<1&&ze<.1);b.classList.toggle("on",hk==hh.obj)})}
   /* vapor, poeira, neon */
   var tt=now/1000,pf=G.puff&&now-G.puff<1500?1.8:1;G.steam.forEach(function(s){var p=(tt*.35*pf+s.o)%1;s.s.position.set(Math.sin(p*6+s.o*9)*.012,.11+p*.22,0);s.s.material.opacity=Math.sin(p*Math.PI)*.35;var sc2=.06+p*.09;s.s.scale.set(sc2,sc2,sc2)});
   G.dust.rotation.y=tt*.01;G.dust.position.y=Math.sin(tt*.3)*.03;G.neon.material.opacity=lv.neonOp*fN*(.92+Math.sin(tt*3)*.04+(Math.random()<.004?-.5:0));
@@ -1424,7 +1442,7 @@ function liquido(){var c=document.getElementById("bliq");if(!c)return;var x=c.ge
   if(!calmo())requestAnimationFrame(f)})()}
 function entrar(som){var B=document.getElementById("boot");if(B.classList.contains("run")||B.classList.contains("out"))return;setSom(som);B.classList.add("run");snd.click();
  var ol=document.getElementById("bootL"),bar=document.getElementById("bootB"),pc=document.getElementById("bootP"),st=document.getElementById("bootS"),cells=bar.children,fast=calmo(),p=0,i=0;
- var steps=[[T("projetos encontrados: ","projects found: ")+P.length,""],[T("tecnologias: C#, SQL, Python, JavaScript","technologies: C#, SQL, Python, JavaScript"),""],[T("a montar o escritório 3D","building the 3D office"),"gl"],[T("a ligar o monitor e o candeeiro","turning on the monitor and the lamp"),""],[T("tudo pronto","all set"),""]];
+ var steps=[[T("projetos encontrados: ","projects found: ")+P.length,""],[T("tecnologias: PHP, HTML, CSS, Java, C#, Python, Kotlin, Android","technologies: PHP, HTML, CSS, Java, C#, Python, Kotlin, Android"),""],[T("a montar o escritório 3D","building the 3D office"),"gl"],[T("a ligar o monitor e o candeeiro","turning on the monitor and the lamp"),""],[T("tudo pronto","all set"),""]];
  function setP(v){p=v;pc.textContent=Math.round(v)+"%";for(var c=0;c<32;c++)cells[c].classList.toggle("on",c<v/100*32)}
  st.textContent=T("a executar…","running…");
  function step(){if(i>=steps.length){setP(100);st.textContent=T("pronto","ready");setTimeout(morph,fast?0:260);return}
