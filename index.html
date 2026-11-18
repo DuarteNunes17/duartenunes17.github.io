@@ -550,6 +550,11 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
 #term form .ps{color:oklch(80% .16 152);white-space:nowrap}#term form .ps b{color:oklch(80% .12 262);font-weight:500}
 #term input{caret-color:oklch(80% .12 262)}
 /* assistente */
+.lapin{position:fixed;left:0;top:40%;width:1px;height:1px;padding:0;border:0;opacity:0;font-size:16px;pointer-events:none}
+.lapui{position:fixed;left:50%;bottom:1.25rem;translate:-50% 0;z-index:57;display:flex;align-items:center;gap:.75rem;max-width:calc(100vw - 1.5rem);padding:.45rem .5rem .45rem .9rem;border:1px solid var(--line);border-radius:99px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 18px 40px -18px var(--sh);animation:hin .5s var(--ease)}
+.lapui[hidden]{display:none}.lapui .tsug{border:0;padding:0;background:none}.lapui .tsug button{background:var(--surf);border-color:var(--line);color:var(--ink)}.lapui .tsug button:hover{border-color:var(--acc);color:var(--ink)}
+.lapui .lh{font:500 .75rem var(--mono);color:var(--mute);white-space:nowrap}
+@media(max-width:760px){.lapui{bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));flex-wrap:wrap;justify-content:center;border-radius:1rem}.lapui .lh{display:none}}
 .chatb{position:fixed;right:clamp(.75rem,2vw,1.5rem);bottom:clamp(.75rem,2vw,1.5rem);z-index:58;display:inline-flex;align-items:center;gap:.55rem;padding:.65rem 1rem .65rem .75rem;border:1px solid var(--line);border-radius:99px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);font:600 .875rem var(--ff);cursor:pointer;box-shadow:0 18px 40px -18px var(--sh);transition:transform .35s var(--ease),opacity .3s,border-color .25s}
 .chatb:hover{transform:translateY(-3px);border-color:var(--acc)}
 .chatb .ic{width:1.3rem;height:1.3rem;color:var(--acc)}
@@ -669,7 +674,8 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
  <form id="tForm" autocomplete="off"><label class="sr" for="tIn">Comando</label><span class="ps" aria-hidden="true">duarte <b>~</b> ❯</span><input id="tIn" spellcheck="false" autocapitalize="off"></form>
 </section>
 
-<button class="chatb" id="chatB" aria-controls="chat" aria-expanded="false"><span class="ic" data-i="chat"></span><span>Pergunta-me algo</span><span class="ldot" aria-hidden="true"></span></button>
+<input id="lIn" class="lapin" aria-label="Comando do terminal do portátil" autocomplete="off" spellcheck="false" autocapitalize="off" maxlength="200">
+<div id="lapui" class="lapui" hidden><div class="tsug" aria-label="Sugestões"><button data-cmd="help">help</button><button data-cmd="about">about</button><button data-cmd="skills">skills</button><button data-cmd="projetos">projetos</button><button data-cmd="neofetch">neofetch</button></div><span class="lh">Escreve no portátil · Esc para sair</span><button class="btn o sm" data-lap="x">Sair</button></div>
 <section id="chat" class="win" hidden aria-label="Assistente">
  <div class="tbar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="tt">assistente.app</span><span class="ctl"><button class="x" data-chat="close" aria-label="Fechar assistente"><span class="ic" data-i="x"></span></button></span></div>
  <div class="chd"><span class="cav" aria-hidden="true">DN</span><div><b>Assistente do portefólio</b><small>Responde por palavras-chave · não é IA</small></div></div>
@@ -741,7 +747,7 @@ var EN={"Sobre":"About","Definições":"Settings","Tema":"Theme","Claro":"Light"
 "Li a":"I have read the","Política de Privacidade":"Privacy Policy","e aceito que os meus dados sejam usados para responder à mensagem.":"and agree that my details are used to reply to my message.",
 "Para continuar, confirma que leste a Política de Privacidade.":"To continue, please confirm you have read the Privacy Policy.",
 "Ver projeto":"View project","Arquivo":"Archive","Projetos mais antigos.":"Older projects.","Gestão e programação":"Management and programming","À procura de estágio":"Looking for an internship","API e regras":"API and rules","Base de dados":"Database","Diagrama: interface, API e base de dados ligadas entre si":"Diagram: interface, API and database connected together","Todos os projetos":"All projects","Termos de Utilização":"Terms of Use","Política de Cookies":"Cookie Policy"};
-Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","Início":"Home","Experiência":"Experience","Sobre":"About","Contacto":"Contact","Projetos":"Projects",
+Object.assign(EN,{"Escreve no portátil · Esc para sair":"Type on the laptop · Esc to leave","Sair":"Leave","# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","Início":"Home","Experiência":"Experience","Sobre":"About","Contacto":"Contact","Projetos":"Projects",
 "Entrar com som":"Enter with sound","Entrar sem som":"Enter without sound","Enter entra sem som · podes ligar o som mais tarde":"Enter goes in without sound · you can turn sound on later","Entrar":"Enter","Prime Enter para entrar":"Press Enter to go in","# portefólio do Duarte Nunes":"# Duarte Nunes' portfolio",
 "Abrir terminal":"Open terminal","Som":"Sound","Ver projetos":"View projects","Explora o escritório com o rato":"Explore the office with your mouse","Disponível para estágio a partir de setembro":"Available for an internship from September",
 "O que faço":"What I do","Do desenho da base de dados ao ecrã que o utilizador vê.":"From database design to the screen the user sees.",
@@ -754,7 +760,7 @@ Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade
 "Ver projeto":"View project","Interesses":"Interests","Competências":"Skills","Objetivos":"Goals","Percurso":"Path","Bases de dados":"Databases",
 "Copiar email":"Copy email","Email copiado.":"Email copied.","Escreve-me":"Write to me","nova_mensagem.txt":"new_message.txt","Explora":"Explore",
 "Projetos selecionados":"Selected projects","a carregar…":"loading…","Tens um projeto ou um estágio em mente? Escreve-me.":"Have a project or an internship in mind? Write to me.","Aplicações de gestão, uma API e automatizações. Clica num projeto para o abrir.":"Management applications, an API and automations. Click a project to open it.","Ver projetos":"View projects","Tecnologias":"Technologies","Usado nos projetos":"Used in projects","Línguas":"Languages","Ferramentas":"Tools","Linguagens":"Programming languages","Bases de dados, aplicações de gestão que poupam trabalho às pessoas, APIs e automatização de tarefas repetitivas.":"Well-designed databases, management applications that save people work, APIs and automating repetitive tasks.","Estudante de Gestão e Programação de Sistemas Informáticos.":"Student of Computer Systems Management and Programming.","Encontrar um estágio a partir de setembro e continuar a construir sistemas fiáveis e fáceis de manter.":"To find an internship from September and keep building reliable systems that are easy to maintain.","Bases de dados bem desenhadas, aplicações de gestão que poupam trabalho às pessoas, APIs e automatização de tarefas repetitivas.":"Well-designed databases, management applications that save people work, APIs and automation of repetitive tasks.","Projetos":"Projects","Aplicações de gestão":"Management applications","Web e automação":"Web and automation"});
-Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","O meu ambiente de trabalho. Arrasta as janelas pela barra de título e abre um projeto para ver os detalhes.":"My desktop. Drag the windows by their title bar and open a project to see the details.","Aplicações de gestão, uma API e automatizações. Escolhe um projeto para o veres em detalhe.":"Management apps, an API and automations. Pick a project to see it in detail.","Abrir em janela":"Open in a window","Seguinte":"Next","Anterior":"Previous","Objetivo":"Goal","O que faz":"What it does","Resultado":"Result","duarte-os · portefólio":"duarte-os · portfolio"});
+Object.assign(EN,{"Escreve no portátil · Esc para sair":"Type on the laptop · Esc to leave","Sair":"Leave","# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","O meu ambiente de trabalho. Arrasta as janelas pela barra de título e abre um projeto para ver os detalhes.":"My desktop. Drag the windows by their title bar and open a project to see the details.","Aplicações de gestão, uma API e automatizações. Escolhe um projeto para o veres em detalhe.":"Management apps, an API and automations. Pick a project to see it in detail.","Abrir em janela":"Open in a window","Seguinte":"Next","Anterior":"Previous","Objetivo":"Goal","O que faz":"What it does","Resultado":"Result","duarte-os · portefólio":"duarte-os · portfolio"});
 function T(pt,en){return L=="en"?en:pt}
 function tr(root){if(L!="en")return;var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode())a.push(n);
  a.forEach(function(n){var k=n.nodeValue.trim();if(EN[k])n.nodeValue=n.nodeValue.replace(k,EN[k])});
@@ -951,7 +957,7 @@ function indNav(){var a=nav.querySelector('[aria-current="page"]'),i=nav.querySe
 function drawFt(){var f=document.getElementById("ft");f.innerHTML='<div class="w"><span>© 2026 Duarte Ferreira Nunes</span><nav aria-label="Informação legal"><button data-go="privacidade">Privacidade</button><button data-go="termos">Termos</button><button data-go="cookies">Cookies</button></nav><span class="mono">3D: three.js (MIT)</span></div>';tr(f)}
 function drawSt(){var p=document.getElementById("pp"),d=dark();p.innerHTML='<h2>// definições</h2><div><span class="lb">Tema</span><div class="seg"><button data-act="th" data-v="light" aria-pressed="'+!d+'">Claro</button><button data-act="th" data-v="dark" aria-pressed="'+d+'">Escuro</button></div></div><div><span class="lb">Idioma</span><div class="seg"><button data-act="lg" data-v="pt" aria-pressed="'+(L=="pt")+'">Português</button><button data-act="lg" data-v="en" aria-pressed="'+(L=="en")+'">English</button></div></div>';tr(p)}
 function hdr(){var s=function(id,pt,en){var e=document.getElementById(id);if(e){e.setAttribute("aria-label",T(pt,en));e.title=T(pt,en)}};s("tTerm","Abrir terminal ( ` )","Open terminal ( ` )");s("gb","Definições","Settings");document.querySelector(".brand").setAttribute("aria-label",T("Início","Home"));document.getElementById("skip").textContent=T("Saltar para o conteúdo","Skip to content");
- document.getElementById("kIn").placeholder=T("Procura secções, projetos ou ações…","Search sections, projects or actions…");document.getElementById("cIn").placeholder=T("Escreve uma pergunta…","Type a question…");document.querySelector("#chatB span:nth-child(2)").textContent=T("Pergunta-me algo","Ask me something");document.querySelector(".chd b").textContent=T("Assistente do portefólio","Portfolio assistant");document.querySelector(".chd small").textContent=T("Responde por palavras-chave · não é IA","Answers by keyword · not an AI");s("tK","Procurar (Ctrl+K)","Search (Ctrl+K)");setSom(AU.on)}
+ document.getElementById("kIn").placeholder=T("Procura secções, projetos ou ações…","Search sections, projects or actions…");document.getElementById("cIn").placeholder=T("Escreve uma pergunta…","Type a question…");document.querySelector(".chd b").textContent=T("Assistente do portefólio","Portfolio assistant");document.querySelector(".chd small").textContent=T("Responde por palavras-chave · não é IA","Answers by keyword · not an AI");s("tK","Procurar (Ctrl+K)","Search (Ctrl+K)");setSom(AU.on)}
 function render(quiet){var v=route();if(v!="home")glPause(true);
  var dl=pjLink();if(dl&&!quiet){cur.sel=dl;cur.cat="Todas";cur.q=""}drawNav(v);cur.still=!!quiet;pg.innerHTML=V[v]();icons(pg);
  var q=document.getElementById("q");if(q)q.oninput=function(){cur.q=q.value;var s=q.selectionStart,top=scrollY;render(1);scrollTo(0,top);var n=document.getElementById("q");n.focus();n.setSelectionRange(s,s)};
@@ -976,19 +982,19 @@ function pix(cor,txt,done,page){if(calmo()){done();return}
  ptT.push(setTimeout(function(){if(id!=ptId)return;if(txt)PT.classList.add("show");
   ptT.push(setTimeout(function(){if(id!=ptId)return;if(page){pg.classList.remove("out");pg.classList.add("enter")}done();PT.className="busy off"+(txt?" show hide":"");
    ptT.push(setTimeout(function(){if(id!=ptId)return;PT.className="";px.innerHTML="";pg.classList.remove("enter")},1050))},txt?520:60))},1000))}
-window.addEventListener("hashchange",function(){fechaJanela(true);var v=route();pix(cv("--acc"),pt2(TIT[v]||"Início"),function(){render();pg.focus({preventScroll:true})},1)});
+window.addEventListener("hashchange",function(){fechaJanela(true);lapOff();var v=route();pix(cv("--acc"),pt2(TIT[v]||"Início"),function(){render();pg.focus({preventScroll:true})},1)});
 window.addEventListener("resize",indNav);
 
 /* cliques globais */
 document.addEventListener("click",function(e){
  var pp=document.getElementById("pp");if(!pp.hidden&&!e.target.closest(".tools>div"))fechaSt();
  if(e.target.closest("#skip")){e.preventDefault();pg.focus();return}
- var t=e.target.closest("[data-chat],#chatB,#tK,[data-link],[data-cmd],[data-ask],[data-sel],[data-step],[data-go],[data-proj],[data-cat],[data-act],[data-term],[data-copy],[data-enter],#gb,#tTerm,#tSnd");if(!t)return;
+ var t=e.target.closest("[data-lap],[data-chat],#chatB,#tK,[data-link],[data-cmd],[data-ask],[data-sel],[data-step],[data-go],[data-proj],[data-cat],[data-act],[data-term],[data-copy],[data-enter],#gb,#tTerm,#tSnd");if(!t)return;
  if(t.matches("a[data-go]"))e.preventDefault();
  if(t.dataset.enter!=null){entrar(t.dataset.enter=="1");return}
- if(t.id=="chatB"){chat(true);return}if(t.dataset.chat){chat(false);return}if(t.id=="tK"){kAbre();return}
+ if(t.dataset.chat){chat(false);return}if(t.id=="tK"){kAbre();return}
  if(t.dataset.ask){pergunta(t.dataset.ask);return}
- if(t.dataset.cmd){corre(t.dataset.cmd);tIn.focus();return}
+ if(t.dataset.cmd){corre(t.dataset.cmd);(G.lapOn?document.getElementById("lIn"):tIn).focus({preventScroll:true});return}if(t.dataset.lap){lapOff();return}
  if(t.dataset.link){var url=location.origin+location.pathname+"#projeto/"+t.dataset.link,okc=function(){toast(T("Link copiado.","Link copied."));snd.click()};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(okc,function(){prompt("",url)});else prompt("",url);return}
  if(t.dataset.sel){if(t.getAttribute("aria-selected")!="true")showProj(t.dataset.sel);return}
  if(t.dataset.step){var bs=[].slice.call(document.querySelectorAll(".pli")),i=bs.findIndex(function(b){return b.dataset.sel==cur.sel});if(bs.length)showProj(bs[(i+Number(t.dataset.step)+bs.length)%bs.length].dataset.sel);return}
@@ -1077,9 +1083,9 @@ function send(ev){ev.preventDefault();var r={n:"Diz-me o teu nome para eu saber 
    TERMINAL + ASSISTENTE POR PALAVRAS-CHAVE (sem IA)
    ========================================================= */
 var tOut=document.getElementById("tOut"),tIn=document.getElementById("tIn"),hist=[],hi=0,tIniciado=false;
-var tq=0;function tw(html,cls){var p=document.createElement("p");if(cls)p.className=cls;p.style.animationDelay=Math.min(tq++,30)*28+"ms";p.innerHTML=html;tOut.appendChild(p);tOut.scrollTop=tOut.scrollHeight}
-function terminal(open){var t=document.getElementById("term"),b=document.getElementById("tTerm");if(open===undefined)open=t.hidden;t.hidden=!open;b.setAttribute("aria-pressed",open);
- if(open){if(!document.getElementById("chat").hidden)chat(false);tq=0;snd.open();if(!tIniciado){CMD.neofetch();tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}setTimeout(function(){tIn.focus()},60)}else{snd.close();G.zt=0;if(document.activeElement==tIn)b.focus()}}
+var tq=0;function tw(html,cls){var p=document.createElement("p");if(cls)p.className=cls;p.style.animationDelay=Math.min(tq++,30)*28+"ms";p.innerHTML=html;tOut.appendChild(p);tOut.scrollTop=tOut.scrollHeight;if(G.lapOn)lapDraw()}
+function termPanel(open){var t=document.getElementById("term"),b=document.getElementById("tTerm");if(open===undefined)open=t.hidden;t.hidden=!open;b.setAttribute("aria-pressed",open);
+ if(open){if(!document.getElementById("chat").hidden)chat(false);tq=0;termInit();setTimeout(function(){tIn.focus()},60)}else{snd.close();G.zt=0;if(document.activeElement==tIn)b.focus()}}
 var KB=[
  {k:["linguag","language","c#","csharp","python","java","kotlin","android","php","html","css","programa"],pt:"Tecnologias: PHP, HTML, CSS, Java, C#, Python, Kotlin e Android.",en:"Technologies: PHP, HTML, CSS, Java, C#, Python, Kotlin and Android."},
  {k:["sql","base de dados","bases de dados","database","postgres","mysql","server"],pt:"Os meus projetos usam bases de dados SQL Server, MySQL e PostgreSQL.",en:"My projects use SQL Server, MySQL and PostgreSQL databases."},
@@ -1127,6 +1133,7 @@ function usadoEm(s){return P.filter(function(p){return p.k.some(function(k){retu
 function nrm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
 
 /* comandos novos do terminal (os antigos continuam iguais) */
+CMD.assistente=function(){tw(T("A abrir o assistente…","Opening the assistant…"),"c2");lapOff();chat(true)};ALI.chat="assistente";ALI.assistant="assistente";
 CMD.about=function(){tw("Duarte Ferreira Nunes","c1");tw(T("Estudante de Gestão e Programação de Sistemas Informáticos.","Computer Systems Management and Programming student."));tw(T("Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.","I'm interested in where information management meets software development."),"c3");tw(T("À procura de estágio a partir de setembro.","Looking for an internship from September."),"c2")};
 CMD.skills=function(){SK.forEach(function(g){tw('<span class="c1">'+pt2(g[0]).padEnd(16," ")+"</span>"+g[1].join(" · "))});tw(T("Na página Sobre vês em que projetos usei cada uma.","On the About page you can see which projects use each one."),"c3")};
 CMD.contacto=function(){tw("email   "+'<a href="mailto:'+EM+'">'+EM+"</a>");tw("github  "+'<a href="'+GH+'" target="_blank" rel="noopener">github.com/DuarteNunes17</a>');tw(T("A abrir Contacto…","Opening Contact…"),"c3");location.hash="contacto"};
@@ -1139,7 +1146,7 @@ CMD.help=function(){tw(T("Comandos","Commands"),"c1");[["about","quem sou, em po
    ASSISTENTE (janela de conversa, respostas por palavras-chave)
    ========================================================= */
 var CHi=false;
-function chat(open){var c=document.getElementById("chat"),b=document.getElementById("chatB");if(open===undefined)open=c.hidden;c.hidden=!open;b.setAttribute("aria-expanded",open);b.classList.toggle("off",open);
+function chat(open){var c=document.getElementById("chat"),b=document.getElementById("tK");if(open===undefined)open=c.hidden;c.hidden=!open;
  if(open){if(!document.getElementById("term").hidden)terminal(false);snd.open();if(!CHi){CHi=true;cm("bot",T("Olá! Sou o assistente do portefólio do Duarte. Posso falar-te dos projetos, das competências, do estágio e dos contactos.","Hi! I'm the assistant of Duarte's portfolio. I can tell you about the projects, skills, internship and contacts."));sug()}setTimeout(function(){document.getElementById("cIn").focus()},80)}
  else{snd.close();if(document.activeElement&&document.activeElement.closest("#chat"))b.focus()}}
 function cm(who,html,acts){var m=document.getElementById("cMsgs"),d=document.createElement("div");d.className="cm "+who;d.innerHTML='<div class="bb">'+html+"</div>"+(acts?'<div class="cacts">'+acts+"</div>":"");m.appendChild(d);icons(d);m.scrollTop=m.scrollHeight;return d}
@@ -1196,6 +1203,36 @@ function monitor(){clearTimeout(MT);var el=document.getElementById("mon");if(!el
  el.innerHTML=rows.map(function(r){return"<div><dt>"+r[0]+"</dt><dd>"+r[1]+"</dd></div>"}).join("");MT=setTimeout(monitor,1000)}
 
 /* =========================================================
+   TERMINAL NO PORTATIL: escreve-se diretamente no ecra do portatil 3D
+   ========================================================= */
+function termInit(){if(tIniciado)return;CMD.neofetch();tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}
+function terminal(open){var panel=document.getElementById("term");if(open===undefined)open=!(G.lapOn||!panel.hidden);
+ if(!open){lapOff();if(!panel.hidden)termPanel(false);return}
+ if(G.R&&!G.fail&&route()=="home"&&document.getElementById("stage"))lapOn();else termPanel(true)}
+var LT=null;
+function lapOn(){if(!document.getElementById("term").hidden)termPanel(false);if(!document.getElementById("chat").hidden)chat(false);termInit();G.zt=1;G.lapOn=true;document.getElementById("tTerm").setAttribute("aria-pressed","true");
+ document.getElementById("lapui").hidden=false;clearInterval(LT);LT=setInterval(lapDraw,500);lapDraw();setTimeout(function(){document.getElementById("lIn").focus({preventScroll:true})},calmo()?0:450)}
+function lapOff(){if(!G.lapOn)return;G.lapOn=false;G.zt=0;clearInterval(LT);document.getElementById("lapui").hidden=true;document.getElementById("tTerm").setAttribute("aria-pressed","false");var i=document.getElementById("lIn");if(document.activeElement==i)i.blur();lapDraw()}
+function lapDraw(){var cv=G.lapCv;if(!cv)return;var c=cv.getContext("2d"),W=cv.width,H=cv.height,fs=24,lh=31,pad=26,top=44,inp=document.getElementById("lIn"),foco=document.activeElement==inp;
+ c.fillStyle="#0b0e15";c.fillRect(0,0,W,H);c.fillStyle="#151a26";c.fillRect(0,0,W,top);["#ff6b5d","#f5c04a","#4ad06b"].forEach(function(cl,i){c.fillStyle=cl;c.beginPath();c.arc(26+i*24,top/2,7,0,7);c.fill()});
+ c.fillStyle="#8a94ad";c.font="19px monospace";c.textAlign="center";c.fillText("duarte@pc: ~ — zsh",W/2,top/2+6);c.textAlign="left";
+ c.font=fs+"px monospace";var cw=c.measureText("M").width,cols=Math.max(10,Math.floor((W-pad*2)/cw)),rows=Math.floor((H-top-pad)/lh)-1,L2=[];
+ if(!tIniciado){[["#4ad06b","duarte@pc ~/portefolio"],["#e6e9f2","$ ls"],["#8fb4ff","index.html  404.html  three.min.js"],["#8fb4ff","preview.png  Duarte-Nunes-CV.pdf"],["#e6e9f2","$ python relatorio.py"],["#7c87a3","a gerar o PDF..."],["#4ad06b","feito"],["#7c87a3",""],["#f5c04a",T("clica no portátil para usares o terminal","click the laptop to use the terminal")]].forEach(function(l){L2.push(l)})}
+ else[].forEach.call(tOut.children,function(p){var k=p.classList,col=k.contains("cmdl")?"#ffffff":k.contains("c1")?"#8fb4ff":k.contains("c2")?"#4ad06b":k.contains("c3")?"#7c87a3":k.contains("c4")?"#f5c04a":"#dfe4ee";
+  p.textContent.split("\n").forEach(function(t){(t.match(new RegExp(".{1,"+cols+"}","g"))||[""]).forEach(function(s){L2.push([col,s])})})});
+ var vis=L2.slice(-rows);vis.forEach(function(l,i){c.fillStyle=l[0];c.fillText(l[1],pad,top+pad+i*lh+6)});
+ if(tIniciado){var y=top+pad+vis.length*lh+6,pr="duarte ~ ❯ ",v=inp.value,room=cols-pr.length-1,vv=v.length>room?v.slice(-room):v;c.fillStyle="#4ad06b";c.fillText(pr,pad,y);var x=pad+c.measureText(pr).width;c.fillStyle="#ffffff";c.fillText(vv,x,y);
+  if(G.lapOn&&foco&&(performance.now()/500|0)%2==0){c.fillStyle="#8fb4ff";c.fillRect(x+c.measureText(vv).width+2,y-fs+3,cw*.9,fs+3)}}
+ if(G.lapTex)G.lapTex.needsUpdate=true}
+(function(){var i=document.getElementById("lIn");
+ i.addEventListener("keydown",function(e){if(e.key=="Enter"){e.preventDefault();var v=i.value;i.value="";corre(v);lapDraw()}
+  else if(e.key=="Escape"){e.preventDefault();e.stopPropagation();lapOff()}
+  else if(e.key=="ArrowUp"){e.preventDefault();if(hi>0){hi--;i.value=hist[hi]}lapDraw()}
+  else if(e.key=="ArrowDown"){e.preventDefault();if(hi<hist.length-1){hi++;i.value=hist[hi]}else{hi=hist.length;i.value=""}lapDraw()}
+  else if(e.key=="Tab"){var v=i.value.toLowerCase();if(v){var m=Object.keys(CMD).filter(function(k){return k.indexOf(v)==0});if(m.length==1){i.value=m[0]+" ";e.preventDefault();lapDraw()}}}});
+ i.addEventListener("input",lapDraw);i.addEventListener("focus",lapDraw);i.addEventListener("blur",lapDraw)})();
+
+/* =========================================================
    ESCRITORIO 3D (three.js)
    ========================================================= */
 var G={};
@@ -1217,7 +1254,7 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  var box=function(w,h,d,mat,x,y,z,par){var m=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;(par||S).add(m);return m};
  var cyl=function(rt,rb,h,mat,x,y,z,par,seg){var m=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,seg||24),mat);m.position.set(x,y,z);m.castShadow=m.receiveShadow=true;(par||S).add(m);return m};
  G.mat={floor:M(0x1a1f29,.85),wall:M(0x161b24,.95),wall2:M(0x131821,.95),wood:M(0x6b4a33,.55),woodd:M(0x3d2a1e,.6),metal:M(0x2a2f38,.35,.6),dark:M(0x111318,.4,.3),plastic:M(0x22262e,.5),white:M(0xe8eaee,.6),key:M(0x2b2f37,.6),
-  mug:M(0x3151d9,.35),pot:M(0xc9b9a6,.8),leaf:M(0x2f7d4f,.6),paper:M(0xf2efe8,.9),book:[M(0x3151d9,.7),M(0xc94f3d,.7),M(0x2f7d4f,.7),M(0xd9a441,.7),M(0x6b4fc9,.7),M(0x2b2f37,.7)]};
+  mug:M(0x3151d9,.35),pot:M(0xc9b9a6,.8),leaf:M(0x2f7d4f,.6),paper:M(0xf2efe8,.9),book:[M(0x2c4a78,.8),M(0x8a3a30,.8),M(0x3d6a4c,.8),M(0xb38a45,.75),M(0x5b4b78,.8),M(0x2b2f37,.85)]};
  var mt=G.mat;mt.alu=M(0xa3a9b3,.32,.85);mt.slat=M(0x6b4a33,.62);mt.felt=M(0x0e1117,.95);mt.case=M(0x101217,.35,.5);
  var ctex=function(w,h,draw){var c=document.createElement("canvas");c.width=w;c.height=h;draw(c.getContext("2d"),w,h);var t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;t.anisotropy=Math.min(8,R.capabilities.getMaxAnisotropy());return t};
  /* reflexos: mapa de ambiente gerado a partir de uma sala simples */
@@ -1226,6 +1263,13 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
   S.environment=pm.fromScene(es,.04).texture;pm.dispose()}catch(x){}
  var glowT=ctex(128,128,function(c){var g=c.createRadialGradient(64,64,2,64,64,64);g.addColorStop(0,"rgba(255,255,255,1)");g.addColorStop(.35,"rgba(255,255,255,.35)");g.addColorStop(1,"rgba(255,255,255,0)");c.fillStyle=g;c.fillRect(0,0,128,128)});
  var glowM=function(col,op){return new THREE.SpriteMaterial({map:glowT,color:col,transparent:true,opacity:op,blending:THREE.AdditiveBlending,depthWrite:false,toneMapped:false})};
+ /* texturas: veio da madeira, estuque das paredes e sombra de contacto */
+ var woodT=function(base,dk,rot){var t=ctex(1024,256,function(c,W,H){c.fillStyle=base;c.fillRect(0,0,W,H);for(var i=0;i<150;i++){var y=Math.random()*H;c.strokeStyle="rgba("+dk+","+(Math.random()*.16).toFixed(3)+")";c.lineWidth=.6+Math.random()*2.4;c.beginPath();c.moveTo(0,y);for(var x=0;x<=W;x+=48)c.lineTo(x,y+Math.sin(x*.005+i)*5+(Math.random()-.5)*1.5);c.stroke()}
+  for(var k=0;k<3;k++){var kx=Math.random()*W,ky=Math.random()*H,g=c.createRadialGradient(kx,ky,1,kx,ky,24);g.addColorStop(0,"rgba("+dk+",.3)");g.addColorStop(1,"rgba("+dk+",0)");c.fillStyle=g;c.beginPath();c.ellipse(kx,ky,34,10,0,0,7);c.fill()}});if(rot){t.center.set(.5,.5);t.rotation=Math.PI/2}return t};
+ mt.wood.map=woodT("#f2e4d2","72,44,22");mt.wood.color.set(0xb4875e);mt.wood.roughness=.5;mt.woodd.map=woodT("#eadbc7","60,36,18");mt.woodd.color.set(0x6e4c34);mt.slat.map=woodT("#f2e4d2","72,44,22",1);
+ var plT=ctex(512,512,function(c){c.fillStyle="#f4f4f4";c.fillRect(0,0,512,512);for(var q=0;q<14000;q++){var v=215+Math.random()*40|0;c.fillStyle="rgba("+v+","+v+","+v+",.35)";c.fillRect(Math.random()*512,Math.random()*512,1+Math.random()*2,1+Math.random()*2)}});plT.wrapS=plT.wrapT=THREE.RepeatWrapping;plT.repeat.set(6,3);mt.wall.map=plT;mt.wall2.map=plT;
+ var blobT=ctex(128,128,function(c){var g=c.createRadialGradient(64,64,4,64,64,64);g.addColorStop(0,"rgba(0,0,0,.85)");g.addColorStop(.55,"rgba(0,0,0,.35)");g.addColorStop(1,"rgba(0,0,0,0)");c.fillStyle=g;c.fillRect(0,0,128,128)}),blobM=new THREE.MeshBasicMaterial({map:blobT,transparent:true,depthWrite:false,opacity:.55,color:0x000000});
+ var blob=function(x,y,z,w,d,ry,op){var m=new THREE.Mesh(new THREE.PlaneGeometry(w,d),op?blobM.clone():blobM);if(op)m.material.opacity=op;m.rotation.set(-Math.PI/2,0,ry||0);m.position.set(x,y,z);m.renderOrder=1;S.add(m);return m};
  /* sala */
  var ft=ctex(1024,1024,function(c,W,H){c.fillStyle="#d8d2c8";c.fillRect(0,0,W,H);for(var y=0;y<H;y+=128){var x=-((y/128)%2)*300-Math.random()*200;while(x<W){var v=196+Math.random()*44|0;c.fillStyle="rgb("+v+","+(v-8)+","+(v-18)+")";c.fillRect(x,y,520,128);
   for(var g=0;g<16;g++){c.strokeStyle="rgba(90,70,50,"+(Math.random()*.13).toFixed(3)+")";c.lineWidth=1+Math.random()*2;var gy=y+Math.random()*128;c.beginPath();c.moveTo(x,gy);c.bezierCurveTo(x+150,gy+(Math.random()-.5)*14,x+350,gy+(Math.random()-.5)*14,x+520,gy);c.stroke()}
@@ -1261,9 +1305,9 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  var mo=new THREE.Mesh(new THREE.SphereGeometry(.035,20,14),mt.plastic);mo.scale.set(1,.45,1.5);mo.position.set(.42,.795,-.62);mo.castShadow=true;S.add(mo);
  /* portatil com terminal */
  var lap=new THREE.Group();S.add(lap);lap.position.set(-.76,.78,-1.02);lap.rotation.y=.5;box(.36,.014,.25,mt.alu,0,.007,0,lap);box(.3,.002,.13,M(0x23262d,.7),0,.015,.03,lap);
- var lt=ctex(512,320,function(c){c.fillStyle="#0c0f16";c.fillRect(0,0,512,320);c.font="21px monospace";[["#4ad06b","duarte@pc ~/portefolio"],["#e6e9f2","$ ls"],["#8fb4ff","index.html  404.html"],["#8fb4ff","three.min.js  preview.png"],["#e6e9f2","$ python relatorio.py"],["#6b7a99","a gerar o PDF..."],["#4ad06b","feito"],["#e6e9f2","$ _"]].forEach(function(l,i){c.fillStyle=l[0];c.fillText(l[1],20,36+i*37)})});
+ var lt=ctex(1024,636,function(){});G.lapTex=lt;G.lapCv=lt.image;
  var lid=new THREE.Group();lid.position.set(0,.014,-.125);lid.rotation.x=-.3;lap.add(lid);box(.36,.24,.01,mt.alu,0,.12,0,lid);
- var lsc=new THREE.Mesh(new THREE.PlaneGeometry(.33,.205),new THREE.MeshBasicMaterial({map:lt,toneMapped:false}));lsc.position.set(0,.125,.0056);lid.add(lsc);G.lapScr=lsc;
+ var lsc=new THREE.Mesh(new THREE.PlaneGeometry(.33,.205),new THREE.MeshBasicMaterial({map:lt,toneMapped:false}));lsc.position.set(0,.125,.0056);lid.add(lsc);G.lapScr=lsc;lapDraw();
  /* computador debaixo da secretaria, com ventoinhas RGB */
  var pc=new THREE.Group();S.add(pc);pc.position.set(-.66,0,-1.02);box(.22,.48,.46,mt.case,0,.25,0,pc);box(.2,.008,.42,mt.metal,0,.008,0,pc);
  var gl2=new THREE.Mesh(new THREE.PlaneGeometry(.4,.4),new THREE.MeshStandardMaterial({color:0x223,roughness:.05,metalness:.2,transparent:true,opacity:.35}));gl2.rotation.y=Math.PI/2;gl2.position.set(.111,.27,0);pc.add(gl2);
@@ -1337,6 +1381,10 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  G.sun=new THREE.DirectionalLight(0xfff1dc,0);G.sun.position.set(-3,3.2,.8);G.sun.target.position.set(0,.8,-.8);G.sun.castShadow=!mob;G.sun.shadow.mapSize.set(1024,1024);G.sun.shadow.camera.left=-2;G.sun.shadow.camera.right=2;G.sun.shadow.camera.top=2;G.sun.shadow.camera.bottom=-1;S.add(G.sun);S.add(G.sun.target);
  G.win=new THREE.PointLight(0x7da2ff,.5,4,2);G.win.position.set(-2.2,1.8,-.5);S.add(G.win);
  /* alvos clicaveis */
+ /* sombras de contacto (o que esta pousado escurece a superficie por baixo) */
+ [[-.05,.7812,-1.18,.42,.3,0],[-.05,.7852,-.62,.74,.3,0],[.42,.7852,-.62,.1,.14,0],[-.76,.7812,-1.02,.46,.36,.5],[.88,.7812,-1.22,.24,.24,0],[.6,.7812,-1.26,.15,.15,0],[.66,.7812,-.72,.3,.38,-.42]].forEach(function(b){blob(b[0],b[1],b[2],b[3],b[4],b[5])});
+ G.mugBlob=blob(-.5,.7852,-.58,.15,.15,0,.6);
+ [[-.66,.008,-1.02,.42,.62,0,.7],[1.52,.008,-1.1,.5,.5,0,.6],[.82,.008,-.98,.62,.98,0,.65],[0,.008,-.95,2.6,1.25,0,.35]].forEach(function(b){blob(b[0],b[1],b[2],b[3],b[4],b[5],b[6])});
  G.targets={monitor:mon,books:books,board:board,note:note,mug:mug,lamp:lamp,laptop:lap};
  G.pick=[];Object.keys(G.targets).forEach(function(k){G.targets[k].traverse(function(o){if(o.isMesh){o.material=o.material.clone();o.userData.t=k;G.pick.push(o)}})});
  G.anchor={monitor:new THREE.Vector3(-.05,1.62,-1.15),books:new THREE.Vector3(-1.25,2.05,-1.4),board:new THREE.Vector3(.95,2.03,-1.55),note:new THREE.Vector3(.66,.86,-.72)};
@@ -1344,11 +1392,11 @@ function glInit(){if(G.R)return true;if(G.fail||!window.THREE)return false;
  var dom=R.domElement;
  dom.addEventListener("pointermove",function(e){var b=dom.getBoundingClientRect();G.ptr.set((e.clientX-b.left)/b.width*2-1,-(e.clientY-b.top)/b.height*2+1)},{passive:true});
  dom.addEventListener("pointerleave",function(){G.ptr.set(-9,-9);G.hover=-1});
- dom.addEventListener("click",function(){var k=G.hit;if(!k)return;if(k=="laptop"){zoomLap();return}if(k=="mug"){var nw=performance.now();if(G.sip&&nw-G.sip<2600)return;G.sip=nw;G.cups=(G.cups||0)+1;G.puff=nw;setTimeout(slurp,calmo()?0:320);if(G.cups==5)toast(T("5 cafés? Chega por hoje. ☕","5 coffees? That's enough for today. ☕"));return}
+ dom.addEventListener("click",function(){var k=G.hit;if(G.lapOn&&k!="laptop"){lapOff();return}if(!k)return;if(k=="laptop"){zoomLap();return}if(k=="mug"){var nw=performance.now();if(G.sip&&nw-G.sip<2600)return;G.sip=nw;G.cups=(G.cups||0)+1;G.puff=nw;setTimeout(slurp,calmo()?0:320);if(G.cups==5)toast(T("5 cafés? Chega por hoje. ☕","5 coffees? That's enough for today. ☕"));return}
   if(k=="lamp"){G.lampOn=!G.lampOn;snd.click();glTheme();return}var h=HOT.find(function(x){return x.obj==k});if(h){snd.click();location.hash=h.go}});
  window.addEventListener("pointermove",function(e){G.mx=e.clientX/innerWidth*2-1;G.my=e.clientY/innerHeight*2-1},{passive:true});
  window.addEventListener("resize",glResize);document.addEventListener("visibilitychange",function(){G.hidden=document.hidden});
- S.updateMatrixWorld(true);G.zl=new THREE.Vector3();lsc.getWorldPosition(G.zl);var nq=new THREE.Quaternion();lsc.getWorldQuaternion(nq);G.zp=G.zl.clone().add(new THREE.Vector3(0,0,1).applyQuaternion(nq).multiplyScalar(.46));var zr=new THREE.Vector3(1,0,0).applyQuaternion(nq).multiplyScalar(.13);G.zl.add(zr);G.zp.add(zr);G.zt=0;G.zf=0;
+ S.updateMatrixWorld(true);G.zl=new THREE.Vector3();lsc.getWorldPosition(G.zl);var nq=new THREE.Quaternion();lsc.getWorldQuaternion(nq);G.zn=new THREE.Vector3(0,0,1).applyQuaternion(nq);G.zp=G.zl.clone().addScaledVector(G.zn,.4);G.zt=0;G.zf=0;
  glTheme();ecraInit();return true}
 function glTheme(){if(!G.S)return;var d=dark(),bg=new THREE.Color(d?0x0b0f17:0xdfe6f0);G.S.background=bg;G.S.fog=new THREE.Fog(bg,5,11);
  var m=G.mat;m.floor.color.set(d?0x1a1f29:0xb9a58c);m.wall.color.set(d?0x161b24:0xe6e1d8);m.wall2.color.set(d?0x131821:0xdcd6cc);
@@ -1384,7 +1432,7 @@ function ecra(now){var c=G.scx,W=1024,H=600;if(now-G.tick<(G.matrix&&now<G.matri
  var d=new Date(),hh=String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0");
  c.fillStyle="#171c2c";c.fillRect(0,H-34,W,34);c.fillStyle="#4ad06b";c.font="16px monospace";c.fillText("● main   Ln "+(Math.min(G.cl,CODE.length-1)+1)+"   UTF-8   SQL",18,H-11);c.textAlign="right";c.fillStyle="#9aa4bd";c.fillText(hh,W-18,H-11);c.textAlign="left";G.stex.needsUpdate=true}
 /* clicar no portatil: a camara aproxima-se e abre o terminal */
-function zoomLap(){G.zt=1;setTimeout(function(){terminal(true)},calmo()?0:800)}
+function zoomLap(){if(G.lapOn){document.getElementById("lIn").focus({preventScroll:true});return}lapOn()}
 /* golo de cafe (o unico som do site), sintetizado no browser */
 function slurp(){var c=actx();if(!c)return;if(c.state=="suspended")c.resume();var d=.7,n=Math.floor(c.sampleRate*d),b=c.createBuffer(1,n,c.sampleRate),a=b.getChannelData(0);
  for(var i=0;i<n;i++){var t=i/c.sampleRate,env=Math.pow(Math.sin(Math.PI*t/d),.6),gur=.5+.5*Math.sin(2*Math.PI*(12+10*t)*t);a[i]=(Math.random()*2-1)*env*gur}
@@ -1401,9 +1449,9 @@ function glLoop(){G.loop=true;var last=performance.now();V3=new THREE.Vector3();
   var k=calmo()?0:1;G.cx+=(G.mx*k-G.cx)*.04;G.cy+=(G.my*k-G.cy)*.04;
   var fov=34+12*u;if(Math.abs(G.C.fov-fov)>.01){G.C.fov=fov;G.C.updateProjectionMatrix()}
   G.zf+=(G.zt-G.zf)*Math.min(1,dt*(calmo()?99:3.2));var ze=G.zf*G.zf*(3-2*G.zf);
-  G.C.position.set(ix+G.cx*(mob?.15:.45)*(1-ze),iy-G.cy*(mob?.06:.18)*(1-ze),iz+Math.abs(G.cx)*.12);G.LK=(G.LK||new THREE.Vector3()).set(look.x+.7*u+G.cx*.08,look.y+.25*u-G.cy*.05,look.z);if(ze>.001){G.C.position.lerp(G.zp,ze);G.LK.lerp(G.zl,ze)}G.C.lookAt(G.LK);var stg=G.R.domElement.parentNode;if(stg&&stg.classList.contains("zoom")!=(ze>.05))stg.classList.toggle("zoom",ze>.05);
+  G.C.position.set(ix+G.cx*(mob?.15:.45)*(1-ze),iy-G.cy*(mob?.06:.18)*(1-ze),iz+Math.abs(G.cx)*.12);G.LK=(G.LK||new THREE.Vector3()).set(look.x+.7*u+G.cx*.08,look.y+.25*u-G.cy*.05,look.z);if(ze>.001){G.zp.copy(G.zl).addScaledVector(G.zn,1.12*Math.max(.1025/.3057,.165/(.3057*(w/h))));G.C.position.lerp(G.zp,ze);G.LK.lerp(G.zl,ze)}G.C.lookAt(G.LK);var stg=G.R.domElement.parentNode;if(stg&&stg.classList.contains("zoom")!=(ze>.05))stg.classList.toggle("zoom",ze>.05);
   /* caneca: levanta e inclina ao beber */
-  if(G.sip){var sp=(now-G.sip)/1500;if(sp<1){var sv=Math.sin(Math.PI*sp);G.mug.position.y=.784+.14*sv;G.mug.rotation.x=.5*Math.max(0,Math.sin(Math.PI*Math.min(1,Math.max(0,(sp-.18)/.64))))}else{G.mug.position.y=.784;G.mug.rotation.x=0}}
+  if(G.sip){var sp=(now-G.sip)/1500;if(sp<1){var sv=Math.sin(Math.PI*sp);G.mug.position.y=.784+.14*sv;G.mugBlob.material.opacity=.6*(1-sv*.8);G.mug.rotation.x=.5*Math.max(0,Math.sin(Math.PI*Math.min(1,Math.max(0,(sp-.18)/.64))))}else{G.mug.position.y=.784;G.mug.rotation.x=0}}
   /* luzes a ligar uma a uma (neon, PC, candeeiro, monitor) */
   var sm=function(a,b){var x=Math.min(1,Math.max(0,(q-a)/(b-a)));return x*x*(3-2*x)},fl=function(a,b){return q<a?0:q<b?(Math.random()<.55?1:.08):1};
   var lv=G.lv,fN=fl(.3,.8),fL=fl(.9,1.2),fM=sm(1.3,1.7),fP=sm(.5,1.1),fA=.2+.8*sm(0,1.6),fx=q>1.3&&q<1.45?1.7:1,tt=now/1000;
@@ -1477,7 +1525,7 @@ function fim(){var B=document.getElementById("boot");tom(1400,.45,"sine",.03,60)
    ARRANQUE: comeca sempre no inicio, no topo
    ========================================================= */
 var DL=(location.hash.match(/^#projeto\/([\w-]+)$/)||[])[1];if(!P.some(function(p){return p.id==DL}))DL=null;if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0);
-icons(document.querySelector("header.bar"));icons(document.getElementById("term"));["chat","chatB","cmdk"].forEach(function(id){var e=document.getElementById(id);icons(e);tr(e)});tr(document.getElementById("term"));setSom(false);render();arranque();
+icons(document.querySelector("header.bar"));icons(document.getElementById("term"));["chat","cmdk","lapui"].forEach(function(id){var e=document.getElementById(id);icons(e);tr(e)});tr(document.getElementById("term"));setSom(false);render();arranque();
 </script>
 </body>
 </html>
