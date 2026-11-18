@@ -97,37 +97,48 @@ p{text-wrap:pretty}
 /* =========================================================
    3. ENTRADA (terminal de arranque)
    ========================================================= */
-#boot{position:fixed;inset:0;z-index:80;display:grid;place-items:center;overflow:hidden;background:oklch(12% .015 262);color:oklch(92% .01 250);font:500 .9375rem/1.7 var(--mono)}
-#boot.out{opacity:0;visibility:hidden;transition:opacity .5s ease .45s,visibility 0s .95s}
-#boot::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(transparent 0 2px,oklch(100% 0 0/.025) 2px 3px);mix-blend-mode:screen}
-#boot::after{content:"";position:absolute;left:0;right:0;top:-30%;height:30%;z-index:2;pointer-events:none;background:linear-gradient(transparent,oklch(75% .15 262/.06),transparent);animation:varre 7s linear infinite}
-@keyframes varre{to{transform:translateY(430%)}}
-#boot .glow{position:absolute;inset:0;pointer-events:none;background:radial-gradient(55% 45% at 50% 45%,oklch(40% .12 262/.3),transparent 70%),linear-gradient(oklch(32% .03 262/.3) 1px,transparent 1px) 0 0/44px 44px,linear-gradient(90deg,oklch(32% .03 262/.3) 1px,transparent 1px) 0 0/44px 44px;-webkit-mask:radial-gradient(65% 60% at 50% 50%,#000,transparent);mask:radial-gradient(65% 60% at 50% 50%,#000,transparent);animation:respira 6s ease-in-out infinite}
-@keyframes respira{50%{opacity:.6}}
-#boot .bx{position:relative;z-index:1;width:min(40rem,calc(100% - 2.5rem))}
-#boot .bh{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.25rem 1rem;color:oklch(64% .02 255);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid oklch(28% .02 262);padding-bottom:.6rem;margin-bottom:1.75rem;font-variant-numeric:tabular-nums}
-#boot .bname{font:800 clamp(2.4rem,9vw,5.25rem)/.95 var(--ff);letter-spacing:-.045em;margin:0 0 1.5rem;color:oklch(96% .01 250);white-space:nowrap}
-#boot .bname i{font-style:normal;color:oklch(75% .15 262)}
-#boot.out .bx{animation:crt .55s cubic-bezier(.7,0,.3,1) forwards}
-#boot.out .glow,#boot.out::after{opacity:0;transition:opacity .25s}
-@keyframes crt{45%{transform:scale(1,.006);filter:brightness(3)}100%{transform:scale(0,.006);filter:brightness(4);opacity:0}}
-#boot .cmd{color:oklch(80% .12 262)}
-#boot .cmd b{color:oklch(92% .01 250);font-weight:500}
-#boot ol{list-style:none;margin:1.25rem 0;padding:0;min-height:9.5em}
-#boot li{opacity:0;transform:translateY(4px);transition:opacity .3s,transform .3s}
+#boot{position:fixed;inset:0;z-index:80;display:grid;place-items:center;align-content:center;gap:1.1rem;padding:1.25rem;background:var(--bg);color:var(--ink);font:500 .875rem/1.65 var(--mono)}
+#boot::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(45% 40% at 50% 48%,color-mix(in oklch,var(--acc) 16%,transparent),transparent 70%),linear-gradient(color-mix(in oklch,var(--line) 55%,transparent) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,color-mix(in oklch,var(--line) 55%,transparent) 1px,transparent 1px) 0 0/40px 40px;-webkit-mask:radial-gradient(60% 55% at 50% 50%,#000,transparent);mask:radial-gradient(60% 55% at 50% 50%,#000,transparent)}
+#boot.out{opacity:0;visibility:hidden;transition:opacity .55s ease .2s,visibility 0s .8s}
+.bwin{position:relative;width:min(31rem,100%);border-radius:1.15rem;overflow:hidden;color:oklch(95% .01 250);background:oklch(14% .02 262);box-shadow:0 50px 100px -40px oklch(22% .09 262/.7),0 0 0 1px oklch(100% 0 0/.09) inset;animation:bwin 1s var(--ease) both;transition:width .65s var(--io),height .65s var(--io),border-radius .65s var(--io),transform .75s var(--io),opacity .5s ease .2s}
+@keyframes bwin{from{opacity:0;transform:translateY(22px) scale(.94);filter:blur(8px)}}
+#bliq{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bwin::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,oklch(12% .025 262/.5) 0%,oklch(12% .025 262/.78) 45%,oklch(11% .02 262/.9) 100%)}
+.btb{position:relative;z-index:1;display:flex;align-items:center;gap:.8rem;padding:.7rem .95rem;color:oklch(82% .02 255);font-size:.75rem;border-bottom:1px solid oklch(100% 0 0/.09)}
+.btb .dots{display:flex;gap:.4rem}.btb .dots i{width:.65rem;height:.65rem;border-radius:50%}
+.btb .dots i:nth-child(1){background:oklch(68% .19 25)}.btb .dots i:nth-child(2){background:oklch(82% .15 85)}.btb .dots i:nth-child(3){background:oklch(74% .17 150)}
+.bin{position:relative;z-index:1;padding:1.15rem 1.3rem 1.3rem;min-height:16.5rem;display:flex;flex-direction:column;transition:opacity .25s}
+.bcm{margin:0;color:oklch(74% .03 255)}
+#boot .cmd{margin:.15rem 0 0;color:oklch(96% .01 250)}
+#boot .cmd .ps{color:oklch(80% .16 152)}
+#boot .cmd b{font-weight:600}
+#boot .car{display:inline-block;width:.55em;height:1.05em;vertical-align:-.15em;margin-left:.15em;background:oklch(80% .12 262);animation:pisca 1s steps(1) infinite}
+#boot ol{list-style:none;margin:.75rem 0 0;padding:0;font-size:.8125rem;color:oklch(86% .015 255)}
+#boot li{opacity:0;transform:translateY(4px);transition:opacity .25s,transform .25s}
 #boot li.in{opacity:1;transform:none}
 #boot .okk{color:oklch(80% .16 152)}
-#boot .pr{display:flex;justify-content:space-between;color:oklch(72% .02 255);font-size:.8125rem;margin-top:1.5rem}
-#boot .bar{display:grid;grid-template-columns:repeat(32,1fr);gap:3px;margin-top:.5rem}
-#boot .bar i{height:8px;border-radius:1px;background:oklch(28% .02 262);transition:background-color .2s}
-#boot .bar i.on{background:oklch(75% .15 262)}
-#boot .go{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1.75rem;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+#boot .pr{display:flex;justify-content:space-between;color:oklch(76% .02 255);font-size:.75rem;margin-top:auto;padding-top:1rem;opacity:0;transition:opacity .3s}
+#boot.run .pr,#boot.run .bar{opacity:1}
+#boot .bar{display:grid;grid-template-columns:repeat(32,1fr);gap:2px;margin-top:.4rem;opacity:0;transition:opacity .3s}
+#boot .bar i{height:6px;border-radius:1px;background:oklch(100% 0 0/.12);transition:background-color .2s}
+#boot .bar i.on{background:oklch(80% .13 262)}
+#boot .go{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:auto;padding-top:1.25rem;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
 #boot .go.in{opacity:1;transform:none}
-#boot .go button{display:inline-flex;align-items:center;gap:.6rem;border:1.5px solid oklch(40% .03 262);background:none;color:oklch(95% .01 250);border-radius:.5rem;padding:.75rem 1.15rem;min-height:2.75rem;font:600 .9375rem var(--ff);cursor:pointer;transition:border-color .25s,background-color .25s,transform .25s var(--ease)}
-#boot .go button:hover{border-color:oklch(75% .15 262);transform:translateY(-2px)}
-#boot .go button.pri{background:oklch(75% .15 262);border-color:oklch(75% .15 262);color:oklch(15% .02 262)}
-#boot .hint{color:oklch(60% .02 255);font-size:.8125rem;margin-top:1rem}
-#boot .car{display:inline-block;width:.6em;height:1.05em;vertical-align:-.15em;background:oklch(80% .12 262);animation:pisca 1s steps(1) infinite}
+#boot.run .go{display:none}
+#boot .go button{display:inline-flex;align-items:center;gap:.55rem;border:1px solid oklch(100% 0 0/.18);background:oklch(100% 0 0/.07);color:oklch(96% .01 250);border-radius:.6rem;padding:.65rem 1rem;min-height:2.75rem;font:600 .875rem var(--ff);cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .25s,background-color .25s,transform .25s var(--ease)}
+#boot .go button:hover{border-color:oklch(100% 0 0/.45);transform:translateY(-2px)}
+#boot .go button.pri{background:oklch(97% .005 250);border-color:oklch(97% .005 250);color:oklch(16% .02 262)}
+#boot .go kbd{font:600 .75rem var(--mono);padding:.05rem .4rem;border-radius:.3rem;background:oklch(16% .02 262/.12);border:1px solid currentColor;opacity:.6}
+#boot .go button:focus-visible{outline:2px solid oklch(80% .13 262);outline-offset:3px}
+.bav{position:absolute;inset:0;z-index:2;opacity:0;transform:scale(.8);transition:opacity .45s var(--ease),transform .6s var(--ease);pointer-events:none}
+.bav .avsvg{display:block;width:100%;height:100%}
+#boot.morph .bin,#boot.morph .btb{opacity:0}
+#boot.morph .bav{opacity:1;transform:none;transition-delay:.35s}
+#boot.morph .bwin{box-shadow:0 30px 60px -20px oklch(22% .09 262/.6),0 0 0 3px var(--acc)}
+.bfoot{position:relative;margin:0;color:var(--mute);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;font-variant-numeric:tabular-nums;animation:hin 1s var(--ease) .35s backwards}
+.bfoot b{color:var(--ink);font-weight:600}.bfoot b i{font-style:normal;color:var(--acc)}
+#boot .hint{position:relative;margin:0;color:var(--mute);font-size:.75rem;text-align:center;animation:hin 1s var(--ease) .5s backwards}
+#boot.morph .bfoot,#boot.morph .hint{opacity:0;transition:opacity .3s}
 
 /* =========================================================
    4. BARRA DE TOPO E NAVEGACAO
@@ -522,6 +533,87 @@ footer .mono{font-size:.8125rem}
 #ring.big{width:3.5rem;height:3.5rem;margin:-1.75rem 0 0 -1.75rem;background:color-mix(in oklch,var(--acc) 14%,transparent)}
 body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
 
+/* terminal: aspeto mais cuidado */
+#term{border-radius:.95rem;border-color:oklch(30% .02 262);background:oklch(13% .015 262);box-shadow:0 40px 80px -30px oklch(5% .02 262/.7)}
+#term .tbar{background:oklch(17% .018 262);border-color:oklch(26% .02 262);color:oklch(76% .02 255)}
+#term .out{background:transparent;padding:1rem 1.1rem}
+#term .out p{animation:tl .28s var(--ease) backwards}
+@keyframes tl{from{opacity:0;transform:translateY(3px)}}
+#term .out .cmdl{color:oklch(96% .01 250);margin-top:.55rem}
+#term .out .cmdl .pp{color:oklch(80% .16 152)}#term .out .cmdl .pt2{color:oklch(80% .12 262)}
+.tsug{display:flex;gap:.35rem;flex-wrap:nowrap;overflow-x:auto;padding:.5rem 1rem;border-top:1px solid oklch(26% .02 262);scrollbar-width:none}
+.tsug::-webkit-scrollbar{display:none}
+.tsug button{flex:none;border:1px solid oklch(32% .02 262);background:oklch(18% .02 262);color:oklch(86% .015 255);border-radius:99px;padding:.25rem .65rem;font:500 .75rem var(--mono);cursor:pointer;transition:border-color .2s,color .2s,background-color .2s}
+.tsug button:hover{border-color:oklch(80% .12 262);color:oklch(96% .01 250)}
+#term form{background:oklch(15% .017 262)}
+#term form .ps{color:oklch(80% .16 152);white-space:nowrap}#term form .ps b{color:oklch(80% .12 262);font-weight:500}
+#term input{caret-color:oklch(80% .12 262)}
+/* assistente */
+.chatb{position:fixed;right:clamp(.75rem,2vw,1.5rem);bottom:clamp(.75rem,2vw,1.5rem);z-index:58;display:inline-flex;align-items:center;gap:.55rem;padding:.65rem 1rem .65rem .75rem;border:1px solid var(--line);border-radius:99px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);color:var(--ink);font:600 .875rem var(--ff);cursor:pointer;box-shadow:0 18px 40px -18px var(--sh);transition:transform .35s var(--ease),opacity .3s,border-color .25s}
+.chatb:hover{transform:translateY(-3px);border-color:var(--acc)}
+.chatb .ic{width:1.3rem;height:1.3rem;color:var(--acc)}
+.chatb .ldot{width:.5rem;height:.5rem;border-radius:50%;background:var(--ok);margin-left:.1rem}
+.chatb.off,body.pre .chatb,body.locked .chatb{opacity:0;pointer-events:none;transform:translateY(10px)}
+#chat{position:fixed;z-index:61;right:clamp(.75rem,2vw,1.5rem);bottom:clamp(.75rem,2vw,1.5rem);width:min(24rem,calc(100vw - 1.5rem));height:min(34rem,calc(100svh - 6rem));display:flex;flex-direction:column;border-radius:1rem;transform-origin:bottom right;transition:transform .45s var(--ease),opacity .35s var(--ease)}
+#chat[hidden]{display:flex;transform:scale(.6) translateY(30px);opacity:0;pointer-events:none;visibility:hidden;transition:transform .35s var(--io),opacity .25s,visibility 0s .35s}
+.chd{display:flex;align-items:center;gap:.75rem;padding:.8rem 1rem;border-bottom:1px solid var(--line)}
+.chd .cav{display:grid;place-items:center;width:2.4rem;height:2.4rem;border-radius:50%;background:linear-gradient(145deg,oklch(68% .15 262),oklch(46% .16 262));color:#fff;font:700 .8125rem var(--mono);flex:none;position:relative}
+.chd .cav::after{content:"";position:absolute;right:0;bottom:0;width:.6rem;height:.6rem;border-radius:50%;background:var(--ok);border:2px solid var(--surf)}
+.chd b{display:block;font-size:.9375rem}.chd small{color:var(--mute);font:500 .75rem var(--mono)}
+.cmsgs{flex:1;overflow:auto;padding:1rem;display:flex;flex-direction:column;gap:.65rem;overscroll-behavior:contain}
+.cm{display:flex;flex-direction:column;max-width:88%;animation:cmin .4s var(--ease) both}
+@keyframes cmin{from{opacity:0;transform:translateY(8px) scale(.97)}}
+.cm .bb{padding:.6rem .8rem;border-radius:.9rem;font-size:.9375rem;line-height:1.5;overflow-wrap:anywhere}
+.cm.bot{align-self:flex-start}.cm.bot .bb{background:var(--cool);border:1px solid var(--line);border-bottom-left-radius:.3rem}
+.cm.me{align-self:flex-end}.cm.me .bb{background:var(--acc);color:var(--on);border-bottom-right-radius:.3rem}
+.cm .bb a{color:var(--accink)}
+.cm .cl{margin:.4rem 0 0;padding-left:1.1rem;font-size:.875rem;color:var(--mute)}.cm .cl b{color:var(--ink)}
+.cacts{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.45rem}.cacts .btn{min-height:2rem;padding:.3rem .7rem;font-size:.8125rem}
+.dots3{display:inline-flex;gap:.25rem;padding:.2rem 0}.dots3 i{width:.4rem;height:.4rem;border-radius:50%;background:var(--mute);animation:dt3 1s ease-in-out infinite}.dots3 i:nth-child(2){animation-delay:.15s}.dots3 i:nth-child(3){animation-delay:.3s}
+@keyframes dt3{40%{transform:translateY(-4px);opacity:.5}}
+.csug{display:flex;gap:.35rem;overflow-x:auto;padding:.5rem 1rem;border-top:1px solid var(--line);scrollbar-width:none}.csug::-webkit-scrollbar{display:none}
+.csug button{flex:none;border:1px solid var(--line);background:var(--surf);color:var(--ink);border-radius:99px;padding:.35rem .75rem;font:500 .8125rem var(--ff);cursor:pointer;transition:border-color .2s,background-color .2s}
+.csug button:hover{border-color:var(--acc);background:var(--cool)}
+#cForm{display:flex;gap:.5rem;padding:.7rem 1rem .9rem}
+#cForm input{flex:1;border-radius:99px;padding:.6rem 1rem}
+#cForm .tbtn{flex:none;width:2.75rem;height:2.75rem;border-radius:50%;background:var(--acc);color:var(--on);border-color:var(--acc)}
+@media(max-width:760px){.chatb{bottom:calc(5.75rem + env(safe-area-inset-bottom,0px));padding:.7rem}.chatb>span:not(.ic){display:none}#chat{bottom:calc(5.5rem + env(safe-area-inset-bottom,0px));height:min(32rem,calc(100svh - 10rem))}}
+/* procura rapida */
+#cmdk{position:fixed;inset:0;z-index:72;display:grid;place-items:start center;padding:12vh 1rem 1rem;background:color-mix(in oklch,var(--bg) 55%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);animation:fade .2s ease}
+#cmdk[hidden]{display:none}
+@keyframes fade{from{opacity:0}}
+.kbox{width:min(36rem,100%);border-radius:1rem;overflow:hidden;animation:kin .35s var(--ease)}
+@keyframes kin{from{opacity:0;transform:translateY(-10px) scale(.97)}}
+.kin{display:flex;align-items:center;gap:.7rem;padding:.9rem 1.1rem;border-bottom:1px solid var(--line)}
+.kin .ic{color:var(--mute);width:1.2rem;height:1.2rem}
+.kin input{border:0;padding:0;background:none;box-shadow:none;font-size:1.0625rem}.kin input:focus{box-shadow:none}
+.kin kbd,#kList kbd{font:500 .6875rem var(--mono);padding:.1rem .4rem;border:1px solid var(--line);border-radius:.3rem;color:var(--mute);background:var(--surf2)}
+#kList{list-style:none;margin:0;padding:.4rem;max-height:min(24rem,55vh);overflow:auto}
+#kList .kg{padding:.6rem .7rem .3rem;font:500 .75rem var(--mono);color:var(--mute)}
+#kList [role="option"]{display:flex;align-items:center;gap:.75rem;padding:.6rem .7rem;border-radius:.55rem;cursor:pointer;color:var(--ink)}
+#kList [role="option"] .ic{color:var(--mute)}#kList [role="option"] kbd{margin-left:auto}
+#kList [aria-selected="true"]{background:var(--cool);box-shadow:inset 0 0 0 1px var(--line)}#kList [aria-selected="true"] .ic{color:var(--accink)}
+.kft{display:flex;gap:1rem;padding:.6rem 1.1rem;border-top:1px solid var(--line);font:500 .75rem var(--mono);color:var(--mute);background:var(--surf2)}
+/* sobre: factos, monitor e competencias */
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin:1.75rem 0 .5rem}
+.facts div{padding:.85rem 1rem;border:1px solid var(--line);border-radius:.7rem;background:var(--surf)}
+.facts small{display:block;font:500 .75rem var(--mono);color:var(--mute);margin-bottom:.2rem}.facts b{font-weight:650;line-height:1.35}
+.monw{margin-top:1.25rem}
+.mon{margin:0;padding:.4rem 1rem .2rem;font:500 .8125rem var(--mono)}
+.mon div{display:flex;justify-content:space-between;gap:1rem;padding:.45rem 0;border-bottom:1px dashed var(--line)}.mon div:last-child{border-bottom:0}
+.mon dt{color:var(--mute)}.mon dd{margin:0;text-align:right;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:.4rem}
+.led{width:.5rem;height:.5rem;border-radius:50%;background:var(--ok);box-shadow:0 0 0 0 color-mix(in oklch,var(--ok) 60%,transparent);animation:vivo 2.4s ease-out infinite}
+.mnote{margin:0;padding:.6rem 1rem .9rem;color:var(--mute);font-size:.8125rem}
+.ab .sm{font-size:.9375rem;margin-top:-.4rem}
+.skl{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.skl li{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem}
+.skl .sn{font:600 .875rem var(--mono);margin-right:.25rem}
+.pchip{border:1px solid var(--line);background:var(--cool);color:var(--accink);border-radius:99px;padding:.1rem .55rem;font:500 .6875rem var(--mono);cursor:pointer;transition:border-color .2s,background-color .2s}
+.pchip:hover{border-color:var(--acc);background:var(--tint)}
+.ccard .sub{display:block;color:var(--mute);font-size:.875rem;margin-top:.1rem}
+.ccard.av .ico{background:color-mix(in oklch,var(--ok) 18%,transparent);color:var(--ok)}
+@media(max-width:520px){.facts{grid-template-columns:1fr}}
+
 @media (prefers-reduced-motion:reduce){
  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
  .rv{opacity:1;transform:none}#ring{display:none}#pt{display:none}
@@ -532,28 +624,32 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
 <a class="skip" href="#pg" id="skip">Saltar para o conteúdo</a>
 
 <!-- ENTRADA -->
-<div id="boot" role="dialog" aria-modal="true" aria-labelledby="bootN">
- <div class="glow" aria-hidden="true"></div>
- <div class="bx">
-  <div class="bh" aria-hidden="true"><span>duarte-os · portefólio</span><span id="bootC"></span></div>
-  <p class="bname" id="bootN" aria-label="Duarte Nunes">DUARTE NUNES</p>
-  <p class="cmd" id="bootT">$ <b>./portefolio --dono duarte</b><span class="car" aria-hidden="true"></span></p>
-  <ol id="bootL" aria-live="polite"></ol>
-  <div class="pr"><span id="bootS">a carregar…</span><span id="bootP">0%</span></div>
-  <div class="bar" id="bootB" aria-hidden="true"></div>
-  <div class="go" id="bootG">
-   <button class="pri" data-enter="1"><span class="ic" data-i="snd"></span><span>Entrar com som</span></button>
-   <button data-enter="0"><span class="ic" data-i="mute"></span><span>Entrar sem som</span></button>
+<div id="boot" role="dialog" aria-modal="true" aria-labelledby="bootT">
+ <div class="bwin" id="bwin">
+  <canvas id="bliq" aria-hidden="true"></canvas>
+  <div class="btb" aria-hidden="true"><span class="dots"><i></i><i></i><i></i></span><span>duarte@portefolio ~ zsh</span></div>
+  <div class="bin">
+   <p class="bcm"># experimenta com som</p>
+   <p class="cmd" id="bootT"><span class="ps">~ $</span> <b id="bootCmd"></b><span class="car" aria-hidden="true"></span></p>
+   <ol id="bootL" aria-live="polite"></ol>
+   <div class="pr"><span id="bootS">a preparar…</span><span id="bootP">0%</span></div>
+   <div class="bar" id="bootB" aria-hidden="true"></div>
+   <div class="go" id="bootG">
+    <button class="pri" data-enter="1"><span class="ic" data-i="snd"></span><span>Entrar com som</span></button>
+    <button data-enter="0"><span class="ic" data-i="mute"></span><span>Entrar sem som</span><kbd aria-hidden="true">⏎</kbd></button>
+   </div>
   </div>
-  <p class="hint" id="bootH">Enter entra sem som · podes ligar o som mais tarde</p>
+  <div class="bav" id="bav" aria-hidden="true"></div>
  </div>
+ <p class="bfoot" aria-hidden="true"><b id="bootN">DUARTE NUNES</b><span id="bootC"></span></p>
+ <p class="hint" id="bootH">Enter entra sem som · podes ligar o som mais tarde</p>
 </div>
-
 <header class="bar"><div class="w">
  <button class="brand" data-go="home" aria-label="Início"><span class="dot" aria-hidden="true"></span><span>duarte<span class="pth">@portefolio:~</span></span></button>
  <nav class="main" id="nav" aria-label="Principal"><span class="ind" aria-hidden="true"></span></nav>
  <div class="tools">
   <span class="clock" id="clock" aria-hidden="true"></span>
+  <button class="tbtn" id="tK" aria-label="Procurar (Ctrl+K)" title="Procurar (Ctrl+K)" aria-controls="cmdk" aria-expanded="false"><span class="ic" data-i="search"></span></button>
   <button class="tbtn" id="tTerm" aria-label="Abrir terminal" aria-pressed="false" title="Terminal ( ` )"><span class="ic" data-i="term"></span></button>
   <button class="tbtn" id="tSnd" aria-label="Som" aria-pressed="false" title="Som"><span class="ic" data-i="mute"></span></button>
   <div style="position:relative"><button class="tbtn" id="gb" aria-label="Definições" aria-expanded="false" aria-controls="pp"><span class="ic" data-i="gear"></span></button>
@@ -567,11 +663,24 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
 <div id="pt" aria-hidden="true"><div class="px"></div><div class="lbl"></div></div>
 
 <section id="term" class="win" hidden aria-label="Terminal">
- <div class="tbar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="tt">duarte@portefolio: ~ — assistente por palavras-chave (sem IA)</span><span class="ctl"><button class="x" data-term="close" aria-label="Fechar terminal"><span class="ic" data-i="x"></span></button></span></div>
+ <div class="tbar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="tt">duarte@portefolio: ~ — zsh</span><span class="ctl"><button class="x" data-term="close" aria-label="Fechar terminal"><span class="ic" data-i="x"></span></button></span></div>
  <div class="out" id="tOut" role="log" aria-live="polite"></div>
- <form id="tForm" autocomplete="off"><label class="sr" for="tIn">Comando</label><span aria-hidden="true">❯</span><input id="tIn" spellcheck="false" autocapitalize="off"></form>
+ <div class="tsug" id="tSug" aria-label="Sugestões"><button data-cmd="help">help</button><button data-cmd="about">about</button><button data-cmd="skills">skills</button><button data-cmd="projetos">projetos</button><button data-cmd="neofetch">neofetch</button><button data-cmd="contacto">contacto</button></div>
+ <form id="tForm" autocomplete="off"><label class="sr" for="tIn">Comando</label><span class="ps" aria-hidden="true">duarte <b>~</b> ❯</span><input id="tIn" spellcheck="false" autocapitalize="off"></form>
 </section>
 
+<button class="chatb" id="chatB" aria-controls="chat" aria-expanded="false"><span class="ic" data-i="chat"></span><span>Pergunta-me algo</span><span class="ldot" aria-hidden="true"></span></button>
+<section id="chat" class="win" hidden aria-label="Assistente">
+ <div class="tbar"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="tt">assistente.app</span><span class="ctl"><button class="x" data-chat="close" aria-label="Fechar assistente"><span class="ic" data-i="x"></span></button></span></div>
+ <div class="chd"><span class="cav" aria-hidden="true">DN</span><div><b>Assistente do portefólio</b><small>Responde por palavras-chave · não é IA</small></div></div>
+ <div class="cmsgs" id="cMsgs" role="log" aria-live="polite"></div>
+ <div class="csug" id="cSug" aria-label="Perguntas sugeridas"></div>
+ <form id="cForm" autocomplete="off"><label class="sr" for="cIn">Pergunta</label><input id="cIn" placeholder="Escreve uma pergunta…" maxlength="200"><button class="tbtn" aria-label="Enviar pergunta"><span class="ic" data-i="arr"></span></button></form>
+</section>
+<div id="cmdk" hidden role="dialog" aria-modal="true" aria-label="Procurar">
+ <div class="kbox win"><div class="kin"><span class="ic" data-i="search"></span><label class="sr" for="kIn">Procurar</label><input id="kIn" placeholder="Procura secções, projetos ou ações…" role="combobox" aria-expanded="true" aria-controls="kList" aria-autocomplete="list" autocomplete="off" spellcheck="false"><kbd>Esc</kbd></div>
+ <ul id="kList" role="listbox" aria-label="Resultados"></ul><div class="kft" aria-hidden="true"><span>↑↓ navegar</span><span>⏎ abrir</span><span>1–5 secções</span></div></div>
+</div>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="ring" aria-hidden="true"></div>
 
@@ -632,7 +741,7 @@ var EN={"Sobre":"About","Definições":"Settings","Tema":"Theme","Claro":"Light"
 "Li a":"I have read the","Política de Privacidade":"Privacy Policy","e aceito que os meus dados sejam usados para responder à mensagem.":"and agree that my details are used to reply to my message.",
 "Para continuar, confirma que leste a Política de Privacidade.":"To continue, please confirm you have read the Privacy Policy.",
 "Ver projeto":"View project","Arquivo":"Archive","Projetos mais antigos.":"Older projects.","Gestão e programação":"Management and programming","À procura de estágio":"Looking for an internship","API e regras":"API and rules","Base de dados":"Database","Diagrama: interface, API e base de dados ligadas entre si":"Diagram: interface, API and database connected together","Todos os projetos":"All projects","Termos de Utilização":"Terms of Use","Política de Cookies":"Cookie Policy"};
-Object.assign(EN,{"Início":"Home","Experiência":"Experience","Sobre":"About","Contacto":"Contact","Projetos":"Projects",
+Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","Início":"Home","Experiência":"Experience","Sobre":"About","Contacto":"Contact","Projetos":"Projects",
 "Entrar com som":"Enter with sound","Entrar sem som":"Enter without sound","Enter entra sem som · podes ligar o som mais tarde":"Enter goes in without sound · you can turn sound on later",
 "Abrir terminal":"Open terminal","Som":"Sound","Ver projetos":"View projects","Explora o escritório com o rato":"Explore the office with your mouse","Disponível para estágio a partir de setembro":"Available for an internship from September",
 "O que faço":"What I do","Do desenho da base de dados ao ecrã que o utilizador vê.":"From database design to the screen the user sees.",
@@ -645,7 +754,7 @@ Object.assign(EN,{"Início":"Home","Experiência":"Experience","Sobre":"About","
 "Ver projeto":"View project","Interesses":"Interests","Competências":"Skills","Objetivos":"Goals","Percurso":"Path","Bases de dados":"Databases",
 "Copiar email":"Copy email","Email copiado.":"Email copied.","Escreve-me":"Write to me","nova_mensagem.txt":"new_message.txt","Explora":"Explore",
 "Projetos selecionados":"Selected projects","a carregar…":"loading…","Tens um projeto ou um estágio em mente? Escreve-me.":"Have a project or an internship in mind? Write to me.","Aplicações de gestão, uma API e automatizações. Clica num projeto para o abrir.":"Management applications, an API and automations. Click a project to open it.","Ver projetos":"View projects","Tecnologias":"Technologies","Usado nos projetos":"Used in projects","Línguas":"Languages","Ferramentas":"Tools","Linguagens":"Programming languages","Bases de dados, aplicações de gestão que poupam trabalho às pessoas, APIs e automatização de tarefas repetitivas.":"Well-designed databases, management applications that save people work, APIs and automating repetitive tasks.","Estudante de Gestão e Programação de Sistemas Informáticos.":"Student of Computer Systems Management and Programming.","Encontrar um estágio a partir de setembro e continuar a construir sistemas fiáveis e fáceis de manter.":"To find an internship from September and keep building reliable systems that are easy to maintain.","Bases de dados bem desenhadas, aplicações de gestão que poupam trabalho às pessoas, APIs e automatização de tarefas repetitivas.":"Well-designed databases, management applications that save people work, APIs and automation of repetitive tasks.","Projetos":"Projects","Aplicações de gestão":"Management applications","Web e automação":"Web and automation"});
-Object.assign(EN,{"O meu ambiente de trabalho. Arrasta as janelas pela barra de título e abre um projeto para ver os detalhes.":"My desktop. Drag the windows by their title bar and open a project to see the details.","Aplicações de gestão, uma API e automatizações. Escolhe um projeto para o veres em detalhe.":"Management apps, an API and automations. Pick a project to see it in detail.","Abrir em janela":"Open in a window","Seguinte":"Next","Anterior":"Previous","Objetivo":"Goal","O que faz":"What it does","Resultado":"Result","duarte-os · portefólio":"duarte-os · portfolio"});
+Object.assign(EN,{"# experimenta com som":"# try it with sound","Disponibilidade":"Availability","Estágio a partir de setembro":"Internship from September","A forma mais rápida de falar comigo é por email.":"The quickest way to reach me is by email.","Curso":"Course","Objetivo":"Goal","Línguas":"Languages","Projetos":"Projects","Competências":"Skills","Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.":"Next to each one are the projects where I used it. Click to open them.","Linguagens":"Languages","Bases de dados":"Databases","Web e back-end":"Web and back end","Ferramentas":"Tools","Falar comigo":"Talk to me","Ver projetos":"See projects","Copiar link":"Copy link","Pergunta-me algo":"Ask me something","Assistente do portefólio":"Portfolio assistant","Responde por palavras-chave · não é IA":"Answers by keyword · not an AI","Escreve uma pergunta…":"Type a question…","Procura secções, projetos ou ações…":"Search sections, projects or actions…","Português, inglês":"Portuguese, English","Gestão e Programação de Sistemas Informáticos":"Computer Systems Management and Programming","Estágio a partir de setembro":"Internship from September","O meu ambiente de trabalho. Arrasta as janelas pela barra de título e abre um projeto para ver os detalhes.":"My desktop. Drag the windows by their title bar and open a project to see the details.","Aplicações de gestão, uma API e automatizações. Escolhe um projeto para o veres em detalhe.":"Management apps, an API and automations. Pick a project to see it in detail.","Abrir em janela":"Open in a window","Seguinte":"Next","Anterior":"Previous","Objetivo":"Goal","O que faz":"What it does","Resultado":"Result","duarte-os · portefólio":"duarte-os · portfolio"});
 function T(pt,en){return L=="en"?en:pt}
 function tr(root){if(L!="en")return;var w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT),n,a=[];while(n=w.nextNode())a.push(n);
  a.forEach(function(n){var k=n.nodeValue.trim();if(EN[k])n.nodeValue=n.nodeValue.replace(k,EN[k])});
@@ -667,7 +776,7 @@ file:'<path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4"/>',
 db:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
 api:'<path d="M8 4C6 4 5 5 5 7v2c0 1.5-1 3-2 3 1 0 2 1.5 2 3v2c0 2 1 3 3 3M16 4c2 0 3 1 3 3v2c0 1.5 1 3 2 3-1 0-2 1.5-2 3v2c0 2-1 3-3 3"/>',
 kb:'<rect x="3" y="4" width="5" height="16" rx="1.5"/><rect x="10" y="4" width="5" height="10" rx="1.5"/><rect x="17" y="4" width="4" height="6" rx="1.5"/>',
-chart:'<path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/>'};
+chart:'<path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/>',chat:'<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>'};
 function ic(n,cls){return '<span class="ic'+(cls?" "+cls:"")+'" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+IC[n]+"</svg></span>"}
 function icons(root){root.querySelectorAll(".ic[data-i]").forEach(function(s){s.outerHTML=ic(s.dataset.i)})}
 
@@ -731,8 +840,8 @@ projetos:function(){var cats=["Todas","Gestão","Web","Automação"],l=P.filter(
  if(!l.some(function(p){return p.id==cur.sel}))cur.sel=l.length?l[0].id:null;var sp=P.find(function(p){return p.id==cur.sel});
  return '<div class="w page"><p class="crumb"><b>~/projetos</b> $ ls</p><h1 class="t">Projetos</h1><p class="lead">Aplicações de gestão, uma API e automatizações. Escolhe um projeto para o veres em detalhe.</p>'
  +'<div class="ctlrow"><div class="srch"><label for="q">Pesquisar por nome ou tecnologia</label><div style="position:relative">'+ic("search")+'<input id="q" type="search" value="'+esc(cur.q)+'" placeholder="grep …"></div></div><div class="chips" role="group" aria-label="Categoria">'+cats.map(function(c){return '<button class="chip" data-cat="'+c+'" aria-pressed="'+(c==cur.cat)+'">'+c+"</button>"}).join("")+"</div></div>"
- +(l.length?'<div class="win pex">'+tbar("~/projetos — "+l.length+" "+T(l.length==1?"projeto":"projetos",l.length==1?"project":"projects"))+'<div class="pexb"><div class="plist" role="tablist" aria-label="Projetos" aria-orientation="vertical"><span class="lbl2" aria-hidden="true">'+T("PROJETOS","PROJECTS")+'</span>'
-   +l.map(function(p){var on=p.id==cur.sel;return '<button class="pli" role="tab" id="tab-'+p.id+'" aria-controls="pmain" aria-selected="'+on+'" tabindex="'+(on?0:-1)+'" data-sel="'+p.id+'"><span class="ai" style="--h:'+p.h+'">'+ic(DI[p.v]||"grid")+'</span><span class="pt"><b>'+p.t+"</b><small>"+p.c+" · "+p.y+"</small></span></button>"}).join("")
+ +(l.length?'<div class="win pex">'+tbar("~/projetos — "+l.length+" "+T(l.length==1?"projeto":"projetos",l.length==1?"project":"projects"))+'<div class="pexb"><div class="plist" role="tablist" aria-label="Projetos" aria-orientation="vertical"><span class="lbl2" aria-hidden="true">'+(l.some(function(p){return p.y>=2025})?T("RECENTES","RECENT"):T("ARQUIVO","ARCHIVE"))+'</span>'
+   +[[T("RECENTES","RECENT"),l.filter(function(p){return p.y>=2025})],[T("ARQUIVO","ARCHIVE"),l.filter(function(p){return p.y<2025})]].filter(function(g){return g[1].length}).map(function(g,gi){return(gi?'<span class="lbl2" aria-hidden="true">'+g[0]+"</span>":"")+g[1].map(function(p){var on=p.id==cur.sel;return '<button class="pli" role="tab" id="tab-'+p.id+'" aria-controls="pmain" aria-selected="'+on+'" tabindex="'+(on?0:-1)+'" data-sel="'+p.id+'"><span class="ai" style="--h:'+p.h+'">'+ic(DI[p.v]||"grid")+'</span><span class="pt"><b>'+p.t+"</b><small>"+p.c+" · "+p.y+"</small></span></button>"}).join("")}).join("")
    +'</div><div class="pmain" id="pmain" role="tabpanel" aria-labelledby="tab-'+sp.id+'" tabindex="0">'+pmain(sp)+"</div></div></div>"
   :'<p class="empty" style="margin-top:2rem">Nenhum projeto corresponde a esta pesquisa. <button class="chip" data-cat="Todas" data-clear="1">Limpar filtros</button></p>')+"</div>"},
 
@@ -745,16 +854,19 @@ experiencia:function(){var ev=[
  return '<div class="w page"><p class="crumb"><b>~/experiencia</b> $ git log --oneline</p><h1 class="t">Experiência</h1><p class="lead">Percurso, formação e o que fui construindo, por ordem.</p><div class="tl">'
  +ev.map(function(e,i){return '<div class="ev rv" style="--i:'+(i%4)+'"><article class="win">'+tbar(e.p?("~/projetos/"+e.p):(e.w=="Em curso"?"~/formacao":"~/agora"))+'<div class="wbody"><span class="when">'+e.w+"</span><h3>"+e.t+"</h3><p>"+e.d+"</p>"+(e.k?tg(e.k):"")+(e.p?'<button class="btn o" data-proj="'+e.p+'"><span>Ver projeto</span>'+ic("arr","ic-arr")+"</button>":"")+(e.b?'<button class="btn o" data-go="'+e.b[0]+'"><span>'+e.b[1]+"</span>"+ic("arr","ic-arr")+"</button>":"")+"</div></article></div>"}).join("")+"</div></div>"},
 
-sobre:function(){return '<div class="w page"><p class="crumb"><b>~/sobre</b> $ cat duarte.md</p><h1 class="t">Sobre mim</h1><div class="ab"><div class="avw"><div class="win">'+tbar("duarte.svg")+'<div class="wbody">'+avImg("")+'</div></div></div><div class="prose">'
- +'<p class="big">Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.</p>'
+sobre:function(){return '<div class="w page"><p class="crumb"><b>~/sobre</b> $ cat duarte.md</p><h1 class="t">Sobre mim</h1><div class="ab"><div class="avw"><div class="win">'+tbar("duarte.svg")+'<div class="wbody">'+avImg("")+'</div></div>'
+ +'<div class="win monw">'+tbar("monitor.app")+'<dl class="mon" id="mon"></dl><p class="mnote">'+T("Dados reais desta visita, medidos no teu browser. Nada é guardado nem enviado.","Real data from this visit, measured in your browser. Nothing is stored or sent.")+"</p></div></div>"
+ +'<div class="prose"><p class="big">Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.</p>'
  +'<p>Ao longo do curso desenvolvi aplicações de gestão, uma API e automatizações de relatórios. Gosto de perceber o problema do utilizador antes de escrever a primeira linha de código, e de entregar sistemas fiáveis e fáceis de manter.</p>'
+ +'<div class="facts">'+[["Curso","Gestão e Programação de Sistemas Informáticos"],["Objetivo","Estágio a partir de setembro"],["Línguas","Português, inglês"],["Projetos",P.length+" "+T("no portefólio","in the portfolio")]].map(function(f){return"<div><small>"+f[0]+"</small><b>"+f[1]+"</b></div>"}).join("")+"</div>"
  +'<h2>Percurso</h2><p>Estudante de Gestão e Programação de Sistemas Informáticos.</p>'
  +'<h2>Interesses</h2><p>Bases de dados bem desenhadas, aplicações de gestão que poupam trabalho às pessoas, APIs e automatização de tarefas repetitivas.</p>'
- +'<h2>Competências</h2><div class="kgrid">'+[["Linguagens",["C#","SQL","Python","JavaScript"]],["Bases de dados",["SQL Server","MySQL","PostgreSQL"]],["Ferramentas",["Git","Figma","Postman"]],["Usado nos projetos",["Node.js","PHP"]]].map(function(g){return '<div class="win"><div class="wbody"><h3>'+g[0]+"</h3>"+tg(g[1])+"</div></div>"}).join("")+"</div>"
+ +'<h2 id="competencias">Competências</h2><p class="sm">Ao lado de cada uma estão os projetos onde a usei. Clica para os abrir.</p><div class="kgrid">'
+ +SK.map(function(g){return '<div class="win"><div class="wbody"><h3>'+g[0]+'</h3><ul class="skl">'+g[1].map(function(s){return '<li><span class="sn">'+s+"</span>"+usadoEm(s).map(function(p){return '<button class="pchip" data-proj="'+p.id+'" aria-label="'+esc(T("Abrir ","Open ")+pt2(p.t))+'">'+p.id+"</button>"}).join("")+"</li>"}).join("")+"</ul></div></div>"}).join("")+"</div>"
  +'<h2>Objetivos</h2><p>Encontrar um estágio a partir de setembro e continuar a construir sistemas fiáveis e fáceis de manter.</p>'
- +'<h2>Línguas</h2><p>Português, inglês</p></div></div></div>'},
+ +'<div class="acts"><button class="btn p" data-go="contacto"><span>Falar comigo</span>'+ic("arr","ic-arr")+'</button><button class="btn o" data-go="projetos">'+ic("grid")+"<span>Ver projetos</span></button></div></div></div></div>"},
 
-contacto:function(){return '<div class="w page"><p class="crumb"><b>~/contacto</b> $ mail duarte</p><h1 class="t">Contacto</h1><p class="lead">Tens um projeto ou um estágio em mente? Escreve-me.</p><div class="ct2"><div class="cards">'
+contacto:function(){return '<div class="w page"><p class="crumb"><b>~/contacto</b> $ mail duarte</p><h1 class="t">Contacto</h1><p class="lead">Tens um projeto ou um estágio em mente? Escreve-me.</p><div class="ct2"><div class="cards"><div class="win ccard av"><span class="ico">'+ic("time")+'</span><div><small>Disponibilidade</small><strong>Estágio a partir de setembro</strong><span class="sub">A forma mais rápida de falar comigo é por email.</span></div></div>'
  +'<div class="win ccard"><span class="ico">'+ic("mail")+'</span><div><small>Email</small><a href="mailto:'+EM+'"><strong>'+EM+'</strong></a></div><button class="tbtn cp" data-copy="'+EM+'" aria-label="Copiar email" title="Copiar email">'+ic("copy")+"</button></div>"
  +'<a class="win ccard" href="'+GH+'" target="_blank" rel="noopener"><span class="ico">'+ic("gh")+'</span><div><small>GitHub</small><strong>github.com/DuarteNunes17</strong></div>'+ic("arr","cp")+"</a></div>"
  +'<form class="win" id="f" novalidate aria-label="Formulário de contacto">'+tbar("nova_mensagem.txt")+'<div class="wbody grid">'
@@ -832,19 +944,21 @@ en:lp("Cookie Policy","Last updated: 10 November 2026",
    RENDER E NAVEGACAO
    ========================================================= */
 var pg=document.getElementById("pg"),nav=document.getElementById("nav");
-function route(){var v=location.hash.slice(1);return V[v]?v:"home"}
+function route(){var v=location.hash.slice(1);if(/^projeto\//.test(v))return "projetos";return V[v]?v:"home"}
+function pjLink(){var m=location.hash.match(/^#projeto\/([\w-]+)$/);return m&&P.some(function(p){return p.id==m[1]})?m[1]:null}
 function drawNav(v){nav.innerHTML='<span class="ind" aria-hidden="true"></span>'+ROUTES.map(function(r){return '<button data-go="'+r[0]+'"'+(r[0]==v?' aria-current="page"':"")+">"+ic(r[2])+"<span>"+r[1]+"</span></button>"}).join("");tr(nav);requestAnimationFrame(indNav)}
 function indNav(){var a=nav.querySelector('[aria-current="page"]'),i=nav.querySelector(".ind");if(!i)return;if(!a){i.style.opacity=0;return}i.style.opacity=1;i.style.left=a.offsetLeft+"px";i.style.width=a.offsetWidth+"px"}
 function drawFt(){var f=document.getElementById("ft");f.innerHTML='<div class="w"><span>© 2026 Duarte Ferreira Nunes</span><nav aria-label="Informação legal"><button data-go="privacidade">Privacidade</button><button data-go="termos">Termos</button><button data-go="cookies">Cookies</button></nav><span class="mono">3D: three.js (MIT)</span></div>';tr(f)}
 function drawSt(){var p=document.getElementById("pp"),d=dark();p.innerHTML='<h2>// definições</h2><div><span class="lb">Tema</span><div class="seg"><button data-act="th" data-v="light" aria-pressed="'+!d+'">Claro</button><button data-act="th" data-v="dark" aria-pressed="'+d+'">Escuro</button></div></div><div><span class="lb">Idioma</span><div class="seg"><button data-act="lg" data-v="pt" aria-pressed="'+(L=="pt")+'">Português</button><button data-act="lg" data-v="en" aria-pressed="'+(L=="en")+'">English</button></div></div>';tr(p)}
-function hdr(){var s=function(id,pt,en){var e=document.getElementById(id);if(e){e.setAttribute("aria-label",T(pt,en));e.title=T(pt,en)}};s("tTerm","Abrir terminal ( ` )","Open terminal ( ` )");s("gb","Definições","Settings");document.querySelector(".brand").setAttribute("aria-label",T("Início","Home"));document.getElementById("skip").textContent=T("Saltar para o conteúdo","Skip to content");setSom(AU.on)}
+function hdr(){var s=function(id,pt,en){var e=document.getElementById(id);if(e){e.setAttribute("aria-label",T(pt,en));e.title=T(pt,en)}};s("tTerm","Abrir terminal ( ` )","Open terminal ( ` )");s("gb","Definições","Settings");document.querySelector(".brand").setAttribute("aria-label",T("Início","Home"));document.getElementById("skip").textContent=T("Saltar para o conteúdo","Skip to content");
+ document.getElementById("kIn").placeholder=T("Procura secções, projetos ou ações…","Search sections, projects or actions…");document.getElementById("cIn").placeholder=T("Escreve uma pergunta…","Type a question…");document.querySelector("#chatB span:nth-child(2)").textContent=T("Pergunta-me algo","Ask me something");document.querySelector(".chd b").textContent=T("Assistente do portefólio","Portfolio assistant");document.querySelector(".chd small").textContent=T("Responde por palavras-chave · não é IA","Answers by keyword · not an AI");s("tK","Procurar (Ctrl+K)","Search (Ctrl+K)");setSom(AU.on)}
 function render(quiet){var v=route();if(v!="home")glPause(true);
- drawNav(v);cur.still=!!quiet;pg.innerHTML=V[v]();icons(pg);
+ var dl=pjLink();if(dl&&!quiet){cur.sel=dl;cur.cat="Todas";cur.q=""}drawNav(v);cur.still=!!quiet;pg.innerHTML=V[v]();icons(pg);
  var q=document.getElementById("q");if(q)q.oninput=function(){cur.q=q.value;var s=q.selectionStart,top=scrollY;render(1);scrollTo(0,top);var n=document.getElementById("q");n.focus();n.setSelectionRange(s,s)};
  var f=document.getElementById("f");if(f)f.onsubmit=send;
  drawFt();drawSt();tr(pg);hdr();document.documentElement.lang=L;
  var tt=TIT[v];tt=pt2(tt);document.title=(tt?tt+" · ":"")+"Duarte Ferreira Nunes"+(v=="home"?T(" · Portefólio"," · Portfolio"):"");
- if(v=="home")homeOn();if(v=="projetos")projOn();
+ if(v=="home")homeOn();if(v=="sobre")monitor();if(v=="projetos"){projOn();if(dl&&!quiet)setTimeout(function(){if(!document.getElementById("appwin"))abreJanela(dl,document.querySelector(".pv"))},calmo()?0:350)}
  if(!quiet)scrollTo(0,0);reveal()}
 function reveal(){var els=pg.querySelectorAll(".rv");if(calmo()||!("IntersectionObserver" in window)){els.forEach(function(e){e.classList.add("in")});return}
  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}})},{threshold:.1});els.forEach(function(e){io.observe(e)})}
@@ -869,9 +983,13 @@ window.addEventListener("resize",indNav);
 document.addEventListener("click",function(e){
  var pp=document.getElementById("pp");if(!pp.hidden&&!e.target.closest(".tools>div"))fechaSt();
  if(e.target.closest("#skip")){e.preventDefault();pg.focus();return}
- var t=e.target.closest("[data-sel],[data-step],[data-go],[data-proj],[data-cat],[data-act],[data-term],[data-copy],[data-enter],#gb,#tTerm,#tSnd");if(!t)return;
+ var t=e.target.closest("[data-chat],#chatB,#tK,[data-link],[data-cmd],[data-ask],[data-sel],[data-step],[data-go],[data-proj],[data-cat],[data-act],[data-term],[data-copy],[data-enter],#gb,#tTerm,#tSnd");if(!t)return;
  if(t.matches("a[data-go]"))e.preventDefault();
  if(t.dataset.enter!=null){entrar(t.dataset.enter=="1");return}
+ if(t.id=="chatB"){chat(true);return}if(t.dataset.chat){chat(false);return}if(t.id=="tK"){kAbre();return}
+ if(t.dataset.ask){pergunta(t.dataset.ask);return}
+ if(t.dataset.cmd){corre(t.dataset.cmd);tIn.focus();return}
+ if(t.dataset.link){var url=location.origin+location.pathname+"#projeto/"+t.dataset.link,okc=function(){toast(T("Link copiado.","Link copied."));snd.click()};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(url).then(okc,function(){prompt("",url)});else prompt("",url);return}
  if(t.dataset.sel){if(t.getAttribute("aria-selected")!="true")showProj(t.dataset.sel);return}
  if(t.dataset.step){var bs=[].slice.call(document.querySelectorAll(".pli")),i=bs.findIndex(function(b){return b.dataset.sel==cur.sel});if(bs.length)showProj(bs[(i+Number(t.dataset.step)+bs.length)%bs.length].dataset.sel);return}
  if(t.id=="gb"){var o=pp.hidden;pp.hidden=!o;t.setAttribute("aria-expanded",o);snd.click();return}
@@ -924,18 +1042,18 @@ function abreJanela(id,from){var i=P.findIndex(function(x){return x.id==id});if(
  var had=!!document.getElementById("appwin");if(!had){var sc=document.createElement("div");sc.id="scrim";document.body.appendChild(sc);sc.addEventListener("click",function(){fechaJanela()})}
  var w=document.getElementById("appwin")||document.createElement("section");w.id="appwin";w.className="win";w.setAttribute("role","dialog");w.setAttribute("aria-modal","true");w.setAttribute("aria-label",pt2(p.t));
  w.innerHTML=tbar("~/projetos/"+p.id+" — README.md",'<span class="ctl"><button data-w="min" aria-label="Minimizar">'+ic("min")+'</button><button data-w="max" aria-label="Maximizar">'+ic("max")+'</button><button class="x" data-w="x" aria-label="Fechar">'+ic("x")+"</button></span>")
-  +'<div class="wscroll"><div class="pj"><div>'+vis(p)+'<div class="deps">"dependencies": [<b>'+p.k.map(function(k){return '"'+k+'"'}).join(", ")+"</b>]</div><dl><dt>Categoria</dt><dd>"+p.c+"</dd><dt>Ano</dt><dd>"+p.y+"</dd><dt>Papel</dt><dd>Desenvolvimento completo</dd></dl>"
-  +(p.live||p.code?'<div class="acts">'+(p.code?'<a class="btn o" href="'+p.code+'" target="_blank" rel="noopener">'+ic("gh")+"<span>GitHub</span></a>":"")+(p.live?'<a class="btn p" href="'+p.live+'" target="_blank" rel="noopener"><span>Demo</span>'+ic("arr","ic-arr")+"</a>":"")+"</div>":"")
+  +'<div class="wscroll"><div class="pj"><div><div class="scr" style="--h:'+p.h+'">'+ui(p)+'</div><div class="deps">"dependencies": [<b>'+p.k.map(function(k){return '"'+k+'"'}).join(", ")+"</b>]</div><dl><dt>Categoria</dt><dd>"+p.c+"</dd><dt>Ano</dt><dd>"+p.y+"</dd><dt>Papel</dt><dd>Desenvolvimento completo</dd></dl>"
+  +'<div class="acts"><button class="btn o sm" data-link="'+p.id+'">'+ic("copy")+'<span>Copiar link</span></button>'+(p.code?'<a class="btn o" href="'+p.code+'" target="_blank" rel="noopener">'+ic("gh")+"<span>GitHub</span></a>":"")+(p.live?'<a class="btn p" href="'+p.live+'" target="_blank" rel="noopener"><span>Demo</span>'+ic("arr","ic-arr")+"</a>":"")+"</div>"
   +'</div><div class="md"><span class="crumb" style="display:block">'+p.c+" · "+p.y+"</span><h2>"+p.t+"</h2><p style=\"margin-top:.75rem\">"+p.d+"</p><h3>Objetivo</h3><p>"+p.pb+"</p><h3>O que faz</h3><p>"+p.sl+"</p><h3>Resultado</h3><p>"+p.rs+'</p></div></div></div><div class="pjnav"><button data-w="prev">'+ic("arrl")+'<span>Anterior</span></button><button data-w="next"><span>Seguinte</span>'+ic("arr")+"</button></div>";
  tr(w);if(!had){document.body.appendChild(w);document.body.classList.add("locked");jw={from:from,foco:document.activeElement};
   var sc2=document.getElementById("scrim");
   if(!calmo()&&from&&from.getBoundingClientRect){var a=from.getBoundingClientRect(),b=w.getBoundingClientRect();w.style.transition="none";w.style.transform="translate("+(a.left+a.width/2-(b.left+b.width/2))+"px,"+(a.top+a.height/2-(b.top+b.height/2))+"px) scale("+Math.max(.2,a.width/b.width)+","+Math.max(.15,a.height/b.height)+")";w.style.opacity="0";w.offsetHeight;w.style.transition="";w.style.transform="";w.style.opacity=""}
   requestAnimationFrame(function(){sc2.classList.add("on")});snd.open()}
- w.dataset.i=i;w.querySelector('[data-w="x"]').focus();
+ w.dataset.i=i;w.querySelector('[data-w="x"]').focus();if(route()=="projetos")history.replaceState(null,"","#projeto/"+p.id);
  w.onclick=function(e){var b=e.target.closest("[data-w]");if(!b)return;var k=b.dataset.w;if(k=="x"||k=="min")fechaJanela(false,k=="min");else if(k=="max"){w.classList.toggle("max");snd.click()}else{var n=(i+(k=="next"?1:P.length-1))%P.length;snd.click();abreJanela(P[n].id,null)}};
  w.onkeydown=function(e){if(e.key!="Tab")return;var f=w.querySelectorAll("button,a[href]"),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}}
 function fechaJanela(now,min){var w=document.getElementById("appwin"),sc=document.getElementById("scrim");if(!w)return;snd.close();
- var fim=function(){w.remove();if(sc)sc.remove();document.body.classList.remove("locked");if(jw&&jw.foco&&jw.foco.focus&&!now)jw.foco.focus({preventScroll:true});jw=null};
+ if(/^#projeto\//.test(location.hash))history.replaceState(null,"","#projetos");var fim=function(){w.remove();if(sc)sc.remove();document.body.classList.remove("locked");if(jw&&jw.foco&&jw.foco.focus&&!now)jw.foco.focus({preventScroll:true});jw=null};
  if(now||calmo()){fim();return}
  if(sc)sc.classList.remove("on");var from=jw&&jw.from&&document.body.contains(jw.from)?jw.from:null,b=w.getBoundingClientRect();
  if(min){w.style.transform="translate(0,"+(innerHeight-b.top)+"px) scale(.2)"}else if(from){var a=from.getBoundingClientRect();w.style.transform="translate("+(a.left+a.width/2-(b.left+b.width/2))+"px,"+(a.top+a.height/2-(b.top+b.height/2))+"px) scale("+Math.max(.2,a.width/b.width)+","+Math.max(.15,a.height/b.height)+")"}else{w.style.transform="scale(.9)"}
@@ -958,9 +1076,9 @@ function send(ev){ev.preventDefault();var r={n:"Diz-me o teu nome para eu saber 
    TERMINAL + ASSISTENTE POR PALAVRAS-CHAVE (sem IA)
    ========================================================= */
 var tOut=document.getElementById("tOut"),tIn=document.getElementById("tIn"),hist=[],hi=0,tIniciado=false;
-function tw(html,cls){var p=document.createElement("p");if(cls)p.className=cls;p.innerHTML=html;tOut.appendChild(p);tOut.scrollTop=tOut.scrollHeight}
+var tq=0;function tw(html,cls){var p=document.createElement("p");if(cls)p.className=cls;p.style.animationDelay=Math.min(tq++,30)*28+"ms";p.innerHTML=html;tOut.appendChild(p);tOut.scrollTop=tOut.scrollHeight}
 function terminal(open){var t=document.getElementById("term"),b=document.getElementById("tTerm");if(open===undefined)open=t.hidden;t.hidden=!open;b.setAttribute("aria-pressed",open);
- if(open){snd.open();if(!tIniciado){tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}setTimeout(function(){tIn.focus()},60)}else{snd.close();if(document.activeElement==tIn)b.focus()}}
+ if(open){if(!document.getElementById("chat").hidden)chat(false);tq=0;snd.open();if(!tIniciado){CMD.neofetch();tIniciado=true;tw(T("Bem-vindo ao terminal do Duarte.","Welcome to Duarte's terminal."),"c2");tw(T("Escreve <b>help</b> para ver os comandos, ou faz uma pergunta (ex.: <i>que linguagens sabes?</i>).","Type <b>help</b> to see the commands, or ask a question (e.g. <i>which languages do you know?</i>)."),"c3");tw(T("Nota: as respostas vêm de uma lista de palavras-chave, não de uma IA.","Note: answers come from a keyword list, not from an AI."),"c3")}setTimeout(function(){tIn.focus()},60)}else{snd.close();if(document.activeElement==tIn)b.focus()}}
 var KB=[
  {k:["linguag","language","c#","csharp","python","javascript","programa"],pt:"Linguagens: C#, SQL, Python e JavaScript. Também usei Node.js e PHP nos projetos.",en:"Languages: C#, SQL, Python and JavaScript. I have also used Node.js and PHP in projects."},
  {k:["sql","base de dados","bases de dados","database","postgres","mysql","server"],pt:"Bases de dados: SQL Server, MySQL e PostgreSQL. Modelação, consultas otimizadas e relatórios.",en:"Databases: SQL Server, MySQL and PostgreSQL. Data modelling, optimised queries and reports."},
@@ -991,7 +1109,7 @@ var CMD={
  exit:function(){terminal(false)}};
 var ALI={projects:"projetos",open:"abrir",experience:"experiencia",about:"sobre",contact:"contacto",theme:"tema",language:"idioma",lang:"idioma",sound:"som",cls:"clear",coffee:"cafe",hello:"ola",hi:"ola","olá":"ola",help:"help",ajuda:"help","?":"help",quit:"exit",sair:"exit","fechar":"exit"};
 ["experiencia","sobre","contacto"].forEach(function(r){CMD[r]=function(){tw(T("A abrir ","Opening ")+pt2(TIT[r])+"…","c2");location.hash=r}});
-function corre(lin){var s=lin.trim();if(!s)return;tw('<span class="c2">❯</span> '+esc(s));hist.push(s);hi=hist.length;
+function corre(lin){var s=lin.trim();if(!s)return;tq=0;tw('<span class="pp">duarte</span> <span class="pt2">~</span> ❯ '+esc(s),"cmdl");hist.push(s);hi=hist.length;
  var parts=s.split(/\s+/),c=parts[0].toLowerCase(),arg=parts.slice(1).join(" ");c=ALI[c]||c;
  if(CMD[c]){CMD[c](arg);return}
  var low=s.toLowerCase(),best=KB.find(function(e){return e.k.some(function(k){return low.indexOf(k)>-1})});
@@ -1000,6 +1118,81 @@ function corre(lin){var s=lin.trim();if(!s)return;tw('<span class="c2">❯</span
 document.getElementById("tForm").addEventListener("submit",function(e){e.preventDefault();corre(tIn.value);tIn.value=""});
 tIn.addEventListener("keydown",function(e){if(e.key=="ArrowUp"){if(hi>0){hi--;tIn.value=hist[hi]}e.preventDefault()}else if(e.key=="ArrowDown"){if(hi<hist.length-1){hi++;tIn.value=hist[hi]}else{hi=hist.length;tIn.value=""}e.preventDefault()}
  else if(e.key=="Tab"){var v=tIn.value.toLowerCase();if(v){var m=Object.keys(CMD).filter(function(k){return k.indexOf(v)==0});if(m.length==1){tIn.value=m[0]+" ";e.preventDefault()}}}else if(e.key.length==1)snd.key()});
+
+/* =========================================================
+   COMPETENCIAS (ligadas aos projetos onde foram usadas)
+   ========================================================= */
+var SK=[["Linguagens",["C#","SQL","Python","JavaScript"]],["Bases de dados",["SQL Server","MySQL","PostgreSQL"]],["Web e back-end",["Node.js","PHP"]],["Ferramentas",["Git","Figma","Postman"]]];
+function usadoEm(s){return P.filter(function(p){return p.k.some(function(k){return k==s||(s=="SQL"&&/SQL/.test(k))})})}
+function nrm(s){return String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")}
+
+/* comandos novos do terminal (os antigos continuam iguais) */
+CMD.about=function(){tw("Duarte Ferreira Nunes","c1");tw(T("Estudante de Gestão e Programação de Sistemas Informáticos.","Computer Systems Management and Programming student."));tw(T("Interessa-me o ponto onde a gestão de informação encontra o desenvolvimento de software.","I'm interested in where information management meets software development."),"c3");tw(T("À procura de estágio a partir de setembro.","Looking for an internship from September."),"c2")};
+CMD.skills=function(){SK.forEach(function(g){tw('<span class="c1">'+pt2(g[0]).padEnd(16," ")+"</span>"+g[1].join(" · "))});tw(T("Na página Sobre vês em que projetos usei cada uma.","On the About page you can see which projects use each one."),"c3")};
+CMD.contacto=function(){tw("email   "+'<a href="mailto:'+EM+'">'+EM+"</a>");tw("github  "+'<a href="'+GH+'" target="_blank" rel="noopener">github.com/DuarteNunes17</a>');tw(T("A abrir Contacto…","Opening Contact…"),"c3");location.hash="contacto"};
+CMD.neofetch=function(){var a=["   ▄▄▄▄▄   ","  █ ▀ ▀ █  ","  █  ▄  █  ","   ▀▄▄▄▀   ","  ▄█████▄  "],i=[["duarte","@portefolio"],["OS",T("duarte-os (portefólio)","duarte-os (portfolio)")],[T("Curso","Course"),"GPSI"],[T("Projetos","Projects"),String(P.length)],["Stack","C# · SQL · Python · JS"],[T("Línguas","Languages"),T("português, inglês","Portuguese, English")],[T("Tema","Theme"),dark()?T("escuro","dark"):T("claro","light")],[T("Estado","Status"),T("disponível para estágio (setembro)","available for an internship (September)")]];
+ i.forEach(function(r,k){tw('<span class="c1">'+(a[k]||"           ")+"</span>  "+(k?'<span class="c4">'+r[0]+"</span>: "+r[1]:'<span class="c2">'+r[0]+"</span>"+r[1]))})};
+ALI.about="about";ALI.skills="skills";ALI.competencias="skills";ALI["competências"]="skills";ALI.contact="contacto";ALI.fetch="neofetch";
+CMD.help=function(){tw(T("Comandos","Commands"),"c1");[["about","quem sou, em poucas linhas"],["skills","competências por área"],["projetos | projects","lista de projetos"],["abrir <nome>","abre um projeto (ex.: abrir stock)"],["contacto | contact","email e GitHub"],["experiencia | sobre","vai para a secção"],["email · github","copia o email · abre o GitHub"],["neofetch","resumo do sistema"],["tema · idioma · som","claro|escuro · pt|en · on|off"],["ls · date · clear","ficheiros · data · limpar"]].forEach(function(c){tw('  <span class="c4">'+esc(c[0].padEnd(22," "))+"</span>"+pt2(c[1]))});tw(T("Podes também fazer perguntas (ex.: que linguagens sabes?). E há comandos escondidos.","You can also ask questions (e.g. which languages do you know?). And there are hidden commands."),"c3")};
+
+/* =========================================================
+   ASSISTENTE (janela de conversa, respostas por palavras-chave)
+   ========================================================= */
+var CHi=false;
+function chat(open){var c=document.getElementById("chat"),b=document.getElementById("chatB");if(open===undefined)open=c.hidden;c.hidden=!open;b.setAttribute("aria-expanded",open);b.classList.toggle("off",open);
+ if(open){if(!document.getElementById("term").hidden)terminal(false);snd.open();if(!CHi){CHi=true;cm("bot",T("Olá! Sou o assistente do portefólio do Duarte. Posso falar-te dos projetos, das competências, do estágio e dos contactos.","Hi! I'm the assistant of Duarte's portfolio. I can tell you about the projects, skills, internship and contacts."));sug()}setTimeout(function(){document.getElementById("cIn").focus()},80)}
+ else{snd.close();if(document.activeElement&&document.activeElement.closest("#chat"))b.focus()}}
+function cm(who,html,acts){var m=document.getElementById("cMsgs"),d=document.createElement("div");d.className="cm "+who;d.innerHTML='<div class="bb">'+html+"</div>"+(acts?'<div class="cacts">'+acts+"</div>":"");m.appendChild(d);icons(d);m.scrollTop=m.scrollHeight;return d}
+function sug(){document.getElementById("cSug").innerHTML=[T("Que projetos tens?","What projects do you have?"),T("Que tecnologias usas?","Which technologies do you use?"),T("Estás disponível para estágio?","Are you available for an internship?"),T("Como te contacto?","How can I contact you?")].map(function(q){return '<button data-ask="'+esc(q)+'">'+esc(q)+"</button>"}).join("")}
+function pergunta(q){q=q.trim();if(!q)return;cm("me",esc(q));var m=document.getElementById("cMsgs"),t=cm("bot typing",'<span class="dots3"><i></i><i></i><i></i></span>');snd.key();
+ setTimeout(function(){t.remove();var r=resposta(q);cm("bot",r[0],r[1]);snd.hover()},calmo()?0:520)}
+function resposta(q){var s=nrm(q),has=function(a){return a.some(function(k){return s.indexOf(nrm(k))>-1})},bt=function(at,txt,ico){return '<button class="btn o sm" '+at+">"+(ico?ic(ico):"")+"<span>"+txt+"</span></button>"};
+ if(has(["projet","project","portfolio","portefolio","trabalho","app"]))return[T("Tenho "+P.length+" projetos. Clica num para o abrir:","I have "+P.length+" projects. Click one to open it:")+'<ul class="cl">'+P.map(function(p){return"<li><b>"+esc(pt2(p.t))+"</b> · "+p.y+" · "+p.k.join(", ")+"</li>"}).join("")+"</ul>",P.map(function(p){return bt('data-proj="'+p.id+'"',p.id+".app")}).join("")+bt('data-go="projetos"',T("Ver todos","See all"),"grid")];
+ if(has(["tecnolog","competenc","skill","linguag","language","sabes","stack","ferrament","tool"]))return[SK.map(function(g){return"<b>"+pt2(g[0])+":</b> "+g[1].join(", ")}).join("<br>"),bt('data-go="sobre"',T("Ver na página Sobre","See on the About page"),"user")];
+ if(has(["estagio","internship","disponiv","available","setembro","september","emprego","job","contrat"]))return[T("Sim! Estou à procura de estágio a partir de setembro. A melhor forma de falar comigo é por email.","Yes! I'm looking for an internship from September. The best way to reach me is by email."),bt('data-go="contacto"',T("Ir para Contacto","Go to Contact"),"mail")+bt('data-copy="'+EM+'"',T("Copiar email","Copy email"),"copy")];
+ if(has(["contact","email","mail","falar","reach","github","linkedin"]))return['Email: <a href="mailto:'+EM+'">'+EM+'</a><br>GitHub: <a href="'+GH+'" target="_blank" rel="noopener">github.com/DuarteNunes17</a>'+(s.indexOf("linkedin")>-1?"<br>"+T("Não tenho LinkedIn no portefólio.","There is no LinkedIn on the portfolio."):""),bt('data-copy="'+EM+'"',T("Copiar email","Copy email"),"copy")+bt('data-go="contacto"',T("Formulário","Form"),"mail")];
+ if(has(["experien","percurso","historico","history","timeline"]))return[T("O meu percurso está na linha temporal: o curso, os projetos e a procura de estágio.","My path is on the timeline: the course, the projects and the internship search."),bt('data-go="experiencia"',T("Ver Experiência","See Experience"),"time")];
+ var k=KB.find(function(e){return e.k.some(function(w){return s.indexOf(nrm(w))>-1})});if(k)return[esc(k[L]||k.pt)];
+ if(has(["ola","olá","hello","hi ","bom dia","boa tarde","boa noite"]))return[T("Olá! 👋 Em que posso ajudar?","Hi! 👋 How can I help?")];
+ if(has(["ia","ai ","gpt","chatgpt","inteligencia","robot","bot"]))return[T("Não sou uma IA: respondo a partir de uma lista de palavras-chave sobre o portefólio.","I'm not an AI: I answer from a list of keywords about the portfolio.")];
+ return[T("Não tenho resposta para isso. Experimenta uma destas perguntas, ou escreve ao Duarte.","I don't have an answer for that. Try one of these questions, or write to Duarte."),bt('data-go="contacto"',T("Escrever ao Duarte","Write to Duarte"),"mail")]}
+document.getElementById("cForm").addEventListener("submit",function(e){e.preventDefault();var i=document.getElementById("cIn");pergunta(i.value);i.value=""});
+
+/* =========================================================
+   PROCURA RAPIDA (Ctrl+K): secoes, projetos e acoes
+   ========================================================= */
+var KI=[],kSel=0,kFoco=null;
+function kItens(){var a=[];ROUTES.forEach(function(r,i){a.push({g:T("Secções","Sections"),t:pt2(r[1]),i:r[2],k:"go "+r[0],x:String(i+1),f:function(){location.hash=r[0]}})});
+ P.forEach(function(p){a.push({g:T("Projetos","Projects"),t:pt2(p.t),i:DI[p.v]||"grid",k:p.id+" "+p.k.join(" ")+" "+p.c,x:p.y,f:function(){location.hash="projeto/"+p.id}})});
+ [[T("Abrir terminal","Open terminal"),"term","`",function(){terminal(true)}],[T("Abrir assistente","Open assistant"),"chat","",function(){chat(true)}],[T("Copiar email","Copy email"),"copy","",function(){copiar(EM)}],[T("Abrir GitHub","Open GitHub"),"gh","",function(){window.open(GH,"_blank","noopener")}],
+  [dark()?T("Mudar para tema claro","Switch to light theme"):T("Mudar para tema escuro","Switch to dark theme"),"gear","",function(){var nv=dark()?"light":"dark";pix(nv=="dark"?"#0b0f17":"#dfe6f0","",function(){document.documentElement.dataset.theme=nv;drawSt();glTheme()})}],
+  [L=="en"?"Mudar para português":"Switch to English","gear","",function(){L=L=="en"?"pt":"en";try{localStorage.setItem("lang",L)}catch(x){}render(1)}],[AU.on?T("Desligar som","Turn sound off"):T("Ligar som","Turn sound on"),AU.on?"mute":"snd","",function(){setSom(!AU.on)}]].forEach(function(c){a.push({g:T("Ações","Actions"),t:c[0],i:c[1],k:"",x:c[2],f:c[3]})});return a}
+function kAbre(){var d=document.getElementById("cmdk");if(!d.hidden)return;kFoco=document.activeElement;d.hidden=false;KI=kItens();kSel=0;var i=document.getElementById("kIn");i.value="";kDraw();i.focus();snd.open();document.getElementById("tK").setAttribute("aria-expanded","true")}
+function kFecha(){var d=document.getElementById("cmdk");if(d.hidden)return;d.hidden=true;snd.close();document.getElementById("tK").setAttribute("aria-expanded","false");if(kFoco&&kFoco.focus)kFoco.focus({preventScroll:true})}
+function kLista(){var q=nrm(document.getElementById("kIn").value.trim());return KI.filter(function(it){return!q||nrm(it.t+" "+it.k+" "+it.g).indexOf(q)>-1})}
+function kDraw(){var l=kLista(),ul=document.getElementById("kList"),g="",h="";if(kSel>=l.length)kSel=Math.max(0,l.length-1);
+ l.forEach(function(it,n){if(it.g!=g){g=it.g;h+='<li class="kg" role="presentation">'+g+"</li>"}h+='<li role="option" id="ko'+n+'" data-k="'+n+'" aria-selected="'+(n==kSel)+'">'+ic(it.i)+"<span>"+esc(it.t)+"</span>"+(it.x?"<kbd>"+it.x+"</kbd>":"")+"</li>"});
+ ul.innerHTML=h||'<li class="kg" role="presentation">'+T("Sem resultados.","No results.")+"</li>";document.getElementById("kIn").setAttribute("aria-activedescendant",l.length?"ko"+kSel:"");var s=ul.querySelector('[aria-selected="true"]');if(s)s.scrollIntoView({block:"nearest"})}
+function kRun(n){var it=kLista()[n];if(!it)return;kFecha();setTimeout(it.f,60)}
+document.getElementById("kIn").addEventListener("input",function(){kSel=0;kDraw()});
+document.getElementById("kIn").addEventListener("keydown",function(e){var n=kLista().length;if(e.key=="ArrowDown"){kSel=(kSel+1)%Math.max(n,1);kDraw();e.preventDefault()}else if(e.key=="ArrowUp"){kSel=(kSel-1+n)%Math.max(n,1);kDraw();e.preventDefault()}else if(e.key=="Enter"){e.preventDefault();kRun(kSel)}else if(e.key=="Tab")e.preventDefault()});
+document.getElementById("kList").addEventListener("click",function(e){var li=e.target.closest("[data-k]");if(li)kRun(Number(li.dataset.k))});
+document.getElementById("kList").addEventListener("mousemove",function(e){var li=e.target.closest("[data-k]");if(li&&Number(li.dataset.k)!=kSel){kSel=Number(li.dataset.k);kDraw()}});
+document.getElementById("cmdk").addEventListener("click",function(e){if(e.target.id=="cmdk")kFecha()});
+document.addEventListener("keydown",function(e){var bootOut=document.getElementById("boot").classList.contains("out");if(!bootOut)return;
+ if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()=="k"){e.preventDefault();var d=document.getElementById("cmdk");d.hidden?kAbre():kFecha();return}
+ if(e.key=="Escape"&&!document.getElementById("cmdk").hidden){e.stopImmediatePropagation();kFecha();return}
+ if(e.key=="Escape"&&!document.getElementById("chat").hidden&&!document.getElementById("appwin")){chat(false);return}
+ var tg=document.activeElement.tagName;if(/INPUT|TEXTAREA|SELECT/.test(tg)||e.ctrlKey||e.metaKey||e.altKey||document.getElementById("appwin")||!document.getElementById("cmdk").hidden)return;
+ if(/^[1-5]$/.test(e.key)){location.hash=ROUTES[Number(e.key)-1][0]}},true);
+
+/* =========================================================
+   MONITOR DO SISTEMA (pagina Sobre): dados reais desta visita
+   ========================================================= */
+var T0=performance.now(),MT;
+function monitor(){clearTimeout(MT);var el=document.getElementById("mon");if(!el)return;var nav=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0],ms=nav&&nav.domContentLoadedEventEnd?Math.round(nav.domContentLoadedEventEnd):null,up=Math.floor((performance.now()-T0)/1000),gl=!!(G.R||(function(){try{var c=document.createElement("canvas");return!!(c.getContext("webgl")||c.getContext("experimental-webgl"))}catch(x){return false}})());
+ var rows=[[T("Estado","Status"),'<i class="led"></i>online'],[T("Página carregada em","Page loaded in"),ms?ms+" ms":"—"],[T("Sessão aberta há","Session open for"),(up>=60?Math.floor(up/60)+" min ":"")+(up%60)+" s"],[T("Ecrã","Screen"),innerWidth+" × "+innerHeight],["3D (WebGL)",gl?T("disponível","available"):T("indisponível","unavailable")],[T("Tema","Theme"),dark()?T("escuro","dark"):T("claro","light")],[T("Idioma","Language"),L=="en"?"English":"Português"],[T("Hora local","Local time"),new Date().toLocaleTimeString(L=="en"?"en-GB":"pt-PT")]];
+ el.innerHTML=rows.map(function(r){return"<div><dt>"+r[0]+"</dt><dd>"+r[1]+"</dd></div>"}).join("");MT=setTimeout(monitor,1000)}
 
 /* =========================================================
    ESCRITORIO 3D (three.js)
@@ -1213,24 +1406,42 @@ function glLoop(){G.loop=true;var last=performance.now();V3=new THREE.Vector3();
 /* =========================================================
    ENTRADA: arranque em estilo terminal
    ========================================================= */
-function arranque(){var B=document.getElementById("boot"),ol=document.getElementById("bootL"),bar=document.getElementById("bootB"),pc=document.getElementById("bootP"),st=document.getElementById("bootS"),go=document.getElementById("bootG");
- tr(B);icons(B);bar.innerHTML=Array(32).fill("<i></i>").join("");var cells=bar.children;
- var steps=[[T("a carregar o portefólio do Duarte","loading Duarte's portfolio"),""],[T("projetos encontrados: ","projects found: ")+P.length,""],[T("tecnologias: C#, SQL, Python, JavaScript","technologies: C#, SQL, Python, JavaScript"),""],[T("a montar o escritório 3D","building the 3D office"),"gl"],[T("a ligar o monitor e o candeeiro","turning on the monitor and the lamp"),""],[T("tudo pronto","all set"),""]];
- var i=0,p=0,fast=calmo();
+function arranque(){var B=document.getElementById("boot"),go=document.getElementById("bootG"),cm=document.getElementById("bootCmd"),bar=document.getElementById("bootB"),fast=calmo();
+ tr(B);icons(B);bar.innerHTML=Array(32).fill("<i></i>").join("");liquido();
  /* relogio e nome que se "descodifica" */
  var bc=document.getElementById("bootC"),bt=function(){if(B.classList.contains("out"))return;var d=new Date();bc.textContent=d.toLocaleDateString(L=="en"?"en-GB":"pt-PT")+" · "+d.toTimeString().slice(0,8);setTimeout(bt,1000)};bt();
- var bn=document.getElementById("bootN"),nm=bn.textContent,ch="!<>-_/[]{}=+*^?#01",t0=performance.now();bn.setAttribute("aria-hidden","false");
+ var bn=document.getElementById("bootN"),nm=bn.textContent,ch="!<>-_/[]{}=+*^?#01",t0=performance.now();
  if(!fast)(function sc(now){var k=Math.min(1,(now-t0)/1400),n=Math.floor(k*nm.length),s="";for(var j=0;j<nm.length;j++)s+=j<n||nm[j]==" "?esc(nm[j]):"<i>"+ch[Math.random()*ch.length|0]+"</i>";bn.innerHTML=s;if(k<1)requestAnimationFrame(sc);else bn.textContent=nm})(t0);
- function setP(v){p=v;pc.textContent=Math.round(v)+"%";for(var c=0;c<32;c++)cells[c].classList.toggle("on",c<v/100*32)}
- function step(){if(i>=steps.length){setP(100);st.textContent=T("pronto","ready");go.classList.add("in");B.querySelector('[data-enter="0"]').focus();return}
-  var s=steps[i],li=document.createElement("li");li.innerHTML='[ <span class="okk">OK</span> ] '+s[0];ol.appendChild(li);requestAnimationFrame(function(){li.classList.add("in")});
-  if(s[1]=="gl"){var okgl=glInit();if(!okgl)li.innerHTML='[ <span style="color:oklch(82% .14 75)">--</span> ] '+T("3D indisponível neste dispositivo, a usar a versão simples","3D unavailable on this device, using the simple version")}
-  i++;var target=i/steps.length*100,from=p,t0=performance.now();(function anim(){var k=Math.min(1,(performance.now()-t0)/(fast?1:380));setP(from+(target-from)*k);if(k<1)requestAnimationFrame(anim);else setTimeout(step,fast?0:140)})()}
- step();
+ /* o comando escreve-se sozinho e depois espera pela escolha */
+ var txt="npx start @duarte",k=0,pronto=function(){go.classList.add("in");B.querySelector('[data-enter="0"]').focus({preventScroll:true})};
+ if(fast){cm.textContent=txt;pronto()}else setTimeout(function t(){cm.textContent=txt.slice(0,++k);if(k<txt.length)setTimeout(t,45+Math.random()*50);else setTimeout(pronto,250)},700);
  B.addEventListener("keydown",function(e){if(e.key=="Enter"&&go.classList.contains("in")&&!e.target.closest("button")){e.preventDefault();entrar(false)}})}
-function entrar(som){var B=document.getElementById("boot");if(B.classList.contains("out"))return;setSom(som);tom(1400,.45,"sine",.03,60);setTimeout(snd.boot,500);B.classList.add("out");var bd=document.body;bd.classList.remove("locked","pre");setTimeout(function(){bd.classList.remove("intro")},6000);
- if(G.R)G.t0=performance.now()+(calmo()?0:350);if(G.onEnter){G.onEnter();G.onEnter=null}setTimeout(function(){pg.focus({preventScroll:true})},200);
- if(!calmo())console.log("%cOlá, curioso! 👋","font:bold 16px sans-serif;color:#3151d9","\nAbre o terminal com a tecla ` e experimenta 'help'. Há comandos escondidos.")}
+/* fundo "liquido" da janela de entrada: manchas de cor a mover-se, desenhadas em baixa resolucao */
+function liquido(){var c=document.getElementById("bliq");if(!c)return;var x=c.getContext("2d"),W=c.width=96,H=c.height=80,B=document.getElementById("boot"),
+ M=[[262,.9,.2,.31],[290,.25,.75,.27],[200,.7,.85,.22],[320,.15,.15,.18]];
+ (function f(now){if(B.classList.contains("out"))return;var t=(now||0)/1000;x.globalCompositeOperation="source-over";x.fillStyle="#0b0f1c";x.fillRect(0,0,W,H);x.globalCompositeOperation="lighter";
+  M.forEach(function(m,i){var cx=W*(m[1]+Math.sin(t*.35+i*1.7)*.22),cy=H*(m[2]+Math.cos(t*.29+i*2.3)*.22),r=W*(.55+Math.sin(t*.5+i)*.08),g=x.createRadialGradient(cx,cy,0,cx,cy,r);g.addColorStop(0,"hsla("+m[0]+",85%,62%,"+m[3]+")");g.addColorStop(1,"hsla("+m[0]+",85%,50%,0)");x.fillStyle=g;x.fillRect(0,0,W,H)});
+  if(!calmo())requestAnimationFrame(f)})()}
+function entrar(som){var B=document.getElementById("boot");if(B.classList.contains("run")||B.classList.contains("out"))return;setSom(som);B.classList.add("run");snd.click();
+ var ol=document.getElementById("bootL"),bar=document.getElementById("bootB"),pc=document.getElementById("bootP"),st=document.getElementById("bootS"),cells=bar.children,fast=calmo(),p=0,i=0;
+ var steps=[[T("projetos encontrados: ","projects found: ")+P.length,""],[T("tecnologias: C#, SQL, Python, JavaScript","technologies: C#, SQL, Python, JavaScript"),""],[T("a montar o escritório 3D","building the 3D office"),"gl"],[T("a ligar o monitor e o candeeiro","turning on the monitor and the lamp"),""],[T("tudo pronto","all set"),""]];
+ function setP(v){p=v;pc.textContent=Math.round(v)+"%";for(var c=0;c<32;c++)cells[c].classList.toggle("on",c<v/100*32)}
+ st.textContent=T("a executar…","running…");
+ function step(){if(i>=steps.length){setP(100);st.textContent=T("pronto","ready");setTimeout(morph,fast?0:260);return}
+  var s=steps[i],li=document.createElement("li");li.innerHTML='<span class="okk">✓</span> '+s[0];ol.appendChild(li);requestAnimationFrame(function(){li.classList.add("in")});if(AU.on)snd.key();
+  if(s[1]=="gl"&&!glInit())li.innerHTML='<span style="color:oklch(82% .14 75)">–</span> '+T("3D indisponível neste dispositivo, a usar a versão simples","3D unavailable on this device, using the simple version");
+  i++;var target=i/steps.length*100,from=p,t0=performance.now();(function anim(){var k=Math.min(1,(performance.now()-t0)/(fast?1:240));setP(from+(target-from)*k);if(k<1)requestAnimationFrame(anim);else setTimeout(step,fast?0:90)})()}
+ step()}
+/* a janela encolhe, transforma-se no boneco e voa para o canto do site */
+function morph(){var B=document.getElementById("boot"),w=document.getElementById("bwin"),av=document.getElementById("bav");
+ if(calmo()){fim();return}
+ av.innerHTML=avImg("");w.style.width=w.offsetWidth+"px";w.style.height=w.offsetHeight+"px";w.offsetHeight;
+ B.classList.add("morph");w.style.width=w.style.height="7.5rem";w.style.borderRadius="50%";tom(880,.3,"sine",.03,1320);
+ setTimeout(function(){var d=document.querySelector(".brand .dot"),a=w.getBoundingClientRect(),b=d?d.getBoundingClientRect():{left:24,top:24,width:8,height:8};
+  w.style.transform="translate("+(b.left+b.width/2-(a.left+a.width/2))+"px,"+(b.top+b.height/2-(a.top+a.height/2))+"px) scale(.08)";w.style.opacity="0";fim()},1150)}
+function fim(){var B=document.getElementById("boot");tom(1400,.45,"sine",.03,60);setTimeout(snd.boot,350);B.classList.add("out");var bd=document.body;bd.classList.remove("locked","pre");setTimeout(function(){bd.classList.remove("intro")},6000);
+ if(G.R)G.t0=performance.now()+(calmo()?0:300);if(G.onEnter){G.onEnter();G.onEnter=null}if(DL){location.hash="projeto/"+DL;DL=null}setTimeout(function(){pg.focus({preventScroll:true})},200);setTimeout(function(){var a=document.getElementById("bav");if(a)a.innerHTML=""},1300);
+ if(!calmo())console.log("%cOlá, curioso! 👋","font:bold 16px sans-serif;color:#3151d9","\nAbre o terminal com a tecla ` ou procura com Ctrl+K. Há comandos escondidos.")}
 
 /* boneco: olhos e cabeca seguem o rato */
 (function(){if(calmo())return;document.addEventListener("pointermove",function(e){document.querySelectorAll(".avsvg").forEach(function(sv){var b=sv.getBoundingClientRect();if(!b.width)return;var dx=e.clientX-(b.left+b.width/2),dy=e.clientY-(b.top+b.height*.48),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/320),ux=dx/d,uy=dy/d;sv.style.setProperty("--px",ux*6*k+"px");sv.style.setProperty("--py",uy*6*k+"px");sv.style.setProperty("--r",ux*4*k+"deg");sv.style.setProperty("--hx",ux*3*k+"px");sv.style.setProperty("--hy",uy*2*k+"px");sv.style.setProperty("--mx",(ux*k).toFixed(3));sv.style.setProperty("--my",(uy*k).toFixed(3))})},{passive:true})})();
@@ -1247,8 +1458,8 @@ function entrar(som){var B=document.getElementById("boot");if(B.classList.contai
 /* =========================================================
    ARRANQUE: comeca sempre no inicio, no topo
    ========================================================= */
-if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0);
-icons(document.querySelector("header.bar"));icons(document.getElementById("term"));setSom(false);render();arranque();
+var DL=(location.hash.match(/^#projeto\/([\w-]+)$/)||[])[1];if(!P.some(function(p){return p.id==DL}))DL=null;if("scrollRestoration" in history)history.scrollRestoration="manual";if(location.hash)history.replaceState(null,"",location.pathname+location.search);scrollTo(0,0);
+icons(document.querySelector("header.bar"));icons(document.getElementById("term"));["chat","chatB","cmdk"].forEach(function(id){var e=document.getElementById(id);icons(e);tr(e)});tr(document.getElementById("term"));setSom(false);render();arranque();
 </script>
 </body>
 </html>
