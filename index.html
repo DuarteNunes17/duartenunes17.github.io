@@ -688,7 +688,7 @@ body.retro{--acc:oklch(82% .2 145);--accink:oklch(84% .18 145)}
  <ul id="kList" role="listbox" aria-label="Resultados"></ul><div class="kft" aria-hidden="true"><span>↑↓ navegar</span><span>⏎ abrir</span><span>1–5 secções</span></div></div>
 </div>
 <div id="toast" role="status" aria-live="polite"></div>
-<div id="ring" aria-hidden="true"></div>
+
 
 <script src="three.min.js"></script>
 <script>
@@ -1519,12 +1519,6 @@ function fim(){var B=document.getElementById("boot");tom(1400,.45,"sine",.03,60)
 
 /* boneco: olhos e cabeca seguem o rato */
 (function(){if(calmo())return;document.addEventListener("pointermove",function(e){document.querySelectorAll(".avsvg").forEach(function(sv){var b=sv.getBoundingClientRect();if(!b.width)return;var dx=e.clientX-(b.left+b.width/2),dy=e.clientY-(b.top+b.height*.48),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/320),ux=dx/d,uy=dy/d;sv.style.setProperty("--px",ux*6*k+"px");sv.style.setProperty("--py",uy*6*k+"px");sv.style.setProperty("--r",ux*4*k+"deg");sv.style.setProperty("--hx",ux*3*k+"px");sv.style.setProperty("--hy",uy*2*k+"px");sv.style.setProperty("--mx",(ux*k).toFixed(3));sv.style.setProperty("--my",(uy*k).toFixed(3))})},{passive:true})})();
-/* cursor (anel que segue o rato, so com rato) */
-(function(){if(!matchMedia("(pointer:fine)").matches||calmo())return;var r=document.getElementById("ring"),x=0,y=0,tx=0,ty=0,on=false;
- window.addEventListener("pointermove",function(e){tx=e.clientX;ty=e.clientY;if(!on){on=true;r.classList.add("on");x=tx;y=ty}var it=e.target.closest&&e.target.closest("a,button,input,textarea,.hs,#gl.hov");r.classList.toggle("big",!!it)},{passive:true});
- document.addEventListener("pointerleave",function(){on=false;r.classList.remove("on")});
- (function l(){x+=(tx-x)*.22;y+=(ty-y)*.22;r.style.transform="translate("+x+"px,"+y+"px)";requestAnimationFrame(l)})()})();
-
 /* codigo konami: modo retro */
 (function(){var seq=["ArrowUp","ArrowUp","ArrowDown","ArrowDown","ArrowLeft","ArrowRight","ArrowLeft","ArrowRight","b","a"],i=0;
  document.addEventListener("keydown",function(e){i=e.key==seq[i]?i+1:(e.key==seq[0]?1:0);if(i==seq.length){i=0;document.body.classList.toggle("retro");G.matrix=Date.now()+10000;toast(T("Modo retro "+(document.body.classList.contains("retro")?"ligado":"desligado")+".","Retro mode "+(document.body.classList.contains("retro")?"on":"off")+"."));snd.boot()}})})();
